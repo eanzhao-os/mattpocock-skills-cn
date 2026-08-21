@@ -1,4 +1,4 @@
-# 02. ask-matt
+# 01. ask-matt
 
 ## Meta
 
@@ -7,7 +7,7 @@
 - upstream: https://github.com/mattpocock/skills/tree/main/skills/engineering/ask-matt
 - 触发方式：`disable-model-invocation: true` → **user-invoked only**（路由咨询；用户主动「问 Matt」）
 - companion 文件：
-  - [PHASE-BOUNDARIES.md](./02-ask-matt_PHASE-BOUNDARIES.md)（关键：phase boundary 决策树）
+  - [PHASE-BOUNDARIES.md](./01-ask-matt_PHASE-BOUNDARIES.md)（关键：phase boundary 决策树）
   - `agents/openai.yaml`
 
 ## 原文 (SKILL.md)
@@ -83,7 +83,7 @@ A **phase** is a chunk of work inside a session — the grilling, the implementa
 - **Subagent** — send a tightly-scoped task to its own window and get a report back.
 - **`/compact`** — compress this context and seed a fresh session with it. The **default**, at the bottom of the tree rather than the first reach.
 
-Read [PHASE-BOUNDARIES.md](./02-ask-matt_PHASE-BOUNDARIES.md) for the ordered tree — the five questions, the reasoning behind each branch, and why the primary-source cost makes **Continue** the one to rule out first. Make the decision **at** a boundary; mid-phase, continue or split the rest into subagents.
+Read [PHASE-BOUNDARIES.md](./01-ask-matt_PHASE-BOUNDARIES.md) for the ordered tree — the five questions, the reasoning behind each branch, and why the primary-source cost makes **Continue** the one to rule out first. Make the decision **at** a boundary; mid-phase, continue or split the rest into subagents.
 
 ## Standalone
 
@@ -179,7 +179,7 @@ disable-model-invocation: true
 - **Subagent（分发子代理）** — 将一个边界明确、目标高度聚焦的任务派发到其独立的子窗口中执行，并在完成后将结果汇报回来。
 - **`/compact`（上下文压缩）** — 对当前上下文进行摘要压缩，并以此作为种子开启一个全新的会话。这是 **默认的备选兜底方案**，位于决策树的最底部，而不是第一优先级。
 
-阅读 [PHASE-BOUNDARIES.md](./02-ask-matt_PHASE-BOUNDARIES.md) 了解严格排序的决策树 —— 其中的五个核心问题、每个分支背后的权衡逻辑，以及为什么由于原始一手上下文（primary-source）的丢失代价，必须首先排除掉 **Continue** 的可能性才考虑其他选项。请务必在 **阶段的边界处** 做出决策；如果在阶段进行中途，要么继续（continue），要么把剩余工作拆分子代理。
+阅读 [PHASE-BOUNDARIES.md](./01-ask-matt_PHASE-BOUNDARIES.md) 了解严格排序的决策树 —— 其中的五个核心问题、每个分支背后的权衡逻辑，以及为什么由于原始一手上下文（primary-source）的丢失代价，必须首先排除掉 **Continue** 的可能性才考虑其他选项。请务必在 **阶段的边界处** 做出决策；如果在阶段进行中途，要么继续（continue），要么把剩余工作拆分子代理。
 
 ## 独立技能（Standalone）
 

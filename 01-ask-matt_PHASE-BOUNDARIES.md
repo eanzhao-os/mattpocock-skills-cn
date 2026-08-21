@@ -1,14 +1,14 @@
-# 02-ask-matt / PHASE-BOUNDARIES.md 精读
+# 01-ask-matt / PHASE-BOUNDARIES.md 精读
 
 ## Meta
 
 | 字段 | 值 |
 |---|---|
-| 对应主 Skill | `02-ask-matt` |
+| 对应主 Skill | `01-ask-matt` |
 | bucket | engineering |
 | 上游路径 | `skills/engineering/ask-matt/PHASE-BOUNDARIES.md` |
 | 角色定位 | 会话阶段边界决策树与上下文切换哲学（Phase Boundaries Decision Tree） |
-| 关联模块 | `02-ask-matt`、`06-handoff` |
+| 关联模块 | `01-ask-matt`、`06-handoff` |
 
 ---
 

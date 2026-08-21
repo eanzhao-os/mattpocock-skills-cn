@@ -8,7 +8,7 @@
 | bucket | engineering |
 | 上游路径 | `skills/engineering/domain-modeling/ADR-FORMAT.md` |
 | 角色定位 | 架构决策记录（ADR）极简标准与准入门槛规范（ADR Format Specification） |
-| 关联模块 | `15-domain-modeling`、`01-setup-matt-pocock-skills` |
+| 关联模块 | `15-domain-modeling`、`02-setup-matt-pocock-skills` |
 
 ---
 

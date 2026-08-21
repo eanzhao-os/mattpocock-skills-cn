@@ -1,10 +1,10 @@
-# 01-setup-matt-pocock-skills / domain.md 精读
+# 02-setup-matt-pocock-skills / domain.md 精读
 
 ## Meta
 
 | 字段 | 值 |
 |---|---|
-| 对应主 Skill | `01-setup-matt-pocock-skills` |
+| 对应主 Skill | `02-setup-matt-pocock-skills` |
 | bucket | engineering |
 | 上游路径 | `skills/engineering/setup-matt-pocock-skills/domain.md` |
 | 角色定位 | 领域模型与项目架构权威文档规范（Domain Documentation Specification） |

@@ -8,7 +8,7 @@
 | bucket | engineering |
 | 上游路径 | `skills/engineering/domain-modeling/CONTEXT-FORMAT.md` |
 | 角色定位 | 业务上下文与通用语言规范（CONTEXT.md Specification） |
-| 关联模块 | `15-domain-modeling`、`01-setup-matt-pocock-skills` |
+| 关联模块 | `15-domain-modeling`、`02-setup-matt-pocock-skills` |
 
 ---
 

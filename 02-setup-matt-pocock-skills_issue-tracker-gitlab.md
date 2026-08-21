@@ -1,10 +1,10 @@
-# 01-setup-matt-pocock-skills / issue-tracker-gitlab.md 精读
+# 02-setup-matt-pocock-skills / issue-tracker-gitlab.md 精读
 
 ## Meta
 
 | 字段 | 值 |
 |---|---|
-| 对应主 Skill | `01-setup-matt-pocock-skills` |
+| 对应主 Skill | `02-setup-matt-pocock-skills` |
 | bucket | engineering |
 | 上游路径 | `skills/engineering/setup-matt-pocock-skills/issue-tracker-gitlab.md` |
 | 角色定位 | 基于 GitLab Issues 的工单与分流操作规范（GitLab Issue Tracker Adapter） |

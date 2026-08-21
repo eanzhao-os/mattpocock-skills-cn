@@ -11,10 +11,11 @@
 - **上游仓库**：[mattpocock/skills](https://github.com/mattpocock/skills)
 - **版本快照**：基于 **2026 年 8 月 8 日** 上游仓库快照翻译整理（紧接 2026-08-05 的 Commit [`355fa74`](https://github.com/mattpocock/skills/commit/355fa74) `feat: add wait-what`；*注：上游仓库后续若有演进变动，本项目不保证实时跟进同步*）。
 - **涵盖范围**：全量 35 个主 Skill（`01`~`35`）+ 22 个 Companion 附属协议/规范文件，共计 57 篇文档。
-- **阅读建议**：按编号 `01` 到 `35` 循序渐进阅读：
-  - **核心必读**：`01` ~ `14`（构建完整 Idea → Spec → Tickets → TDD → Implement → Review 工程主闭环）
-  - **横切支柱**：`15`（领域建模）、`16`（深模块设计）、`19`（Wayfinder 复杂工程破局）
-  - **其他扩展**：按具体场景查阅（效能沟通、写作、脚手架等）。
+- **阅读建议**：
+  - 🌟 **首篇必读**：[01. ask-matt](./01-ask-matt.md) —— 先建立对整套体系的**全景路线图（Idea → Spec → Tickets → TDD → Implement）与阶段边界决策**的全局认知。
+  - **核心闭环**：`02` ~ `14` —— 从工程脚手架配置到完整人机协作工程落地。
+  - **横切支柱**：`15`（领域建模与 ADR）、`16`（深模块设计）、`19`（Wayfinder 复杂工程破局）。
+  - **其他扩展**：按具体业务场景查阅（效能沟通、写作、脚手架等）。
 
 ---
 
@@ -33,8 +34,8 @@
 
 ### 🛠️ engineering/（工程核心主流程）
 
-- `setup-matt-pocock-skills` → [01. 工程环境脚手架](./01-setup-matt-pocock-skills.md)（前置必读）
-- `ask-matt` → [02. 技能全景路由与阶段边界](./02-ask-matt.md)（导航总览）
+- `ask-matt` → [01. 技能全景路由与阶段边界](./01-ask-matt.md)（🌟 强烈推荐首篇阅读 / 导航总览）
+- `setup-matt-pocock-skills` → [02. 工程环境脚手架](./02-setup-matt-pocock-skills.md)（实战接入前置）
 - `grill-with-docs` → [05. 需求深度访谈与文档沉淀](./05-grill-with-docs.md)（主澄清入口）
 - `to-spec` → [07. 对话转技术规范](./07-to-spec.md)
 - `to-tickets` → [08. 规范拆解为工单](./08-to-tickets.md)

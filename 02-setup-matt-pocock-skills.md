@@ -1,4 +1,4 @@
-# 01. setup-matt-pocock-skills
+# 02. setup-matt-pocock-skills
 
 ## Meta
 
@@ -7,11 +7,11 @@
 - upstream: https://github.com/mattpocock/skills/tree/main/skills/engineering/setup-matt-pocock-skills
 - 触发方式：`disable-model-invocation: true` → **user-invoked only**（模型不可自动调用；必须用户显式跑）
 - companion 文件：
-  - [issue-tracker-github.md](./01-setup-matt-pocock-skills_issue-tracker-github.md)
-  - [issue-tracker-gitlab.md](./01-setup-matt-pocock-skills_issue-tracker-gitlab.md)
-  - [issue-tracker-local.md](./01-setup-matt-pocock-skills_issue-tracker-local.md)
-  - [triage-labels.md](./01-setup-matt-pocock-skills_triage-labels.md)
-  - [domain.md](./01-setup-matt-pocock-skills_domain.md)
+  - [issue-tracker-github.md](./02-setup-matt-pocock-skills_issue-tracker-github.md)
+  - [issue-tracker-gitlab.md](./02-setup-matt-pocock-skills_issue-tracker-gitlab.md)
+  - [issue-tracker-local.md](./02-setup-matt-pocock-skills_issue-tracker-local.md)
+  - [triage-labels.md](./02-setup-matt-pocock-skills_triage-labels.md)
+  - [domain.md](./02-setup-matt-pocock-skills_domain.md)
   - `agents/openai.yaml`
 
 ## 原文 (SKILL.md)
@@ -122,11 +122,11 @@ Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.
 
 Then write the docs files using the seed templates in this skill folder as a starting point:
 
-- [issue-tracker-github.md](./01-setup-matt-pocock-skills_issue-tracker-github.md) — GitHub issue tracker
-- [issue-tracker-gitlab.md](./01-setup-matt-pocock-skills_issue-tracker-gitlab.md) — GitLab issue tracker
-- [issue-tracker-local.md](./01-setup-matt-pocock-skills_issue-tracker-local.md) — local-markdown issue tracker
-- [triage-labels.md](./01-setup-matt-pocock-skills_triage-labels.md) — label mapping (only if `triage` is installed)
-- [domain.md](./01-setup-matt-pocock-skills_domain.md) — domain doc consumer rules + layout
+- [issue-tracker-github.md](./02-setup-matt-pocock-skills_issue-tracker-github.md) — GitHub issue tracker
+- [issue-tracker-gitlab.md](./02-setup-matt-pocock-skills_issue-tracker-gitlab.md) — GitLab issue tracker
+- [issue-tracker-local.md](./02-setup-matt-pocock-skills_issue-tracker-local.md) — local-markdown issue tracker
+- [triage-labels.md](./02-setup-matt-pocock-skills_triage-labels.md) — label mapping (only if `triage` is installed)
+- [domain.md](./02-setup-matt-pocock-skills_domain.md) — domain doc consumer rules + layout
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
@@ -202,7 +202,7 @@ disable-model-invocation: true  # 禁止模型自动调用
 给用户看草稿：
 
 - 将写入 `CLAUDE.md` / `AGENTS.md` 的 `## Agent skills` 块
-- `docs/agents/issue-tracker.md`、`[domain.md](./01-setup-matt-pocock-skills_domain.md)`、`[triage-labels.md](./01-setup-matt-pocock-skills_triage-labels.md)`（后者仅当装了 triage）
+- `docs/agents/issue-tracker.md`、`[domain.md](./02-setup-matt-pocock-skills_domain.md)`、`[triage-labels.md](./02-setup-matt-pocock-skills_triage-labels.md)`（后者仅当装了 triage）
 
 允许写入前修改。
 

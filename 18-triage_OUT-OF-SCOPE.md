@@ -8,7 +8,7 @@
 | bucket | engineering |
 | 上游路径 | `skills/engineering/triage/OUT-OF-SCOPE.md` |
 | 角色定位 | 拒批特性知识库与防重复研讨机制（Out-of-Scope Knowledge Base） |
-| 关联模块 | `18-triage`、`01-setup-matt-pocock-skills` |
+| 关联模块 | `18-triage`、`02-setup-matt-pocock-skills` |
 
 ---
 
