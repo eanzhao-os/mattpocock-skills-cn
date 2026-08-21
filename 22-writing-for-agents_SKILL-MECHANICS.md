@@ -1,49 +1,4 @@
-# 22-writing-for-agents / SKILL-MECHANICS.md 精读
-
-## Meta
-
-| 字段 | 值 |
-|---|---|
-| 对应主 Skill | `22-writing-for-agents` |
-| bucket | productivity |
-| 上游路径 | `skills/productivity/writing-for-agents/SKILL-MECHANICS.md` |
-| 角色定位 | Skill 底层调度机制、触发分流与路由设计（Skill Mechanics & Routing） |
-| 关联模块 | `22-writing-for-agents`、`27-loop-me` |
-
----
-
-## 原文 (Markdown)
-
-```markdown
-# Skill mechanics
-
-The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill — frontmatter, the invocation choice, and router skills. Everything else about writing it is the universal reference in `SKILL.md`.
-
-## Invocation
-
-Two choices, trading the two loads:
-
-- A **model-invoked** skill keeps a `description`, so the agent can fire it autonomously — and other skills can reach it. You can still type its name: model-invocation always _includes_ user reach; a description only ever adds agent discovery, never removes the human's. The description is the skill's top-level context pointer, forced to stay loaded at all times — permanent context load in exchange for discoverability. A model-invoked skill whose content is all reference is also one home for shared reference: another skill can invoke it, so reference needed by several skills lives in one place. Mechanics: omit `disable-model-invocation`, and write a model-facing description carrying the trigger branches (the pointer-writing rules in `SKILL.md` apply in full).
-- A **user-invoked** skill strips the description from the agent's reach: only the human typing its name can invoke it, and no other skill can. Zero context load, but it spends cognitive load — you are the index that must remember it exists. Mechanics: set `disable-model-invocation: true`; the `description` becomes human-facing — a one-line summary, trigger lists stripped.
-
-Pick model-invocation only when the agent must reach the skill on its own, or another skill must. If it only ever fires by hand, make it user-invoked and pay no context load.
-
-Shared reference that two user-invoked skills both need can live in neither — with no descriptions, neither can fire the other. Push it to a plain file outside the skill system: external reference any skill can point at.
-
-## Splitting by invocation
-
-The invocation cut of splitting (the sequence cut lives in `SKILL.md`): split off a model-invoked skill when you have a distinct leading word that should trigger it on its own — a trigger word you actually use in your prompts — or another skill must reach it. You pay context load for the new always-loaded description, so that independent reach has to be worth it.
-
-## Router skills
-
-When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each, so the human has one skill to remember instead of many. It can only hint, never fire them: user-invoked skills have no description, so nothing but the human can reach them.
-```
-
----
-
-## 中文翻译
-
-# Skill 底层机制与路由模式（Skill Mechanics）
+# 22-writing-for-agents / SKILL-MECHANICS.md 精读（Skill 底层机制与路由模式（Skill Mechanics））
 
 本文档是 [writing-for-agents](./22-writing-for-agents.md) (SKILL.md) 针对 **Skill 技能编写场景** 的专用拓展分支：专门规范当编写的目标文档本身就是一个 Skill 时所发生的底层机制变化 —— 涵盖 Frontmatter 元数据、调用模式选型（Invocation choice）以及路由技能（Router skills）。其余所有关于正文编写的法则均严格遵循 `SKILL.md` 的通用规范。
 
@@ -79,3 +34,49 @@ When user-invoked skills multiply past what you can remember, that piled-up cogn
 - 打造一个专门面向人类的入口技能，其内部完整罗列了所有其他相关子技能的名字以及各自在何时该选用；
 - 人类只需要记住这一个顶层路由技能的名字即可；
 - **路由技能只做提点推荐，绝不自动触发**：因为底层的子技能都是纯人类调用的（没有 description），唯有人类看完提示后亲自手动点名触发。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
+
+| 字段 | 值 |
+|---|---|
+| 对应主 Skill | `22-writing-for-agents` |
+| bucket | productivity |
+| 上游路径 | `skills/productivity/writing-for-agents/SKILL-MECHANICS.md` |
+| 角色定位 | Skill 底层调度机制、触发分流与路由设计（Skill Mechanics & Routing） |
+| 关联模块 | `22-writing-for-agents`、`27-loop-me` |
+
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
+
+```markdown
+# Skill mechanics
+
+The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill — frontmatter, the invocation choice, and router skills. Everything else about writing it is the universal reference in `SKILL.md`.
+
+## Invocation
+
+Two choices, trading the two loads:
+
+- A **model-invoked** skill keeps a `description`, so the agent can fire it autonomously — and other skills can reach it. You can still type its name: model-invocation always _includes_ user reach; a description only ever adds agent discovery, never removes the human's. The description is the skill's top-level context pointer, forced to stay loaded at all times — permanent context load in exchange for discoverability. A model-invoked skill whose content is all reference is also one home for shared reference: another skill can invoke it, so reference needed by several skills lives in one place. Mechanics: omit `disable-model-invocation`, and write a model-facing description carrying the trigger branches (the pointer-writing rules in `SKILL.md` apply in full).
+- A **user-invoked** skill strips the description from the agent's reach: only the human typing its name can invoke it, and no other skill can. Zero context load, but it spends cognitive load — you are the index that must remember it exists. Mechanics: set `disable-model-invocation: true`; the `description` becomes human-facing — a one-line summary, trigger lists stripped.
+
+Pick model-invocation only when the agent must reach the skill on its own, or another skill must. If it only ever fires by hand, make it user-invoked and pay no context load.
+
+Shared reference that two user-invoked skills both need can live in neither — with no descriptions, neither can fire the other. Push it to a plain file outside the skill system: external reference any skill can point at.
+
+## Splitting by invocation
+
+The invocation cut of splitting (the sequence cut lives in `SKILL.md`): split off a model-invoked skill when you have a distinct leading word that should trigger it on its own — a trigger word you actually use in your prompts — or another skill must reach it. You pay context load for the new always-loaded description, so that independent reach has to be worth it.
+
+## Router skills
+
+When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each, so the human has one skill to remember instead of many. It can only hint, never fire them: user-invoked skills have no description, so nothing but the human can reach them.
+```
+
+</details>

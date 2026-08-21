@@ -1,82 +1,4 @@
-# 01-ask-matt / PHASE-BOUNDARIES.md 精读
-
-## Meta
-
-| 字段 | 值 |
-|---|---|
-| 对应主 Skill | `01-ask-matt` |
-| bucket | engineering |
-| 上游路径 | `skills/engineering/ask-matt/PHASE-BOUNDARIES.md` |
-| 角色定位 | 会话阶段边界决策树与上下文切换哲学（Phase Boundaries Decision Tree） |
-| 关联模块 | `01-ask-matt`、`06-handoff` |
-
----
-
-## 原文 (Markdown)
-
-```markdown
-# Phase boundaries
-
-A **phase** is a chunk of work inside a session — the grilling, the implementation, the QA. The definition is fuzzy on purpose: a phase ends when you think *"ok, we're done with that"*.
-
-The **phase boundary** is the gap between two phases, and it is the only place this decision belongs. Mid-phase there is no decision to make — continue, or split the work that's left into subagents. Compacting mid-phase makes the agent lose the thread.
-
-## The five options
-
-| Option       | What it does                                                    |
-| ------------ | --------------------------------------------------------------- |
-| **Continue** | Stay in the session. No context switch at all.                    |
-| **`/clear`** | Empty the context window and start from nothing.                  |
-| **`/handoff`** | Write a portable markdown file and seed a session anywhere with it. |
-| **Subagent** | Send the task to its own context window and get a report back.     |
-| **`/compact`** | Compress this context and seed a fresh session with the summary.  |
-
-## The tree
-
-Work top to bottom at the boundary. The first **yes** wins.
-
-**1. Can you continue in this session?** Two things make the answer yes: the next phase needs this phase as a **primary source**, or you have enough [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone) left (~150k tokens) for the next phase to fit. Grilling → implementation is the standard yes: the implementation wants the reasoning verbatim, not a summary of it. Continue costs nothing and loses nothing, so rule it out before anything else.
-
-**2. Is the context irrelevant to what comes next?** Is everything in this session — the exploration, the decisions, the dead ends — disposable? If so, **`/clear`**. It is the cheapest move on the board: it takes no time and hands back the whole window. `/clear` also isn't terminal — the old session stays resumable.
-
-The cost of getting this wrong is one-way. Clear a *relevant* context and you lose the **why** behind what you built, and no amount of reading the diff back gets it returned.
-
-**3. Do you need to hand off?** `/handoff` is narrow. You need it only when you are:
-
-- swapping to a **new harness** (Claude → Codex),
-- moving to a **new directory** or repo,
-- sending the work to a **colleague**,
-- or forking a side task you found **mid-phase** without derailing what you're doing.
-
-That list is the whole clause. What `/handoff` buys is **portability** — a file that travels. If nothing is travelling, you don't need it.
-
-**4. Can the task be done AFK?** Is it scoped tightly enough to run with you away from the keyboard, no steering? Then send it to a **subagent** and leave this session untouched. Automated review is the standard case: the agent reads the diff and reports, and you aren't needed while it does.
-
-**5. Otherwise, `/compact`.** Relevant context, same harness, same directory, and you need to stay in the loop — this is where the tree lands, and it lands here often. Pass it an instruction (`/compact we're going to QA this area`) so the summary keeps what the next phase needs.
-
-`/compact` is the **default, not the first reach**. It sits at the bottom because the four questions above it are all cheaper or more precise. The failure mode when people start here is a fresh session that is confidently wrong about a decision the summary flattened.
-
-## Primary and secondary sources
-
-Every move except **Continue** turns a **primary source** into a **secondary source** — the session as it happened, replaced by a summary of it. The trade is always the same shape:
-
-| Source                            | Information | Noise | Room to move |
-| --------------------------------- | ----------- | ----- | ------------ |
-| Primary (Continue)                | Full        | Lots  | Little       |
-| Secondary (`/compact`, `/handoff`) | Lossy       | Less  | Lots         |
-
-This is why question 1 comes first. You only pay the lossiness when staying costs more than it saves.
-
-## These are judgement calls
-
-The questions are not objective — each has taste in it, and the same boundary can go two ways on two days. The value is in asking them **in order**, at the boundary rather than in the middle of the work.
-```
-
----
-
-## 中文翻译
-
-# 阶段边界决策树与上下文切换哲学（Phase Boundaries）
+# 01-ask-matt / PHASE-BOUNDARIES.md 精读（阶段边界决策树与上下文切换哲学（Phase Boundaries））
 
 所谓 **阶段（Phase）**，是指一次 Agent 交互会话内部的一大块独立工作单元 —— 例如前期的深度追问（Grilling）、中期的代码实现（Implementation）、或后期的质量保证（QA）。这个定义故意保持适度的经验模糊性：当你心中闪过 *“好了，这部分工作已经搞定了”* 的念头时，一个阶段便宣告结束。
 
@@ -152,3 +74,82 @@ The questions are not objective — each has taste in it, and the same boundary 
 ## 决策裁量的艺术
 
 上述五个问题并非冷酷死板的客观算法 —— 每一处都蕴含着架构品味与主观判断，同一个阶段边界在不同情境下完全可能产生两种不同的决策抉择。这一决策树最核心的不可替代价值在于：**强迫你在阶段更迭的法定边界上、严格按照上述顺序依次进行自我拷问，而不是在工作推进行到半途中盲目折腾上下文**。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
+
+| 字段 | 值 |
+|---|---|
+| 对应主 Skill | `01-ask-matt` |
+| bucket | engineering |
+| 上游路径 | `skills/engineering/ask-matt/PHASE-BOUNDARIES.md` |
+| 角色定位 | 会话阶段边界决策树与上下文切换哲学（Phase Boundaries Decision Tree） |
+| 关联模块 | `01-ask-matt`、`06-handoff` |
+
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
+
+```markdown
+# Phase boundaries
+
+A **phase** is a chunk of work inside a session — the grilling, the implementation, the QA. The definition is fuzzy on purpose: a phase ends when you think *"ok, we're done with that"*.
+
+The **phase boundary** is the gap between two phases, and it is the only place this decision belongs. Mid-phase there is no decision to make — continue, or split the work that's left into subagents. Compacting mid-phase makes the agent lose the thread.
+
+## The five options
+
+| Option       | What it does                                                    |
+| ------------ | --------------------------------------------------------------- |
+| **Continue** | Stay in the session. No context switch at all.                    |
+| **`/clear`** | Empty the context window and start from nothing.                  |
+| **`/handoff`** | Write a portable markdown file and seed a session anywhere with it. |
+| **Subagent** | Send the task to its own context window and get a report back.     |
+| **`/compact`** | Compress this context and seed a fresh session with the summary.  |
+
+## The tree
+
+Work top to bottom at the boundary. The first **yes** wins.
+
+**1. Can you continue in this session?** Two things make the answer yes: the next phase needs this phase as a **primary source**, or you have enough [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone) left (~150k tokens) for the next phase to fit. Grilling → implementation is the standard yes: the implementation wants the reasoning verbatim, not a summary of it. Continue costs nothing and loses nothing, so rule it out before anything else.
+
+**2. Is the context irrelevant to what comes next?** Is everything in this session — the exploration, the decisions, the dead ends — disposable? If so, **`/clear`**. It is the cheapest move on the board: it takes no time and hands back the whole window. `/clear` also isn't terminal — the old session stays resumable.
+
+The cost of getting this wrong is one-way. Clear a *relevant* context and you lose the **why** behind what you built, and no amount of reading the diff back gets it returned.
+
+**3. Do you need to hand off?** `/handoff` is narrow. You need it only when you are:
+
+- swapping to a **new harness** (Claude → Codex),
+- moving to a **new directory** or repo,
+- sending the work to a **colleague**,
+- or forking a side task you found **mid-phase** without derailing what you're doing.
+
+That list is the whole clause. What `/handoff` buys is **portability** — a file that travels. If nothing is travelling, you don't need it.
+
+**4. Can the task be done AFK?** Is it scoped tightly enough to run with you away from the keyboard, no steering? Then send it to a **subagent** and leave this session untouched. Automated review is the standard case: the agent reads the diff and reports, and you aren't needed while it does.
+
+**5. Otherwise, `/compact`.** Relevant context, same harness, same directory, and you need to stay in the loop — this is where the tree lands, and it lands here often. Pass it an instruction (`/compact we're going to QA this area`) so the summary keeps what the next phase needs.
+
+`/compact` is the **default, not the first reach**. It sits at the bottom because the four questions above it are all cheaper or more precise. The failure mode when people start here is a fresh session that is confidently wrong about a decision the summary flattened.
+
+## Primary and secondary sources
+
+Every move except **Continue** turns a **primary source** into a **secondary source** — the session as it happened, replaced by a summary of it. The trade is always the same shape:
+
+| Source                            | Information | Noise | Room to move |
+| --------------------------------- | ----------- | ----- | ------------ |
+| Primary (Continue)                | Full        | Lots  | Little       |
+| Secondary (`/compact`, `/handoff`) | Lossy       | Less  | Lots         |
+
+This is why question 1 comes first. You only pay the lossiness when staying costs more than it saves.
+
+## These are judgement calls
+
+The questions are not objective — each has taste in it, and the same boundary can go two ways on two days. The value is in asking them **in order**, at the boundary rather than in the middle of the work.
+```
+
+</details>

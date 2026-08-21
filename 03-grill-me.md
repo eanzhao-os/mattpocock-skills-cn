@@ -1,6 +1,18 @@
-# 03. grill-me
+# 03. grill-me（grill-me（纯对话打磨））
 
-## Meta
+```yaml
+name: grill-me
+description: 深度严谨的追问访谈，用于打磨和完善方案或设计。
+disable-model-invocation: true
+```
+
+启动一场 `/grilling` 深度访谈会话。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
 
 - bucket: `productivity`
 - path: `skills/productivity/grill-me/`
@@ -9,7 +21,10 @@
 - companion 文件：
   - `agents/openai.yaml`（仅 harness 元数据）
 
-## 原文 (SKILL.md)
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
 ```markdown
 ---
@@ -21,14 +36,4 @@ disable-model-invocation: true
 Run a `/grilling` session.
 ```
 
-## 中文翻译
-
-```yaml
-name: grill-me
-description: 深度严谨的追问访谈，用于打磨和完善方案或设计。
-disable-model-invocation: true
-```
-
-# grill-me（纯对话打磨）
-
-启动一场 `/grilling` 深度访谈会话。
+</details>

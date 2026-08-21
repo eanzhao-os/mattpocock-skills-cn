@@ -1,65 +1,4 @@
-# 09. tdd
-
-## Meta（bucket/path/url/触发方式/companions）
-
-| 字段 | 值 |
-|---|---|
-| bucket | `engineering/` |
-| path | `skills/engineering/tdd/` |
-| url | https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd |
-| name | `tdd` |
-| 触发 | description：test-first 做功能或修 bug；用户提到 red-green-refactor 或要 integration tests |
-| 调用策略 | 默认可被模型按 description 触发（无 `disable-model-invocation`） |
-| companions | [tests.md](./09-tdd_tests.md)（好/坏测试示例）、[mocking.md](./09-tdd_mocking.md)（mock 边界与可 mock 设计）——本页只摘要，不全文翻译 |
-| 相关 skill | `/codebase-design`（seam / module / depth 词表）；`/code-review`（refactor 归属 review 阶段，不在 red→green 循环内） |
-| 下游消费者 | `/implement` 明确要求 “Use /tdd where possible, at pre-agreed seams” |
-
-## 原文 (SKILL.md)
-
-```markdown
----
-name: tdd
-description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
----
-
-# Test-Driven Development
-
-TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle — consult them before and during the loop, not after.
-
-When exploring the codebase, read `CONTEXT.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
-
-## What a good test is
-
-Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification — "user can checkout with valid cart" tells you exactly what capability exists — and survives refactors because it doesn't care about internal structure.
-
-See [tests.md](./09-tdd_tests.md) for examples and [mocking.md](./09-tdd_mocking.md) for mocking guidelines.
-
-## Seams — where tests go
-
-A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
-
-**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything — agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
-
-Ask: "What's the public interface, and which seams should we test?"
-
-When the shape of that interface is itself in question — how deep the module is, where the seam belongs, what the interface should expose — use the `/codebase-design` skill for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
-
-## Anti-patterns
-
-- **Implementation-coupled** — mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
-- **Tautological** — the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth — a known-good literal, a worked example, the spec.
-- **Horizontal slicing** — writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead — one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
-
-## Rules of the loop
-
-- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
-- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
-- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.
-```
-
-## 中文翻译
-
-# Test-Driven Development（测试驱动开发）
+# 09. tdd（Test-Driven Development（测试驱动开发））
 
 TDD 是由“红（失败）→ 绿（通过）”构成的迭代循环。本 skill 是指导该循环产出“真正值得长期保留的测试”的权威参考：明确什么是好测试、测试应该写在什么位置、防范哪些反模式、以及严格遵循的循环准则。其中的每一项准则都适用于每一次循环 —— 请在循环**之前**与**进行中**随时查阅，而不是事后才来翻看。
 
@@ -106,3 +45,69 @@ TDD 是由“红（失败）→ 绿（通过）”构成的迭代循环。本 sk
 - **只在 system boundaries mock**：外部 API、（有时）DB、时间/随机、（有时）文件系统。
 - **不 mock**：自己的 classes/modules、内部 collaborators、你控制的一切。
 - **为可 mock 而设计**：DI 注入外部依赖；prefer SDK-style 接口（`getUser` / `getOrders`）而非通用 `fetch(endpoint)`——每 mock 返回一种 shape，测试 setup 无条件分支。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
+
+| 字段 | 值 |
+|---|---|
+| bucket | `engineering/` |
+| path | `skills/engineering/tdd/` |
+| url | https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd |
+| name | `tdd` |
+| 触发 | description：test-first 做功能或修 bug；用户提到 red-green-refactor 或要 integration tests |
+| 调用策略 | 默认可被模型按 description 触发（无 `disable-model-invocation`） |
+| companions | [tests.md](./09-tdd_tests.md)（好/坏测试示例）、[mocking.md](./09-tdd_mocking.md)（mock 边界与可 mock 设计）——本页只摘要，不全文翻译 |
+| 相关 skill | `/codebase-design`（seam / module / depth 词表）；`/code-review`（refactor 归属 review 阶段，不在 red→green 循环内） |
+| 下游消费者 | `/implement` 明确要求 “Use /tdd where possible, at pre-agreed seams” |
+
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
+
+```markdown
+---
+name: tdd
+description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
+---
+
+# Test-Driven Development
+
+TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle — consult them before and during the loop, not after.
+
+When exploring the codebase, read `CONTEXT.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
+
+## What a good test is
+
+Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification — "user can checkout with valid cart" tells you exactly what capability exists — and survives refactors because it doesn't care about internal structure.
+
+See [tests.md](./09-tdd_tests.md) for examples and [mocking.md](./09-tdd_mocking.md) for mocking guidelines.
+
+## Seams — where tests go
+
+A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
+
+**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything — agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
+
+Ask: "What's the public interface, and which seams should we test?"
+
+When the shape of that interface is itself in question — how deep the module is, where the seam belongs, what the interface should expose — use the `/codebase-design` skill for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
+
+## Anti-patterns
+
+- **Implementation-coupled** — mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
+- **Tautological** — the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth — a known-good literal, a worked example, the spec.
+- **Horizontal slicing** — writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead — one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
+
+## Rules of the loop
+
+- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
+- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
+- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.
+```
+
+</details>

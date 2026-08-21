@@ -1,62 +1,4 @@
-# 23-teach / GLOSSARY-FORMAT.md 精读
-
-## Meta
-
-| 字段 | 值 |
-|---|---|
-| 对应主 Skill | `23-teach` |
-| bucket | productivity |
-| 上游路径 | `skills/productivity/teach/GLOSSARY-FORMAT.md` |
-| 角色定位 | 教学工作区权威通用术语表构建规范（GLOSSARY.md Specification） |
-| 关联模块 | `23-teach`、`15-domain-modeling` |
-
----
-
-## 原文 (Markdown)
-
-```markdown
-# GLOSSARY.md Format
-
-`GLOSSARY.md` is the canonical language for this teaching workspace. All explainers, exercises, and learning records should adhere to its terminology. Building it is itself part of learning: compressing a concept into a tight definition is evidence the user understands it.
-
-## Structure
-
-```md
-# {Topic} Glossary
-
-{One or two sentence description of the topic this glossary covers.}
-
-## Terms
-
-**Hypertrophy**:
-Muscle growth driven by mechanical tension and metabolic stress over repeated training sessions.
-_Avoid_: Bulking, getting big
-
-**Progressive overload**:
-Systematically increasing the demand on a muscle over time — via load, volume, or intensity.
-_Avoid_: Pushing harder, levelling up
-
-**RPE (Rate of Perceived Exertion)**:
-A 1–10 self-rating of how hard a set felt, where 10 is failure and 8 means two reps left in the tank.
-_Avoid_: Effort score, intensity rating
-```
-
-## Rules
-
-- **Add a term only when the user understands it.** The glossary is a record of compressed knowledge, not a dictionary the user reads to learn. If the user has just been introduced to a concept, wait until they can use it correctly before promoting it here.
-- **Be opinionated.** When several words exist for the same concept, pick the best one and list the rest as aliases to avoid. This is how language compresses.
-- **Keep definitions tight.** One or two sentences. Define what the term IS, not what it does or how to do it.
-- **Use the glossary's own terms inside definitions.** Once a term is in the glossary, prefer it everywhere — including inside other definitions. This is what makes complex terms easier to grasp later.
-- **Group under subheadings** when natural clusters emerge (e.g. `## Anatomy`, `## Programming`). A flat list is fine when terms cohere.
-- **Flag ambiguities explicitly.** If a term is used loosely in the wider field, note the resolution: "In this workspace, 'set' always means a working set — warm-ups are tracked separately."
-- **Revise as understanding deepens.** A definition the user wrote in week one may be wrong by week six. Update in place; do not leave stale entries.
-```
-
----
-
-## 中文翻译
-
-# 统一术语表构建规范（GLOSSARY.md Format）
+# 23-teach / GLOSSARY-FORMAT.md 精读（统一术语表构建规范（GLOSSARY.md Format））
 
 `GLOSSARY.md` 是当前教学工作区的**权威通用语言法典（Canonical language）**。所有的原理解析、实操习题与学习记录档案，均必须严格遵守其术语定义。
 
@@ -97,3 +39,62 @@ _Avoid_: 努力程度评分, 强度等级
 - **按需划分二级主题分组（Group under subheadings）**：当术语自然呈现业务集群时分块罗列（如 `## 解剖生理`、`## 周期规划`）；如果全局浑然一体，扁平列表即可；
 - **显式化解行业歧义（Flag ambiguities explicitly）**：如果某个词在行业泛指中含义模糊，显式写明本工作区的裁决准则（例如：“在本工作区中，‘一组’永远指代正式有效组 —— 热身组单独统计”）；
 - **伴随认知深化就地重构（Revise as understanding deepens）**：学员在第一周写下的幼稚定义到了第六周很可能是片面的。就地更新替换，绝不任由陈旧的僵死定义误导全局。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
+
+| 字段 | 值 |
+|---|---|
+| 对应主 Skill | `23-teach` |
+| bucket | productivity |
+| 上游路径 | `skills/productivity/teach/GLOSSARY-FORMAT.md` |
+| 角色定位 | 教学工作区权威通用术语表构建规范（GLOSSARY.md Specification） |
+| 关联模块 | `23-teach`、`15-domain-modeling` |
+
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
+
+```markdown
+# GLOSSARY.md Format
+
+`GLOSSARY.md` is the canonical language for this teaching workspace. All explainers, exercises, and learning records should adhere to its terminology. Building it is itself part of learning: compressing a concept into a tight definition is evidence the user understands it.
+
+## Structure
+
+```md
+# {Topic} Glossary
+
+{One or two sentence description of the topic this glossary covers.}
+
+## Terms
+
+**Hypertrophy**:
+Muscle growth driven by mechanical tension and metabolic stress over repeated training sessions.
+_Avoid_: Bulking, getting big
+
+**Progressive overload**:
+Systematically increasing the demand on a muscle over time — via load, volume, or intensity.
+_Avoid_: Pushing harder, levelling up
+
+**RPE (Rate of Perceived Exertion)**:
+A 1–10 self-rating of how hard a set felt, where 10 is failure and 8 means two reps left in the tank.
+_Avoid_: Effort score, intensity rating
+```
+
+## Rules
+
+- **Add a term only when the user understands it.** The glossary is a record of compressed knowledge, not a dictionary the user reads to learn. If the user has just been introduced to a concept, wait until they can use it correctly before promoting it here.
+- **Be opinionated.** When several words exist for the same concept, pick the best one and list the rest as aliases to avoid. This is how language compresses.
+- **Keep definitions tight.** One or two sentences. Define what the term IS, not what it does or how to do it.
+- **Use the glossary's own terms inside definitions.** Once a term is in the glossary, prefer it everywhere — including inside other definitions. This is what makes complex terms easier to grasp later.
+- **Group under subheadings** when natural clusters emerge (e.g. `## Anatomy`, `## Programming`). A flat list is fine when terms cohere.
+- **Flag ambiguities explicitly.** If a term is used loosely in the wider field, note the resolution: "In this workspace, 'set' always means a working set — warm-ups are tracked separately."
+- **Revise as understanding deepens.** A definition the user wrote in week one may be wrong by week six. Update in place; do not leave stale entries.
+```
+
+</details>

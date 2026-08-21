@@ -1,57 +1,9 @@
-# 12. prototype
-
-## Meta（bucket/path/url/触发方式/companions）
-
-| 字段 | 值 |
-|---|---|
-| bucket | `engineering/` |
-| path | `skills/engineering/prototype/` |
-| url | https://github.com/mattpocock/skills/tree/main/skills/engineering/prototype |
-| name | `prototype` |
-| 触发 | description：用 throwaway prototype 回答设计问题；sanity-check state model / logic，或探索 UI 应长什么样 |
-| 调用策略 | 默认可触发（无 disable-model-invocation） |
-| companions | [LOGIC.md](./12-prototype_LOGIC.md)（逻辑/状态 demo）、[UI.md](./12-prototype_UI.md)（多变体 UI）——本页只摘要，不全文翻译 |
-| 产出回写 | 验证后的决策进正式代码；prototype 本体进 throwaway branch 作 primary source；to-tickets 允许内联 prototype 决策片段 |
-
-## 原文 (SKILL.md)
-
-```markdown
----
-name: prototype
-description: Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.
----
-
-# Prototype
-
-A prototype is **throwaway code that answers a question**. The question decides the shape.
-
-## Pick a branch
-
-Identify which question is being answered — from the user's prompt, the surrounding code, or by asking if the user is around:
-
-- **"Does this logic / state model feel right?"** → [LOGIC.md](./12-prototype_LOGIC.md). Build a single shareable HTML file — free-play buttons plus tabbed guided walkthroughs — that pushes the state machine through cases that are hard to reason about on paper, and that a non-developer can drive.
-- **"What should this look like?"** → [UI.md](./12-prototype_UI.md). Generate several radically different UI variations on a single route, switchable via a URL search param and a floating bottom bar.
-
-The two branches produce very different artifacts — getting this wrong wastes the whole prototype. If the question is genuinely ambiguous and the user isn't reachable, default to whichever branch better matches the surrounding code (a backend module → logic; a page or component → UI) and state the assumption at the top of the prototype.
-
-## Rules that apply to both
-
-1. **Throwaway from day one, and clearly marked as such.** Locate the prototype code close to where it will actually be used (next to the module or page it's prototyping for) so context is obvious — but name it so a casual reader can see it's a prototype, not production. For throwaway UI routes, obey whatever routing convention the project already uses; don't invent a new top-level structure.
-2. **Trivial to run.** A UI prototype starts from one command in the project's task runner — `pnpm <name>`, `python <path>`, `bun <path>`, etc. A logic demo is a single HTML file the user double-clicks. Either way, no thinking required to start it.
-3. **No persistence by default.** State lives in memory. Persistence is the thing the prototype is _checking_, not something it should depend on. If the question explicitly involves a database, hit a scratch DB or a local file with a clear "PROTOTYPE — wipe me" name.
-4. **Skip the polish.** No tests, no error handling beyond what makes the prototype _runnable_, no abstractions. The point is to learn something fast.
-5. **Surface the state.** After every action (logic) or on every variant switch (UI), print or render the full relevant state so the user can see what changed.
-6. **Capture it when done.** Fold any validated decision into the real code, then capture the prototype itself as a **primary source**: commit it to a throwaway branch, out of main, and leave a context pointer to that branch on the implementation issue. Capture the answer too — the verdict and the question it settled — in the issue or a commit. The main branch keeps only the validated decision.
-```
-
-## 中文翻译
+# 12. prototype（Prototype（用后即弃的原型验证））
 
 ```yaml
 name: prototype
 description: 编写一个用后即弃的原型（throwaway prototype）来回答具体的设计问题。当用户希望对状态模型或核心业务逻辑是否合理进行健全性检查，或探索 UI 界面应该呈现何种外观时使用。
 ```
-
-# Prototype（用后即弃的原型验证）
 
 原型本质上是 **“为了回答某一个具体问题而编写的用后即弃代码（throwaway code）”**。问题本身的性质决定了原型的形态。
 
@@ -89,3 +41,56 @@ description: 编写一个用后即弃的原型（throwaway prototype）来回答
 - **子形态 B（末选）**：全新 throwaway route（路径/文件名含 `prototype`）；无 nearby home 才用。
 - **流程**：声明问题与 N → 生成 structurally different 变体（非仅换色）→ switcher 组件 → 底栏左右箭头 + 标签 + 键盘 ←/→（input 聚焦时不拦截）→ production build 隐藏 bar → 胜出者 fold 进真代码，其余进 throwaway branch。
 - **Anti-patterns**：只差颜色/文案、变体间共享过多 Layout、接真 mutations、把 prototype 代码直接 promote 上 production（无测试约束下写的，应 rewrite）。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
+
+| 字段 | 值 |
+|---|---|
+| bucket | `engineering/` |
+| path | `skills/engineering/prototype/` |
+| url | https://github.com/mattpocock/skills/tree/main/skills/engineering/prototype |
+| name | `prototype` |
+| 触发 | description：用 throwaway prototype 回答设计问题；sanity-check state model / logic，或探索 UI 应长什么样 |
+| 调用策略 | 默认可触发（无 disable-model-invocation） |
+| companions | [LOGIC.md](./12-prototype_LOGIC.md)（逻辑/状态 demo）、[UI.md](./12-prototype_UI.md)（多变体 UI）——本页只摘要，不全文翻译 |
+| 产出回写 | 验证后的决策进正式代码；prototype 本体进 throwaway branch 作 primary source；to-tickets 允许内联 prototype 决策片段 |
+
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
+
+```markdown
+---
+name: prototype
+description: Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.
+---
+
+# Prototype
+
+A prototype is **throwaway code that answers a question**. The question decides the shape.
+
+## Pick a branch
+
+Identify which question is being answered — from the user's prompt, the surrounding code, or by asking if the user is around:
+
+- **"Does this logic / state model feel right?"** → [LOGIC.md](./12-prototype_LOGIC.md). Build a single shareable HTML file — free-play buttons plus tabbed guided walkthroughs — that pushes the state machine through cases that are hard to reason about on paper, and that a non-developer can drive.
+- **"What should this look like?"** → [UI.md](./12-prototype_UI.md). Generate several radically different UI variations on a single route, switchable via a URL search param and a floating bottom bar.
+
+The two branches produce very different artifacts — getting this wrong wastes the whole prototype. If the question is genuinely ambiguous and the user isn't reachable, default to whichever branch better matches the surrounding code (a backend module → logic; a page or component → UI) and state the assumption at the top of the prototype.
+
+## Rules that apply to both
+
+1. **Throwaway from day one, and clearly marked as such.** Locate the prototype code close to where it will actually be used (next to the module or page it's prototyping for) so context is obvious — but name it so a casual reader can see it's a prototype, not production. For throwaway UI routes, obey whatever routing convention the project already uses; don't invent a new top-level structure.
+2. **Trivial to run.** A UI prototype starts from one command in the project's task runner — `pnpm <name>`, `python <path>`, `bun <path>`, etc. A logic demo is a single HTML file the user double-clicks. Either way, no thinking required to start it.
+3. **No persistence by default.** State lives in memory. Persistence is the thing the prototype is _checking_, not something it should depend on. If the question explicitly involves a database, hit a scratch DB or a local file with a clear "PROTOTYPE — wipe me" name.
+4. **Skip the polish.** No tests, no error handling beyond what makes the prototype _runnable_, no abstractions. The point is to learn something fast.
+5. **Surface the state.** After every action (logic) or on every variant switch (UI), print or render the full relevant state so the user can see what changed.
+6. **Capture it when done.** Fold any validated decision into the real code, then capture the prototype itself as a **primary source**: commit it to a throwaway branch, out of main, and leave a context pointer to that branch on the implementation issue. Capture the answer too — the verdict and the question it settled — in the issue or a commit. The main branch keeps only the validated decision.
+```
+
+</details>

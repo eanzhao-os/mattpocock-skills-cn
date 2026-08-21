@@ -1,6 +1,95 @@
-# 02. setup-matt-pocock-skills
+# 02. setup-matt-pocock-skills（Setup Matt Pocock's Skills）
 
-## Meta
+```yaml
+name: setup-matt-pocock-skills
+description: 为本仓库配置 engineering skills 所需前提——设置 issue tracker、triage 标签词表、domain 文档布局。在首次使用其他 engineering skills 之前跑一次。
+disable-model-invocation: true  # 禁止模型自动调用
+```
+
+为 engineering skills 所假设的「每仓配置」搭脚手架：
+
+- **Issue tracker** — issues 落在哪里（默认 GitHub；也开箱支持本地 markdown）
+- **Triage labels** — 五个规范 triage 角色所用的字符串
+- **Domain docs** — `CONTEXT.md` 与 ADRs 的位置，以及读取它们的消费规则
+
+这是 **prompt 驱动的 skill**，不是确定性脚本。流程是：探索 → 呈现发现 → 与用户确认 → 再写入。
+
+## 流程
+
+### 1. 探索
+
+看当前 repo 的起始状态。有什么读什么，不要假设：
+
+- `git remote -v` 与 `.git/config` — 是不是 GitHub？哪个？
+- 根目录的 `AGENTS.md` / `CLAUDE.md` — 是否存在？是否已有 `## Agent skills` 段？
+- 根目录的 `CONTEXT.md` / `CONTEXT-MAP.md`
+- `docs/adr/` 以及任何 `src/*/docs/adr/`
+- `docs/agents/` — 本 skill 是否已有先前输出？
+- `.scratch/` — 是否已在用本地 markdown issue tracker 约定
+- `triage` skill 是否已安装？（同目录有 `triage` 文件夹，或可用 skills 列表里有它）这决定 Section B 是否执行
+- monorepo 信号 — `pnpm-workspace.yaml`、`package.json` 的 `workspaces`、或有独立 `src/` 的 `packages/*`。只在真正大型多包仓呈现；没有则按 single-context（几乎所有仓）
+
+### 2. 呈现发现并提问
+
+总结已有与缺失。然后按 section 顺序：一个 section、一个答案、再下一个。
+
+每个 section 先给推荐答案，让用户一句话就能接受。只有真正分叉时才给一行 explainer；探索已定案时整段跳过（无 未装则跳 B；无 monorepo 则跳 C 提问）。
+
+**Section A — Issue tracker。**
+
+> Explainer：issue tracker 是本仓 issues 所在处。`to-tickets`、`triage`、`to-spec` 等会读写它——需要知道是调 `gh issue create`、写 `.scratch/` 下 markdown，还是按你描述的其他工作流。选你**实际**用来跟进本仓工作的地方。
+
+默认姿态：这套 skill 为 GitHub 设计。remote 指向 GitHub 就提议 GitHub；指向 GitLab 就提议 GitLab。否则（或用户偏好）提供：
+
+- **GitHub** — 用 `gh` CLI
+- **GitLab** — 用 `glab` CLI
+- **Local markdown** — `.scratch/<feature>/`（适合 solo 或无 remote）
+- **Other**（Jira、Linear 等）— 让用户用一段话描述工作流，记为 freeform prose
+
+选择写入 `docs/agents/issue-tracker.md`。GitHub/GitLab 模板带有「PRs as a request surface」开关，默认 **off**——保持 off 且不要主动提出；想把外部 PR 进 triage 队列的用户可事后改文件。
+
+**Section B — Triage label vocabulary。** 若未装 `triage` 则整段跳过。
+
+若已装，只问一题：是否保留默认 triage labels？（推荐 **yes**）
+
+默认五个规范角色，标签字符串等于角色名：`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`。yes 则原样写入；no 时（通常因 tracker 已有别名）收集 override，避免 `triage` 创建重复标签。
+
+**Section C — Domain docs。** 默认 **single-context**——根目录一个 `CONTEXT.md` + `docs/adr/`。几乎适用所有仓；**不问直接写**。
+
+仅当探索发现 monorepo 信号时，才提供 **multi-context**（根 `CONTEXT-MAP.md` 指向各 context 的 `CONTEXT.md`）并确认布局。
+
+### 3. 确认与编辑
+
+给用户看草稿：
+
+- 将写入 `CLAUDE.md` / `AGENTS.md` 的 `## Agent skills` 块
+- `docs/agents/issue-tracker.md`、`[domain.md](./02-setup-matt-pocock-skills_domain.md)`、`[triage-labels.md](./02-setup-matt-pocock-skills_triage-labels.md)`（后者仅当装了 triage）
+
+允许写入前修改。
+
+### 4. 写入
+
+**选编辑文件：**
+
+- 有 `CLAUDE.md` → 编辑它
+- 否则有 `AGENTS.md` → 编辑它
+- 都没有 → **问用户**要创建哪一个，不要替用户选
+
+绝不在已有一方时再创建另一方。已有 `## Agent skills` 则原地更新，不追加重复块；不覆盖周围用户编辑。
+
+块结构含 Issue tracker / Triage labels（条件）/ Domain docs 三个子段，指向 `docs/agents/*.md`。
+
+然后用本 skill 目录下 seed 模板写 docs 文件。Other tracker 则按用户描述从零写 `issue-tracker.md`。
+
+### 5. 完成
+
+告知 setup 完成、哪些 engineering skills 会读这些文件。说明之后可直接改 `docs/agents/*.md`；只有换 issue tracker 或想从零重来才需要重跑本 skill。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
 
 - bucket: `engineering`
 - path: `skills/engineering/setup-matt-pocock-skills/`
@@ -14,7 +103,10 @@
   - [domain.md](./02-setup-matt-pocock-skills_domain.md)
   - `agents/openai.yaml`
 
-## 原文 (SKILL.md)
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
 ````markdown
 ---
@@ -135,91 +227,4 @@ For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch us
 Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
 ````
 
-## 中文翻译
-
-```yaml
-name: setup-matt-pocock-skills
-description: 为本仓库配置 engineering skills 所需前提——设置 issue tracker、triage 标签词表、domain 文档布局。在首次使用其他 engineering skills 之前跑一次。
-disable-model-invocation: true  # 禁止模型自动调用
-```
-
-# Setup Matt Pocock's Skills
-
-为 engineering skills 所假设的「每仓配置」搭脚手架：
-
-- **Issue tracker** — issues 落在哪里（默认 GitHub；也开箱支持本地 markdown）
-- **Triage labels** — 五个规范 triage 角色所用的字符串
-- **Domain docs** — `CONTEXT.md` 与 ADRs 的位置，以及读取它们的消费规则
-
-这是 **prompt 驱动的 skill**，不是确定性脚本。流程是：探索 → 呈现发现 → 与用户确认 → 再写入。
-
-## 流程
-
-### 1. 探索
-
-看当前 repo 的起始状态。有什么读什么，不要假设：
-
-- `git remote -v` 与 `.git/config` — 是不是 GitHub？哪个？
-- 根目录的 `AGENTS.md` / `CLAUDE.md` — 是否存在？是否已有 `## Agent skills` 段？
-- 根目录的 `CONTEXT.md` / `CONTEXT-MAP.md`
-- `docs/adr/` 以及任何 `src/*/docs/adr/`
-- `docs/agents/` — 本 skill 是否已有先前输出？
-- `.scratch/` — 是否已在用本地 markdown issue tracker 约定
-- `triage` skill 是否已安装？（同目录有 `triage` 文件夹，或可用 skills 列表里有它）这决定 Section B 是否执行
-- monorepo 信号 — `pnpm-workspace.yaml`、`package.json` 的 `workspaces`、或有独立 `src/` 的 `packages/*`。只在真正大型多包仓呈现；没有则按 single-context（几乎所有仓）
-
-### 2. 呈现发现并提问
-
-总结已有与缺失。然后按 section 顺序：一个 section、一个答案、再下一个。
-
-每个 section 先给推荐答案，让用户一句话就能接受。只有真正分叉时才给一行 explainer；探索已定案时整段跳过（无 未装则跳 B；无 monorepo 则跳 C 提问）。
-
-**Section A — Issue tracker。**
-
-> Explainer：issue tracker 是本仓 issues 所在处。`to-tickets`、`triage`、`to-spec` 等会读写它——需要知道是调 `gh issue create`、写 `.scratch/` 下 markdown，还是按你描述的其他工作流。选你**实际**用来跟进本仓工作的地方。
-
-默认姿态：这套 skill 为 GitHub 设计。remote 指向 GitHub 就提议 GitHub；指向 GitLab 就提议 GitLab。否则（或用户偏好）提供：
-
-- **GitHub** — 用 `gh` CLI
-- **GitLab** — 用 `glab` CLI
-- **Local markdown** — `.scratch/<feature>/`（适合 solo 或无 remote）
-- **Other**（Jira、Linear 等）— 让用户用一段话描述工作流，记为 freeform prose
-
-选择写入 `docs/agents/issue-tracker.md`。GitHub/GitLab 模板带有「PRs as a request surface」开关，默认 **off**——保持 off 且不要主动提出；想把外部 PR 进 triage 队列的用户可事后改文件。
-
-**Section B — Triage label vocabulary。** 若未装 `triage` 则整段跳过。
-
-若已装，只问一题：是否保留默认 triage labels？（推荐 **yes**）
-
-默认五个规范角色，标签字符串等于角色名：`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`。yes 则原样写入；no 时（通常因 tracker 已有别名）收集 override，避免 `triage` 创建重复标签。
-
-**Section C — Domain docs。** 默认 **single-context**——根目录一个 `CONTEXT.md` + `docs/adr/`。几乎适用所有仓；**不问直接写**。
-
-仅当探索发现 monorepo 信号时，才提供 **multi-context**（根 `CONTEXT-MAP.md` 指向各 context 的 `CONTEXT.md`）并确认布局。
-
-### 3. 确认与编辑
-
-给用户看草稿：
-
-- 将写入 `CLAUDE.md` / `AGENTS.md` 的 `## Agent skills` 块
-- `docs/agents/issue-tracker.md`、`[domain.md](./02-setup-matt-pocock-skills_domain.md)`、`[triage-labels.md](./02-setup-matt-pocock-skills_triage-labels.md)`（后者仅当装了 triage）
-
-允许写入前修改。
-
-### 4. 写入
-
-**选编辑文件：**
-
-- 有 `CLAUDE.md` → 编辑它
-- 否则有 `AGENTS.md` → 编辑它
-- 都没有 → **问用户**要创建哪一个，不要替用户选
-
-绝不在已有一方时再创建另一方。已有 `## Agent skills` 则原地更新，不追加重复块；不覆盖周围用户编辑。
-
-块结构含 Issue tracker / Triage labels（条件）/ Domain docs 三个子段，指向 `docs/agents/*.md`。
-
-然后用本 skill 目录下 seed 模板写 docs 文件。Other tracker 则按用户描述从零写 `issue-tracker.md`。
-
-### 5. 完成
-
-告知 setup 完成、哪些 engineering skills 会读这些文件。说明之后可直接改 `docs/agents/*.md`；只有换 issue tracker 或想从零重来才需要重跑本 skill。
+</details>

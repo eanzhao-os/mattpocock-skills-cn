@@ -1,60 +1,4 @@
-# 02-setup-matt-pocock-skills / issue-tracker-gitlab.md 精读
-
-## Meta
-
-| 字段 | 值 |
-|---|---|
-| 对应主 Skill | `02-setup-matt-pocock-skills` |
-| bucket | engineering |
-| 上游路径 | `skills/engineering/setup-matt-pocock-skills/issue-tracker-gitlab.md` |
-| 角色定位 | 基于 GitLab Issues 的工单与分流操作规范（GitLab Issue Tracker Adapter） |
-| 关联模块 | `08-to-tickets`、`18-triage`、`19-wayfinder` |
-
----
-
-## 原文 (Markdown)
-
-```markdown
-# Issue tracker: GitLab Issues
-
-Issues and specs for this repo are published to GitLab Issues via the `glab` CLI.
-
-## When a skill says "publish to the issue tracker"
-
-Create an issue using `glab issue create`.
-
-- Title should match the spec or ticket title
-- Description should be the full markdown content of the spec or ticket
-
-## When a skill says "fetch the relevant ticket"
-
-Read the issue using `glab issue view <number>`.
-
-## Triage operations
-
-Used by `/triage`.
-
-- **Needs-triage query**: `glab issue list --label needs-triage` (open issues only, oldest first).
-- **Update triage state**: `glab issue update <n> --label "<label>"` (which replaces the label list) and post findings as a comment with `glab issue note <n> --message "<brief>"`.
-- **Apply triage roles**: map canonical roles (`needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) to repository labels using `triage-labels.md`.
-
-## Wayfinding operations
-
-Used by `/wayfinder`. The **map** is an issue labelled `epic`, with one **child** issue per ticket.
-
-- **Map**: the issue labelled `epic` — the Notes / Decisions-so-far / Fog body.
-- **Child ticket**: `glab issue create --title "<slug>" --description "<question>" --label "task"`. A `Type:` line in the body records the ticket type (`research`/`prototype`/`grilling`/`task`).
-- **Blocking**: GitLab's **native blocking link** — the canonical, UI-visible representation. Add it with the `/blocked_by #<n>` quick action, posted as a note (`glab issue note <child> --message "/blocked_by #<blocker>"`). Native blocking links are a Premium/Ultimate feature; on the free tier (or where unavailable) fall back to a `Blocked by: #<n>, #<n>` line at the top of the description. A ticket is unblocked when every blocker is closed.
-- **Frontier query**: `glab issue list -F json` scoped to the map's children, drop any with an open blocker — a native `blocked_by` link to an open issue (`glab api projects/:id/issues/:iid/links`), or an open issue in the `Blocked by` line — or an assignee; first in map order wins.
-- **Claim**: `glab issue update <n> --assignee @me` — the session's first write.
-- **Resolve**: `glab issue note <n> --message "<answer>"`, then `glab issue close <n>`, then append a context pointer (gist + link) to the map's Decisions-so-far.
-```
-
----
-
-## 中文翻译
-
-# 工单系统适配规范：GitLab Issues
+# 02-setup-matt-pocock-skills / issue-tracker-gitlab.md 精读（工单系统适配规范：GitLab Issues）
 
 本代码仓库的所有规范文档（specs）与具体工单（issues/tickets）均通过 `glab` 命令行工具发布并管理在 GitLab Issues 中。
 
@@ -92,3 +36,60 @@ Used by `/wayfinder`. The **map** is an issue labelled `epic`, with one **child*
 - **开拓前沿查询（Frontier query）**：执行 `glab issue list -F json` 扫描地图下的子工单。通过 API 关联接口（`glab api projects/:id/issues/:iid/links`）或正文 `Blocked by` 行过滤掉所有存在未关闭依赖、或已被认领的工单；按地图默认顺序挑选排在最前的第一张工单攻坚；
 - **认领任务（Claim）**：在动工执行实质工作之前，执行 `glab issue update <n> --assignee @me` 抢占工单所有权 —— 作为当前会话的**第一次写操作**；
 - **顺利解决（Resolve）**：将最终结论发表评论回贴：`glab issue note <n> --message "<结论答案>"`，随后执行 `glab issue close <n>` 关闭工单，并在根地图 Issue 的“截至目前决策（Decisions-so-far）”章节追加一行带链接的上下文指针（极简核心要点 + 对应 Issue URL）。
+
+---
+
+## 📑 附录：技能元信息与英文原文
+
+### 📌 元数据（Meta）
+
+| 字段 | 值 |
+|---|---|
+| 对应主 Skill | `02-setup-matt-pocock-skills` |
+| bucket | engineering |
+| 上游路径 | `skills/engineering/setup-matt-pocock-skills/issue-tracker-gitlab.md` |
+| 角色定位 | 基于 GitLab Issues 的工单与分流操作规范（GitLab Issue Tracker Adapter） |
+| 关联模块 | `08-to-tickets`、`18-triage`、`19-wayfinder` |
+
+<br>
+
+<details>
+<summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
+
+```markdown
+# Issue tracker: GitLab Issues
+
+Issues and specs for this repo are published to GitLab Issues via the `glab` CLI.
+
+## When a skill says "publish to the issue tracker"
+
+Create an issue using `glab issue create`.
+
+- Title should match the spec or ticket title
+- Description should be the full markdown content of the spec or ticket
+
+## When a skill says "fetch the relevant ticket"
+
+Read the issue using `glab issue view <number>`.
+
+## Triage operations
+
+Used by `/triage`.
+
+- **Needs-triage query**: `glab issue list --label needs-triage` (open issues only, oldest first).
+- **Update triage state**: `glab issue update <n> --label "<label>"` (which replaces the label list) and post findings as a comment with `glab issue note <n> --message "<brief>"`.
+- **Apply triage roles**: map canonical roles (`needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) to repository labels using `triage-labels.md`.
+
+## Wayfinding operations
+
+Used by `/wayfinder`. The **map** is an issue labelled `epic`, with one **child** issue per ticket.
+
+- **Map**: the issue labelled `epic` — the Notes / Decisions-so-far / Fog body.
+- **Child ticket**: `glab issue create --title "<slug>" --description "<question>" --label "task"`. A `Type:` line in the body records the ticket type (`research`/`prototype`/`grilling`/`task`).
+- **Blocking**: GitLab's **native blocking link** — the canonical, UI-visible representation. Add it with the `/blocked_by #<n>` quick action, posted as a note (`glab issue note <child> --message "/blocked_by #<blocker>"`). Native blocking links are a Premium/Ultimate feature; on the free tier (or where unavailable) fall back to a `Blocked by: #<n>, #<n>` line at the top of the description. A ticket is unblocked when every blocker is closed.
+- **Frontier query**: `glab issue list -F json` scoped to the map's children, drop any with an open blocker — a native `blocked_by` link to an open issue (`glab api projects/:id/issues/:iid/links`), or an open issue in the `Blocked by` line — or an assignee; first in map order wins.
+- **Claim**: `glab issue update <n> --assignee @me` — the session's first write.
+- **Resolve**: `glab issue note <n> --message "<answer>"`, then `glab issue close <n>`, then append a context pointer (gist + link) to the map's Decisions-so-far.
+```
+
+</details>
