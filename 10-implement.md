@@ -16,9 +16,9 @@ flowchart TD
     Seam --> LoopStart["TDD 垂直切片循环<br/>(编写红灯测试)"]
     LoopStart --> Dev["编写最小实现变绿"]
     Dev --> CheckFast["高频快跑: 单测试文件<br/>+ 增量类型检查"]
-    CheckFast --> More{当前工单切片<br/>是否全部完成？}
-    More -- 否 --> LoopStart
-    More -- 是 --> FullTest["运行全量测试套件<br/>(仅在最后跑一次)"]
+    CheckFast --> More{"当前工单切片<br/>是否全部完成？"}
+    More -->|否| LoopStart
+    More -->|是| FullTest["运行全量测试套件<br/>(仅在最后跑一次)"]
     FullTest --> Review["调用双轴代码审查<br/>(/code-review)"]
     Review --> Commit([提交代码至当前分支<br/>git commit])
 ```

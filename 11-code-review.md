@@ -20,7 +20,7 @@ description: 沿着两条独立轴线对自某个固定基准点（commit / bran
 
 ```mermaid
 flowchart TD
-    Diff["锁定固定基准点<br/>(git diff 三点比对)"] --> Fork{分流并行审查}
+    Diff["锁定固定基准点<br/>(git diff 三点比对)"] --> Fork{"分流并行审查"}
 
     subgraph Sub1["子代理 1: 编码规范轴 (Standards)"]
         S1["加载仓库规范文档<br/>+ 内置代码坏味道"] --> S2["逐行审查代码模式<br/>启发式主观裁量"]

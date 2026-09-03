@@ -13,7 +13,7 @@ description: 编写一个用后即弃的原型（throwaway prototype）来回答
 
 ```mermaid
 flowchart TD
-    Question([待验证的设计问题]) --> Branch{问题类型？}
+    Question([待验证的设计问题]) --> Branch{"问题类型？"}
 
     subgraph LogicBranch["逻辑分支 (LOGIC.md)"]
         L1["状态模型/业务规则验证"] --> L2["单文件 HTML 演示页面"]
@@ -25,8 +25,8 @@ flowchart TD
         U2 --> U3["悬浮底栏与参数切换<br/>(键盘左右键快捷切片)"]
     end
 
-    Branch -- 业务逻辑/状态机 --> LogicBranch
-    Branch -- 页面外观/组件形态 --> UIBranch
+    Branch -->|业务逻辑/状态机| LogicBranch
+    Branch -->|页面外观/组件形态| UIBranch
 
     L3 --> Rule["铁律: 零测试/无持久化/外露状态"]
     U3 --> Rule

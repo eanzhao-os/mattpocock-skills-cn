@@ -38,9 +38,9 @@ flowchart TD
     LoopStart --> Claim["认领并攻克前沿工单<br/>(调研/原型/访谈/任务)"]
     Claim --> Resolve["记录敲定决策关闭工单"]
     Resolve --> UpdateMap["更新地图驱散迷雾<br/>(晋升新工单或标出范围)"]
-    UpdateMap --> CheckDone{迷雾是否散去<br/>前沿是否清空？}
-    CheckDone -- 否 --> LoopStart
-    CheckDone -- 是 --> ToSpec["收拢压缩为需求规范<br/>(/to-spec)"]
+    UpdateMap --> CheckDone{"迷雾是否散去<br/>前沿是否清空？"}
+    CheckDone -->|否| LoopStart
+    CheckDone -->|是| ToSpec["收拢压缩为需求规范<br/>(/to-spec)"]
     ToSpec --> Ship["汇入主流程实现<br/>(to-tickets/implement)"]
 ```
 

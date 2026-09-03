@@ -13,9 +13,9 @@ flowchart TD
     S1 --> S2["2. 溯源双方原始意图<br/>(读 commit/PR/issue)"]
     S2 --> S3["3. 逐块裁决消解冲突<br/>(保留双方意图，绝不 abort)"]
     S3 --> S4["4. 运行自动化三步门禁<br/>Typecheck -> Test -> Format"]
-    S4 --> Check{门禁是否全绿？}
-    Check -- 否 --> Fix["修复破坏代码"] --> S4
-    Check -- 是 --> S5["5. 暂存提交完成流程<br/>git add 并推进 rebase/merge"]
+    S4 --> Check{"门禁是否全绿？"}
+    Check -->|否| Fix["修复破坏代码"] --> S4
+    Check -->|是| S5["5. 暂存提交完成流程<br/>git add 并推进 rebase/merge"]
     S5 --> Done([冲突安全消解完毕])
 ```
 

@@ -13,11 +13,11 @@ description: 就方案、决策或构思对用户进行刨根问底式的深度�
 flowchart TD
     Start([开始深度访谈]) --> BuildTree["初始化设计决策树<br/>(Design Tree)"]
     BuildTree --> CalFrontier["计算当前前沿集合<br/>(Compute Frontier)"]
-    CalFrontier --> CheckEmpty{前沿集合<br/>是否为空？}
-    CheckEmpty -- 是 --> Confirm([确认达成统一认知<br/>Shared Understanding])
-    CheckEmpty -- 否 --> CheckType{前沿问题<br/>需要客观事实？}
-    CheckType -- 是 --> SubAgent["指派子代理后台查证<br/>(查文件/调工具)"]
-    CheckType -- 否 --> AskUser["格式化提问 Q1, Q2...<br/>并附带推荐选项"]
+    CalFrontier --> CheckEmpty{"前沿集合<br/>是否为空？"}
+    CheckEmpty -->|是| Confirm([确认达成统一认知<br/>Shared Understanding])
+    CheckEmpty -->|否| CheckType{"前沿问题<br/>需要客观事实？"}
+    CheckType -->|是| SubAgent["指派子代理后台查证<br/>(查文件/调工具)"]
+    CheckType -->|否| AskUser["格式化提问 Q1, Q2...<br/>并附带推荐选项"]
     SubAgent --> UpdateTree["汇报事实更新前置"]
     AskUser --> UserAnswer["用户做出裁量决策"]
     UpdateTree --> Reshape["重塑决策树推进前沿"]

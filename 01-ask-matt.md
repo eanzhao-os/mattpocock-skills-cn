@@ -12,15 +12,15 @@
 ```mermaid
 flowchart TD
     Idea([想法 / 需求]) --> Grill["深度访谈<br/>(grill-with-docs)"]
-    Grill --> Q1{仅靠对话<br/>能解决？}
-    Q1 -- 否 --> Proto["快速原型验证<br/>(prototype/handoff)"]
+    Grill --> Q1{"仅靠对话<br/>能解决？"}
+    Q1 -->|否| Proto["快速原型验证<br/>(prototype/handoff)"]
     Proto --> Grill
-    Q1 -- 是 --> Q2{需要跨会话<br/>大型构建？}
-    Q2 -- 是 --> Spec["整理需求规范<br/>(to-spec)"]
+    Q1 -->|是| Q2{"需要跨会话<br/>大型构建？"}
+    Q2 -->|是| Spec["整理需求规范<br/>(to-spec)"]
     Spec --> Tickets["拆解垂直工单<br/>(to-tickets)"]
     Tickets --> Clear["清空上下文<br/>(/clear)"]
     Clear --> Imp["单工单实现<br/>(implement)"]
-    Q2 -- 否 --> Imp
+    Q2 -->|否| Imp
     Imp --> TDD["测试驱动开发<br/>(tdd: 红绿循环)"]
     TDD --> Review["双轴代码审查<br/>(code-review)"]
     Review --> Ship([交付代码 / Ship])

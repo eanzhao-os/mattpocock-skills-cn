@@ -28,9 +28,9 @@ flowchart TD
     Tight --> P2["Phase 2: 复现与最小化<br/>(核实红灯，单变量裁剪)"]
     P2 --> P3["Phase 3: 形成排他假设<br/>(列出猜想，严禁直接改代码)"]
     P3 --> P4["Phase 4: 埋点与二分排查<br/>(日志/断点/git bisect)"]
-    P4 --> Check{定位根因？}
-    Check -- 否 --> P3
-    Check -- 是 --> P5["Phase 5: 修复与回归锁定<br/>(反馈闭环转长期测试)"]
+    P4 --> Check{"定位根因？"}
+    Check -->|否| P3
+    Check -->|是| P5["Phase 5: 修复与回归锁定<br/>(反馈闭环转长期测试)"]
     P5 --> Done([彻底消除隐患])
 ```
 

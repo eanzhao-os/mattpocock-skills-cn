@@ -30,12 +30,12 @@ disable-model-invocation: true
 ```mermaid
 flowchart TD
     New[新工单 / 外部 PR] --> NT["1. 待评估<br/>(needs-triage)"]
-    NT --> Check{排查与核实}
-    Check -- 信息不充分 --> NI["2. 待补充信息<br/>(needs-info)"]
-    NI -- 提出者回复新信息 --> NT
-    Check -- 需求明确可自闭环 --> RFA["3. Agent 可独立执行<br/>(ready-for-agent)"]
-    Check -- 需主观裁量或特权 --> RFH["4. 需人工介入<br/>(ready-for-human)"]
-    Check -- 已实现或历史否决 --> WF["5. 不予处理关闭<br/>(wontfix)"]
+    NT --> Check{"排查与核实"}
+    Check -->|信息不充分| NI["2. 待补充信息<br/>(needs-info)"]
+    NI -->|提出者回复新信息| NT
+    Check -->|需求明确可自闭环| RFA["3. Agent 可独立执行<br/>(ready-for-agent)"]
+    Check -->|需主观裁量或特权| RFH["4. 需人工介入<br/>(ready-for-human)"]
+    Check -->|已实现或历史否决| WF["5. 不予处理关闭<br/>(wontfix)"]
 ```
 
 两个 **分类维度（Category）**：

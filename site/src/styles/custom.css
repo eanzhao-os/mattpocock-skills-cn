@@ -10,7 +10,37 @@ main, .main-pane, .content-panel, .sl-container, .sl-markdown-content {
   max-width: 100%;
 }
 
-.mermaid {
+/* 确保标题文字与锚点链接按钮在同一行展示，锚点紧贴在文字后方 */
+.sl-markdown-content .sl-heading-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 0.45rem !important;
+}
+
+.sl-markdown-content .sl-heading-wrapper > :is(h1, h2, h3, h4, h5, h6) {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sl-markdown-content .sl-anchor-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0.15rem !important;
+  vertical-align: middle !important;
+  opacity: 0.75;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.sl-markdown-content .sl-heading-wrapper:hover .sl-anchor-link {
+  opacity: 1;
+}
+
+/* Mermaid 容器样式 */
+pre.mermaid, .mermaid {
   display: block;
   text-align: center;
   margin: 1.5rem 0;
@@ -21,9 +51,11 @@ main, .main-pane, .content-panel, .sl-container, .sl-markdown-content {
   overflow-x: auto;
   max-width: 100%;
   box-sizing: border-box;
+  font-family: inherit;
+  white-space: pre;
 }
 
-.mermaid svg {
+pre.mermaid svg, .mermaid svg {
   display: inline-block;
   max-width: 100%;
   height: auto;
@@ -37,7 +69,7 @@ main, .main-pane, .content-panel, .sl-container, .sl-markdown-content {
 }
 
 @media (max-width: 640px) {
-  .mermaid {
+  pre.mermaid, .mermaid {
     padding: 0.5rem;
   }
 }

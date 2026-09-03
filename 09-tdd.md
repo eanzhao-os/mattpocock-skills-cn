@@ -37,9 +37,9 @@ flowchart TD
     Red --> VerifyRed["运行测试确认红灯<br/>(报出预期业务错误)"]
     VerifyRed --> Green["2. 编写最小实现<br/>(Green: 刚好变绿)"]
     Green --> VerifyGreen["运行测试确认通过<br/>(保持单切片聚焦)"]
-    VerifyGreen --> Next{当前切片<br/>是否完成？}
-    Next -- 否 --> Red
-    Next -- 是 --> Done([进入代码审查重构<br/>code-review 阶段])
+    VerifyGreen --> Next{"当前切片<br/>是否完成？"}
+    Next -->|否| Red
+    Next -->|是| Done([进入代码审查重构<br/>code-review 阶段])
 ```
 
 - **先红后绿（Red before green）**：必须先写出能够复现失败的测试（红），然后只写刚好足够让测试通过的最小代码（绿）。不要预先猜测未来的测试，也不要提前编写投机性的额外功能。

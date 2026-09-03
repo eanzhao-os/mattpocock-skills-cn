@@ -52,19 +52,33 @@ function getTheme() {
   return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
 }
 
-function initAndRunMermaid() {
+let mermaidCounter = 0;
+
+async function initAndRunMermaid() {
   if (typeof window.mermaid === 'undefined') {
     setTimeout(initAndRunMermaid, 50);
     return;
   }
   const nodes = document.querySelectorAll('.mermaid');
   if (nodes.length === 0) return;
+
   mermaid.initialize({
     startOnLoad: false,
     theme: getTheme(),
     securityLevel: 'loose',
   });
-  mermaid.run({ nodes });
+
+  for (const node of nodes) {
+    const rawCode = node.getAttribute('data-code') || node.textContent.trim();
+    if (!rawCode) continue;
+    try {
+      const id = 'mermaid-svg-' + (++mermaidCounter);
+      const { svg } = await mermaid.render(id, rawCode);
+      node.innerHTML = svg;
+    } catch (err) {
+      console.warn('Mermaid render warning:', err);
+    }
+  }
 }
 
 if (document.readyState === 'loading') {
@@ -76,13 +90,6 @@ if (document.readyState === 'loading') {
 const observer = new MutationObserver((mutations) => {
   for (const mutation of mutations) {
     if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-      const nodes = document.querySelectorAll('.mermaid');
-      nodes.forEach((node) => {
-        if (node.getAttribute('data-original-code')) {
-          node.innerHTML = node.getAttribute('data-original-code') || '';
-          node.removeAttribute('data-processed');
-        }
-      });
       initAndRunMermaid();
     }
   }

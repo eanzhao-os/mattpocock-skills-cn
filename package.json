@@ -13,6 +13,7 @@
     "dev": "npm --prefix site run dev"
   },
   "devDependencies": {
+    "mermaid": "^11.17.2",
     "playwright": "^1.62.1"
   }
 }

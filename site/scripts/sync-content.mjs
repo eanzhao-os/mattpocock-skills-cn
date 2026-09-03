@@ -93,10 +93,10 @@ export const BUCKET_MAPPING = {
 };
 
 const BUCKET_LABELS = {
-  engineering: '工程核心主流程 (Engineering)',
-  productivity: '效能与人机协作 (Productivity)',
-  'in-progress': '探索与演进 (In Progress)',
-  misc: '基础设施与工具 (Misc)'
+  engineering: 'Engineering',
+  productivity: 'Productivity',
+  'in-progress': 'In Progress',
+  misc: 'Misc'
 };
 
 function extractTitle(content, fallback) {
@@ -184,11 +184,11 @@ export function syncContent() {
     const isCompanion = file.includes('_');
 
     // 转换内容：
-    // (a) 将 ```mermaid ... ``` 替换为 <div class="mermaid">...</div>
+    // (a) 将 ```mermaid ... ``` 替换为 <pre class="mermaid">，保证预格式化与 Smartypants 免疫
     let transformed = content.replace(/^```mermaid\s*\n([\s\S]*?)\n```$/gm, (m, code) => {
       const trimmedCode = code.trim();
       const escaped = escapeHtml(trimmedCode);
-      return `<div class="mermaid" data-original-code="${escaped}">\n${trimmedCode}\n</div>`;
+      return `<pre class="mermaid" data-code="${escaped}">\n${trimmedCode}\n</pre>`;
     });
 
     // (b) 链接重写：](./xx-yy.md#anchor) 或 (xx-yy.md#anchor)
@@ -245,26 +245,33 @@ export function syncContent() {
 
     const items = [];
     for (const main of mainDocs) {
+      // 提取主文档简洁英文名，如 "01. ask-matt"
+      const mainEnglishSlug = main.baseName.replace(/^[0-9]{2}-/, '');
+      const mainLabel = `${main.file.slice(0, 2)}. ${mainEnglishSlug}`;
+
       // 查找属于该主文档的 companion（主文件名前缀一致）
       const prefix = main.file.replace(/\.md$/, '') + '_';
       const companions = companionDocs.filter(c => c.file.startsWith(prefix));
 
       if (companions.length > 0) {
-        // 创建折叠子分组
+        // 创建折叠子分组，全部使用简洁英文名
         items.push({
-          label: main.title,
+          label: mainLabel,
           collapsed: true,
           items: [
-            { label: `${main.baseName} (主规范)`, slug: main.slug },
-            ...companions.map(c => ({
-              label: c.title,
-              slug: c.slug
-            }))
+            { label: `${mainEnglishSlug} (main)`, slug: main.slug },
+            ...companions.map(c => {
+              const compSuffix = c.file.replace(/^[0-9]{2}-[^_]+_/, '').replace(/\.md$/, '');
+              return {
+                label: compSuffix,
+                slug: c.slug
+              };
+            })
           ]
         });
       } else {
         items.push({
-          label: main.title,
+          label: mainLabel,
           slug: main.slug
         });
       }
