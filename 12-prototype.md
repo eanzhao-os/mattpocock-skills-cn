@@ -51,14 +51,14 @@ flowchart TD
 
 ## Companions 摘要（不全文）
 
-### `[LOGIC.md](./12-prototype_LOGIC.md)` — Logic Prototype
+### [LOGIC.md](./12-prototype_LOGIC.md) — Logic Prototype
 
 - **形态**：单文件 HTML/CSS/JS，无 framework/bundler/server；可邮件转发、双击打开；面向 non-developer，用 domain language。
 - **何时**：状态机边角、数据模型能否表示某 case、想摸 API 手感；“按按钮看状态变”。
 - **流程**：先写明问题（可见 intro）→ 逻辑抽成可 lift 的 pure module（reducer / state machine / pure functions / 清晰 method surface；无 DOM）→ 布局：标题、当前状态面板、free-play 按钮、tab 化 guided scenarios → 交给用户点 → 验证后的 reducer/machine 进正式模块，HTML shell 进 throwaway branch。
 - **Anti-patterns**：加测试、接真 DB、过度泛化、逻辑与页面糊在一起、上 framework、把 HTML shell 送进 production。
 
-### `[UI.md](./12-prototype_UI.md)` — UI Prototype
+### [UI.md](./12-prototype_UI.md) — UI Prototype
 
 - **形态**：同一 route 上 N 个结构迥异变体（默认 3，上限 5），`?variant=` + 浮动底栏切换。
 - **子形态 A（优先）**：挂在**已有页面**上，保留真实 data/auth/density；只换渲染子树。

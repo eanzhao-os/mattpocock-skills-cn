@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="技 · 印章标识">
+  <defs>
+    <linearGradient id="seal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c14a2f"/>
+      <stop offset="1" stop-color="#9e3320"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="104" fill="url(#seal)"/>
+  <rect x="46" y="46" width="420" height="420" rx="80" fill="none" stroke="#fdf3ea" stroke-width="9" opacity="0.9"/>
+  <text x="256" y="262" font-size="238" text-anchor="middle" dominant-baseline="central"
+        font-family="'Songti SC','STSong','Noto Serif SC','Noto Serif CJK SC','SimSun',serif"
+        font-weight="700" fill="#fdf3ea">技</text>
+</svg>

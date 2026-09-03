@@ -93,10 +93,10 @@ export const BUCKET_MAPPING = {
 };
 
 const BUCKET_LABELS = {
-  engineering: 'Engineering',
-  productivity: 'Productivity',
-  'in-progress': 'In Progress',
-  misc: 'Misc'
+  engineering: '🛠️ 工程主流程',
+  productivity: '💡 效能协作',
+  'in-progress': '🔬 探索演进',
+  misc: '📦 基础工具'
 };
 
 function extractTitle(content, fallback) {
@@ -109,6 +109,20 @@ function extractTitle(content, fallback) {
     return title;
   }
   return fallback;
+}
+
+// 正文中剥离首个 H1（frontmatter title 已由 Starlight 渲染为页面标题，避免重复）
+function stripLeadingH1(content) {
+  return content.replace(/^#\s+.+\n+/, '');
+}
+
+// 将 companion 后缀转为可读标签：PHASE-BOUNDARIES -> Phase Boundaries
+function humanizeSuffix(suffix) {
+  return suffix
+    .toLowerCase()
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
 }
 
 function escapeHtml(str) {
@@ -206,6 +220,9 @@ export function syncContent() {
       }
     );
 
+    // (c) 剥离正文首个 H1，避免与 Starlight 渲染的页面标题重复
+    transformed = stripLeadingH1(transformed);
+
     // (c) 注入 frontmatter
     // 注意：如果原有内容头部有 frontmatter 或首个 H1，我们构建统一规范的 frontmatter
     const frontmatter = [
@@ -259,11 +276,11 @@ export function syncContent() {
           label: mainLabel,
           collapsed: true,
           items: [
-            { label: `${mainEnglishSlug} (main)`, slug: main.slug },
+            { label: '📖 正文', slug: main.slug },
             ...companions.map(c => {
               const compSuffix = c.file.replace(/^[0-9]{2}-[^_]+_/, '').replace(/\.md$/, '');
               return {
-                label: compSuffix,
+                label: `📎 ${humanizeSuffix(compSuffix)}`,
                 slug: c.slug
               };
             })

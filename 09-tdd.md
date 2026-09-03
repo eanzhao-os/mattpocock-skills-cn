@@ -48,13 +48,13 @@ flowchart TD
 
 ## Companions 摘要（不全文）
 
-### `[tests.md](./09-tdd_tests.md)` — Good and Bad Tests
+### [tests.md](./09-tdd_tests.md) — Good and Bad Tests
 
 - **好测试（integration-style）**：经 real interfaces 测可观察行为；公共 API；能在 internal refactor 后存活；描述 WHAT 不 HOW；每测一逻辑断言。例：`user can checkout with valid cart`。
 - **坏：implementation-detail**：mock 内部 collaborator、测 call count/order、旁路查 DB。例：断言 `paymentService.process` 被调用 vs 经 `getUser` 验证 `createUser` 可检索。
 - **坏：tautological**：`items.reduce` 算出 expected 再 `toBe(expected)`；应改用独立字面量 `toBe(15)`。
 
-### `[mocking.md](./09-tdd_mocking.md)` — When to Mock
+### [mocking.md](./09-tdd_mocking.md) — When to Mock
 
 - **只在 system boundaries mock**：外部 API、（有时）DB、时间/随机、（有时）文件系统。
 - **不 mock**：自己的 classes/modules、内部 collaborators、你控制的一切。

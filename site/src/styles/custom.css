@@ -1,53 +1,480 @@
-/* 自定义全局样式 */
+/* ==========================================================================
+   Matt Pocock Skills 中文精读 — 品牌主题
+   设计语言：「朱砂 · 纸上精读」
+   - 朱砂红（印章红）品牌色，暖纸底色，衬线中文标题，营造书房精读感
+   - 双主题：浅色 = 宣纸 + 朱砂；深色 = 墨色 + 柔朱砂
+   ========================================================================== */
 
-html, body {
+/* --------------------------------------------------------------------------
+   1. 色彩令牌 —— 浅色（宣纸 + 朱砂）
+   注意 Starlight 令牌契约：--sl-color-white = 最强文字色，
+   --sl-color-black = 页面底色，gray-1 最靠近文字色 → gray-7 最靠近底色。
+   必须按 data-theme 作用域覆盖，否则会被 Starlight 默认调色板顶掉。
+   -------------------------------------------------------------------------- */
+:root[data-theme='light'] {
+  /* 品牌朱砂 */
+  --brand-seal: #b3402a;
+  --brand-seal-deep: #8c2f1d;
+  --brand-seal-soft: #f9ece6;
+
+  /* Starlight 强调色体系 */
+  --sl-color-accent-low: #f8e9e3;
+  --sl-color-accent: #b3402a;
+  --sl-color-accent-high: #8c2f1d;
+
+  /* 暖灰阶（gray-1 最深 → gray-7 最浅） */
+  --sl-color-white: #1d1a16;
+  --sl-color-gray-1: #2e2924;
+  --sl-color-gray-2: #463f36;
+  --sl-color-gray-3: #6e675c;
+  --sl-color-gray-4: #a39a8d;
+  --sl-color-gray-5: #cfc7b8;
+  --sl-color-gray-6: #ece6da;
+  --sl-color-gray-7: #f7f4ec;
+  --sl-color-black: #fdfbf7;
+
+  /* 语义色 */
+  --sl-color-text: #463f36;
+  --sl-color-text-accent: #8c2f1d;
+  --sl-color-text-invert: #fdf8f2;
+  --sl-color-bg-nav: color-mix(in srgb, #f7f4ec 82%, transparent);
+  --sl-color-bg-sidebar: #f7f4ec;
+  --sl-color-bg-inline-code: #f3ece2;
+  --sl-color-hairline: #e6dfd2;
+  --sl-color-hairline-light: #ece6da;
+  --sl-color-hairline-shade: #d9d2c3;
+
+  /* 自定义通用变量 */
+  --paper-shadow: 0 1px 2px rgb(46 41 36 / 0.05), 0 4px 16px rgb(46 41 36 / 0.06);
+  --paper-shadow-hover: 0 2px 4px rgb(46 41 36 / 0.06), 0 12px 32px rgb(46 41 36 / 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   2. 色彩令牌 —— 深色（墨夜 + 柔朱砂）
+   -------------------------------------------------------------------------- */
+:root[data-theme='dark'] {
+  --brand-seal: #e0684e;
+  --brand-seal-deep: #f09a83;
+  --brand-seal-soft: #39211b;
+
+  --sl-color-accent-low: #38221c;
+  --sl-color-accent: #e0684e;
+  --sl-color-accent-high: #f09a83;
+
+  /* 暖灰阶（gray-1 最亮 → gray-7 最暗） */
+  --sl-color-white: #efeadf;
+  --sl-color-gray-1: #e3dccf;
+  --sl-color-gray-2: #cdc5b4;
+  --sl-color-gray-3: #a39a8d;
+  --sl-color-gray-4: #877e70;
+  --sl-color-gray-5: #615a4f;
+  --sl-color-gray-6: #3d3831;
+  --sl-color-gray-7: #2b2721;
+  --sl-color-black: #1b1815;
+
+  --sl-color-text: #cdc5b4;
+  --sl-color-text-accent: #ee8b72;
+  --sl-color-text-invert: #241611;
+  --sl-color-bg-nav: color-mix(in srgb, #1f1c18 82%, transparent);
+  --sl-color-bg-sidebar: #1f1c18;
+  --sl-color-bg-inline-code: #2e2922;
+  --sl-color-hairline: #33302a;
+  --sl-color-hairline-light: #2b2823;
+  --sl-color-hairline-shade: #403c34;
+
+  --paper-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.35);
+  --paper-shadow-hover: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   3. 字体与通用令牌（双主题共享）
+   -------------------------------------------------------------------------- */
+:root {
+  --sl-font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+  --sl-font-serif: 'Songti SC', 'STSong', 'Noto Serif SC', 'Noto Serif CJK SC',
+    'Source Han Serif SC', 'SimSun', serif;
+  --sl-font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  --sl-line-height: 1.85;
+  --sl-line-height-headings: 1.4;
+
+  --paper-radius: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. 全局基础
+   -------------------------------------------------------------------------- */
+html,
+body {
   overflow-x: hidden;
   max-width: 100vw;
 }
 
-main, .main-pane, .content-panel, .sl-container, .sl-markdown-content {
+main,
+.main-pane,
+.content-panel,
+.sl-container,
+.sl-markdown-content {
   min-width: 0;
   max-width: 100%;
 }
 
-/* 确保标题文字与锚点链接按钮在同一行展示，锚点紧贴在文字后方 */
+::selection {
+  background: color-mix(in srgb, var(--sl-color-accent) 24%, transparent);
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 细滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sl-color-hairline-shade) transparent;
+}
+
+/* --------------------------------------------------------------------------
+   4. 顶栏
+   -------------------------------------------------------------------------- */
+.header {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: var(--sl-color-bg-nav);
+  border-bottom: 1px solid var(--sl-color-hairline-light);
+}
+
+.site-title {
+  font-family: var(--sl-font-serif);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.site-title img {
+  border-radius: 22%;
+  box-shadow: 0 1px 4px rgb(140 47 29 / 0.35);
+}
+
+/* 搜索框 */
+site-search button {
+  border-radius: 999px;
+}
+
+/* --------------------------------------------------------------------------
+   5. 侧边栏
+   -------------------------------------------------------------------------- */
+#starlight__sidebar {
+  border-right: 1px solid var(--sl-color-hairline-light);
+}
+
+.sidebar-content a {
+  border-radius: 0.5rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-content a:hover {
+  color: var(--sl-color-text-accent);
+  background: color-mix(in srgb, var(--sl-color-accent) 6%, transparent);
+}
+
+/* 当前页：朱砂指示条 + 柔和底色 */
+.sidebar-content a[aria-current='page'] {
+  color: var(--sl-color-text-accent);
+  background: var(--sl-color-accent-low);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--sl-color-accent);
+}
+
+/* 分组标题 */
+.sidebar-content summary,
+.sidebar-content .group-label {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-content summary:hover {
+  color: var(--sl-color-text-accent);
+}
+
+/* --------------------------------------------------------------------------
+   6. 右侧目录（TOC）
+   -------------------------------------------------------------------------- */
+.right-sidebar a {
+  transition: color 0.15s ease;
+}
+
+.right-sidebar a:hover {
+  color: var(--sl-color-text-accent);
+}
+
+/* --------------------------------------------------------------------------
+   7. 正文排版 —— 中文精读优化
+   -------------------------------------------------------------------------- */
+.sl-markdown-content {
+  line-height: var(--sl-line-height);
+  letter-spacing: 0.005em;
+}
+
+.sl-markdown-content p {
+  margin-block: 1em;
+}
+
+/* 标题：衬线 + 朱砂层级点缀（--sl-color-white 语义为「最强文字色」，双主题均正确） */
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6),
+.sl-markdown-content .sl-heading-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--sl-font-serif);
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  color: var(--sl-color-white);
+  text-wrap: balance;
+}
+
+/* 页面主标题（frontmatter title 渲染处） */
+.sl-markdown-content > h1:first-child,
+h1#_top {
+  font-size: clamp(1.9rem, 4vw, 2.4rem);
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--sl-color-accent);
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+/* H2 章节分隔感 */
+.sl-markdown-content .sl-heading-wrapper:has(h2) {
+  margin-top: 2.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--sl-color-hairline-light);
+}
+
+/* 首个元素不重复加分隔 */
+.sl-markdown-content > .sl-heading-wrapper:has(h2):first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* 标题锚点链接 —— 修复错位放大问题：统一内联基线对齐 + 硬性尺寸约束 */
 .sl-markdown-content .sl-heading-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
-  gap: 0.45rem !important;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .sl-markdown-content .sl-heading-wrapper > :is(h1, h2, h3, h4, h5, h6) {
-  display: inline !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  display: inline;
+  margin: 0;
 }
 
 .sl-markdown-content .sl-anchor-link {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin: 0 !important;
-  padding: 0.15rem !important;
-  vertical-align: middle !important;
-  opacity: 0.75;
-  transition: opacity 0.15s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  font-size: 0.85em;
+  line-height: 1;
+  color: var(--sl-color-gray-3);
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
 }
 
-.sl-markdown-content .sl-heading-wrapper:hover .sl-anchor-link {
+.sl-markdown-content .sl-anchor-link svg,
+.sl-markdown-content .sl-anchor-link .sl-anchor-icon,
+.sl-markdown-content .sl-heading-wrapper svg {
+  width: 1em !important;
+  height: 1em !important;
+  max-width: 1em;
+  max-height: 1em;
+}
+
+.sl-markdown-content .sl-heading-wrapper:hover .sl-anchor-link,
+.sl-markdown-content .sl-anchor-link:focus-visible {
   opacity: 1;
 }
 
-/* Mermaid 容器样式 */
-pre.mermaid, .mermaid {
+.sl-markdown-content .sl-anchor-link:hover {
+  color: var(--sl-color-accent);
+}
+
+@media (hover: none) {
+  .sl-markdown-content .sl-anchor-link {
+    opacity: 0.6;
+  }
+}
+
+/* 链接 */
+.sl-markdown-content a {
+  color: var(--sl-color-text-accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--sl-color-accent) 35%, transparent);
+  text-underline-offset: 0.22em;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.sl-markdown-content a:hover {
+  color: var(--sl-color-accent);
+  text-decoration-color: var(--sl-color-accent);
+}
+
+/* 加粗术语 */
+.sl-markdown-content strong {
+  color: var(--sl-color-white);
+  font-weight: 650;
+}
+
+/* 列表标记 */
+.sl-markdown-content li::marker {
+  color: var(--sl-color-accent);
+}
+
+/* 分隔线：章节呼吸感 */
+.sl-markdown-content hr {
+  margin-block: 2.8rem;
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--sl-color-hairline-shade) 20%,
+    var(--sl-color-hairline-shade) 80%,
+    transparent
+  );
+}
+
+/* 引言块 —— 每篇开头的导引语，做成「引子」卡片 */
+.sl-markdown-content blockquote {
+  margin-block: 1.4rem;
+  padding: 0.9rem 1.2rem;
+  background: color-mix(in srgb, var(--sl-color-accent) 5%, var(--sl-color-bg));
+  border: 1px solid var(--sl-color-hairline-light);
+  border-left: 3px solid var(--sl-color-accent);
+  border-radius: 0 var(--paper-radius) var(--paper-radius) 0;
+  color: var(--sl-color-gray-3);
+}
+
+.sl-markdown-content blockquote :is(p):first-child {
+  margin-top: 0;
+}
+
+.sl-markdown-content blockquote :is(p):last-child {
+  margin-bottom: 0;
+}
+
+/* 行内代码 */
+.sl-markdown-content :not(pre) > code {
+  background: var(--sl-color-bg-inline-code);
+  color: var(--sl-color-text-accent);
+  padding: 0.12em 0.38em;
+  border-radius: 0.35em;
+  font-size: 0.86em;
+  border: 1px solid var(--sl-color-hairline-light);
+}
+
+/* 代码块（Expressive Code） */
+.expressive-code .frame {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: var(--paper-radius);
+  box-shadow: var(--paper-shadow);
+}
+
+.expressive-code .frame.has-title .header {
+  border-radius: var(--paper-radius) var(--paper-radius) 0 0;
+}
+
+.expressive-code pre {
+  border-radius: 0 0 var(--paper-radius) var(--paper-radius);
+}
+
+/* 表格：卡片化 + 斑马纹 */
+.sl-markdown-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: var(--paper-radius);
+  box-shadow: var(--paper-shadow);
+}
+
+.sl-markdown-content th {
+  background: var(--sl-color-bg-sidebar);
+  font-weight: 650;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.sl-markdown-content th,
+.sl-markdown-content td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--sl-color-hairline-light);
+}
+
+.sl-markdown-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sl-markdown-content tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--sl-color-bg-sidebar) 55%, transparent);
+}
+
+.sl-markdown-content tbody tr:hover {
+  background: var(--sl-color-accent-low);
+}
+
+/* details/summary —— 英文原文折叠块，做成「附录」质感 */
+.sl-markdown-content details {
+  margin-block: 1.6rem;
+  border: 1px dashed var(--sl-color-hairline-shade);
+  border-radius: var(--paper-radius);
+  background: var(--sl-color-bg-sidebar);
+  overflow: hidden;
+}
+
+.sl-markdown-content details summary {
+  padding: 0.75rem 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--sl-color-gray-3);
+  transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.sl-markdown-content details summary:hover {
+  background: color-mix(in srgb, var(--sl-color-accent) 7%, transparent);
+  color: var(--sl-color-text-accent);
+}
+
+.sl-markdown-content details[open] summary {
+  border-bottom: 1px dashed var(--sl-color-hairline);
+  color: var(--sl-color-text-accent);
+}
+
+.sl-markdown-content details > :not(summary) {
+  margin-inline: 1.1rem;
+}
+
+.sl-markdown-content details > :last-child {
+  margin-bottom: 1.1rem;
+}
+
+/* Mermaid 图形容器 */
+pre.mermaid,
+.mermaid {
   display: block;
   text-align: center;
-  margin: 1.5rem 0;
-  padding: 1rem 0.5rem;
-  background: var(--sl-color-gray-6);
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 0.5rem;
+  margin: 1.8rem 0;
+  padding: 1.4rem 1rem;
+  background: var(--sl-color-bg-sidebar);
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: var(--paper-radius);
+  box-shadow: var(--paper-shadow);
   overflow-x: auto;
   max-width: 100%;
   box-sizing: border-box;
@@ -55,21 +482,149 @@ pre.mermaid, .mermaid {
   white-space: pre;
 }
 
-pre.mermaid svg, .mermaid svg {
+pre.mermaid svg,
+.mermaid svg {
   display: inline-block;
   max-width: 100%;
   height: auto;
 }
 
-/* 确保表格与代码块在小屏下内部滚动，不撑大视口 */
-.sl-markdown-content table {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
+@media (max-width: 640px) {
+  pre.mermaid,
+  .mermaid {
+    padding: 0.75rem 0.5rem;
+  }
 }
 
-@media (max-width: 640px) {
-  pre.mermaid, .mermaid {
-    padding: 0.5rem;
-  }
+/* 图片 */
+.sl-markdown-content img {
+  border-radius: var(--paper-radius);
+}
+
+/* --------------------------------------------------------------------------
+   8. 首页 Hero（splash）
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-block-end: 2rem;
+}
+
+.hero .sl-markdown-content,
+.hero html {
+  background: transparent;
+}
+
+.hero h1,
+.hero .page-title {
+  font-family: var(--sl-font-serif);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.hero .tagline {
+  color: var(--sl-color-gray-3);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  max-width: 42rem;
+}
+
+.hero img {
+  filter: drop-shadow(0 12px 32px rgb(140 47 29 / 0.28));
+  border-radius: 24%;
+  max-width: min(320px, 58vw);
+  margin-inline: auto;
+}
+
+/* 动作按钮 */
+.sl-link-button,
+.hero .actions a {
+  border-radius: 999px !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.sl-link-button.primary {
+  background: var(--sl-color-accent);
+  color: var(--sl-color-text-invert);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--sl-color-accent) 40%, transparent);
+}
+
+.sl-link-button.primary:hover {
+  background: var(--sl-color-accent-high);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--sl-color-accent) 45%, transparent);
+}
+
+.sl-link-button.secondary {
+  border: 1px solid var(--sl-color-hairline-shade);
+}
+
+.sl-link-button.secondary:hover {
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-text-accent);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   9. 卡片网格（首页分类）
+   -------------------------------------------------------------------------- */
+.card-grid .card,
+.sl-card-grid .card,
+.card {
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-radius: 1rem !important;
+  background: var(--sl-color-bg) !important;
+  box-shadow: var(--paper-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--paper-shadow-hover);
+  border-color: color-mix(in srgb, var(--sl-color-accent) 45%, transparent) !important;
+}
+
+.card .icon {
+  color: var(--sl-color-accent);
+}
+
+.card .title {
+  font-weight: 700;
+  color: var(--sl-color-white);
+}
+
+.card a {
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   10. 页脚与分页
+   -------------------------------------------------------------------------- */
+.pagination-links a {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: var(--paper-radius);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pagination-links a:hover {
+  border-color: var(--sl-color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--paper-shadow-hover);
+}
+
+.pagination-links a:hover .link-title {
+  color: var(--sl-color-text-accent);
+}
+
+.meta {
+  color: var(--sl-color-gray-3);
+}
+
+/* --------------------------------------------------------------------------
+   11. Aside / 提示块
+   -------------------------------------------------------------------------- */
+.starlight-aside {
+  border-radius: var(--paper-radius);
+  border: 1px solid var(--sl-color-hairline-light);
 }
