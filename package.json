@@ -8,7 +8,8 @@
     "test:lint": "node scripts/test-lint-md.mjs",
     "test:links": "node scripts/check-dist-links.mjs",
     "test:smoke": "node scripts/smoke-test.mjs",
-    "test": "npm run test:lint && npm run test:links && npm run test:smoke",
+    "test:theme-toggle": "node scripts/test-theme-toggle.mjs",
+    "test": "npm run test:lint && npm run test:links && npm run test:theme-toggle && npm run test:smoke",
     "build": "npm --prefix site run build",
     "dev": "npm --prefix site run dev"
   },

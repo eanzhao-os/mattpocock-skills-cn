@@ -41,6 +41,9 @@ export default defineConfig({
 			},
 			lastUpdated: true,
 			customCss: ['./src/styles/custom.css'],
+			components: {
+				ThemeSelect: './src/components/ThemeToggle.astro',
+			},
 			head: [
 				{
 					tag: 'script',
