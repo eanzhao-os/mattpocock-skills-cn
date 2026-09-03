@@ -7,6 +7,24 @@ description: 就方案、决策或构思对用户进行刨根问底式的深度�
 
 # grilling（深度追问访谈原语）
 
+下图是深度追问访谈算法（Grilling）核心循环与决策树推进的总览：
+
+```mermaid
+flowchart TD
+    Start([开始深度访谈]) --> BuildTree["初始化设计决策树<br/>(Design Tree)"]
+    BuildTree --> CalFrontier["计算当前前沿集合<br/>(Compute Frontier)"]
+    CalFrontier --> CheckEmpty{前沿集合<br/>是否为空？}
+    CheckEmpty -- 是 --> Confirm([确认达成统一认知<br/>Shared Understanding])
+    CheckEmpty -- 否 --> CheckType{前沿问题<br/>需要客观事实？}
+    CheckType -- 是 --> SubAgent["指派子代理后台查证<br/>(查文件/调工具)"]
+    CheckType -- 否 --> AskUser["格式化提问 Q1, Q2...<br/>并附带推荐选项"]
+    SubAgent --> UpdateTree["汇报事实更新前置"]
+    AskUser --> UserAnswer["用户做出裁量决策"]
+    UpdateTree --> Reshape["重塑决策树推进前沿"]
+    UserAnswer --> Reshape
+    Reshape --> CalFrontier
+```
+
 持续对用户进行严谨深入的追问访谈，直到双方达成**统一认知（shared understanding）**。将整个议题建模为一棵**设计决策树（design tree）**：每个核心决策都会衍生出从属其下的子决策分支。
 
 按**轮次（rounds）**逐步推进这棵决策树。**前沿问题集合（frontier）**是指所有前置条件已经敲定的决策 —— 也就是你**现在**就可以直接提问、而无需凭空揣测尚未听到的答案的问题。在单轮中一次性抛出整个前沿集合里的所有问题：为每个问题编号，并给出你所推荐的选项与答案。然后等待用户全部回答完毕，再进入下一轮。

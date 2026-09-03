@@ -7,6 +7,32 @@
 
 ## 主流程：从构思到交付（The main flow: idea → ship）
 
+下图是技能全景主流程与汇入通道的总览：
+
+```mermaid
+flowchart TD
+    Idea([想法 / 需求]) --> Grill["深度访谈<br/>(grill-with-docs)"]
+    Grill --> Q1{仅靠对话<br/>能解决？}
+    Q1 -- 否 --> Proto["快速原型验证<br/>(prototype/handoff)"]
+    Proto --> Grill
+    Q1 -- 是 --> Q2{需要跨会话<br/>大型构建？}
+    Q2 -- 是 --> Spec["整理需求规范<br/>(to-spec)"]
+    Spec --> Tickets["拆解垂直工单<br/>(to-tickets)"]
+    Tickets --> Clear["清空上下文<br/>(/clear)"]
+    Clear --> Imp["单工单实现<br/>(implement)"]
+    Q2 -- 否 --> Imp
+    Imp --> TDD["测试驱动开发<br/>(tdd: 红绿循环)"]
+    TDD --> Review["双轴代码审查<br/>(code-review)"]
+    Review --> Ship([交付代码 / Ship])
+
+    subgraph OnRamps["汇入通道 (On-ramps)"]
+        direction TB
+        Triage["工单分流 (triage)"] --> Imp
+        Diag["缺陷诊断<br/>(diagnosing-bugs)"] --> TDD
+        Wayfinder["迷局破局<br/>(wayfinder)"] --> Spec
+    end
+```
+
 绝大多数工作所走的标准路线：你有一个想法，想把它做出来。
 
 1. **`/grill-with-docs`** — 通过深度访谈打磨想法。只要你在一个具体的项目目录（working directory）下工作，就从这里开始：它是有状态的，会把访谈中梳理出的认知沉淀在 `CONTEXT.md` 和架构决策记录（ADRs）中。（如果没有代码仓库或工作目录？那就用 `/grill-me` —— 详见后文 Standalone。两者底层运行的是同一个 `/grilling` 访谈内核；但 `grill-with-docs` 会在本地留下文档记录，因此在有代码仓库时，它是绝对更优的选择。）
@@ -209,4 +235,5 @@ Off the main flow entirely.
 
 **`/setup-matt-pocock-skills`** — run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.
 ```
+
 </details>

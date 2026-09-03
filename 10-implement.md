@@ -8,6 +8,21 @@ disable-model-invocation: true
 
 根据用户在需求规范（spec）或工单（tickets）中所描述的内容实现具体工作。
 
+下图是单工单实现（Implement）核心流程与测试审查闭环的总览：
+
+```mermaid
+flowchart TD
+    Input([工单输入 tickets/spec]) --> Seam["确认预定架构接缝<br/>(pre-agreed seams)"]
+    Seam --> LoopStart["TDD 垂直切片循环<br/>(编写红灯测试)"]
+    LoopStart --> Dev["编写最小实现变绿"]
+    Dev --> CheckFast["高频快跑: 单测试文件<br/>+ 增量类型检查"]
+    CheckFast --> More{当前工单切片<br/>是否全部完成？}
+    More -- 否 --> LoopStart
+    More -- 是 --> FullTest["运行全量测试套件<br/>(仅在最后跑一次)"]
+    FullTest --> Review["调用双轴代码审查<br/>(/code-review)"]
+    Review --> Commit([提交代码至当前分支<br/>git commit])
+```
+
 在条件允许的情况下尽可能使用 `/tdd`（测试驱动开发），且严格仅在**预先达成一致的架构接缝（pre-agreed seams）**上进行。
 
 开发期间频繁运行类型检查（typechecking），频繁运行关联的单个测试文件；而**全量测试套件（full test suite）只在最后全部完成后运行一次**。

@@ -25,6 +25,19 @@ disable-model-invocation: true
 
 ## 角色与状态定义（Roles）
 
+下图是五种工单分流流转状态（States）与流转条件的总览：
+
+```mermaid
+flowchart TD
+    New[新工单 / 外部 PR] --> NT["1. 待评估<br/>(needs-triage)"]
+    NT --> Check{排查与核实}
+    Check -- 信息不充分 --> NI["2. 待补充信息<br/>(needs-info)"]
+    NI -- 提出者回复新信息 --> NT
+    Check -- 需求明确可自闭环 --> RFA["3. Agent 可独立执行<br/>(ready-for-agent)"]
+    Check -- 需主观裁量或特权 --> RFH["4. 需人工介入<br/>(ready-for-human)"]
+    Check -- 已实现或历史否决 --> WF["5. 不予处理关闭<br/>(wontfix)"]
+```
+
 两个 **分类维度（Category）**：
 - `bug` — 系统某些功能出现损坏或异常
 - `enhancement` — 新功能特性或优化改进建议
@@ -141,7 +154,7 @@ disable-model-invocation: true
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 ---
 name: triage
 description: Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.
@@ -254,6 +267,6 @@ Capture everything resolved during grilling under "established so far" so the wo
 ## Resuming a previous session
 
 If prior triage notes exist on the issue or PR, read them, check if the reporter answered the open questions, and present the updated picture before continuing. Don't re-ask resolved questions.
-```
+````
 
 </details>

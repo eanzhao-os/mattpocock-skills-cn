@@ -7,6 +7,26 @@ argument-hint: "下一个会话将用于什么任务？"
 disable-model-invocation: true
 ```
 
+下图是跨会话/跨环境交接（Handoff）的流转时序总览：
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as 用户
+    participant Source as 当前 Agent<br/>(源会话)
+    participant Temp as 临时目录<br/>(OS TempDir)
+    participant Target as 新 Agent<br/>(新会话)
+
+    User->>Source: 触发 /handoff [后续目标]
+    Note over Source: 提炼上下文并脱敏<br/>引用产物并列出建议技能
+    Source->>Temp: 写入交接文档 (handoff doc)
+    Source-->>User: 返回临时文件绝对路径
+    User->>Target: 启动新会话并挂载交接文档
+    Target->>Temp: 读取交接文档
+    Note over Target: 获取精炼一手上下文
+    Target->>Target: 调用建议技能接续工作
+```
+
 编写一份交接文档，系统总结当前会话的上下文与进展，以便全新的 Agent 能够直接接续工作。**将其保存到用户操作系统的临时目录（temp directory）中，而不是当前的工作区代码目录内**。
 
 文档中必须包含一个 **"建议调用的技能（suggested skills）"** 章节，明确指出接手工作的 Agent 接下来应该调用哪些 skills。

@@ -83,7 +83,7 @@ Agent 必须拥有极其清晰的完工判据。每一条验收准则都必须�
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 # Writing Agent Briefs
 
 An agent brief is a structured comment posted on a GitHub issue or PR when it moves to `ready-for-agent`. It is the authoritative specification that an AFK agent will work from. The original body and discussion are context — the agent brief is the contract.
@@ -291,6 +291,6 @@ This is bad because:
 - No acceptance criteria
 - No scope boundaries
 - No description of current vs desired behavior
-```
+````
 
 </details>

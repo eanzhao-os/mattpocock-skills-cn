@@ -9,6 +9,30 @@ description: 编写一个用后即弃的原型（throwaway prototype）来回答
 
 ## 选择分支方向
 
+下图是原型验证（Prototype）分支选择与生命周期的总览：
+
+```mermaid
+flowchart TD
+    Question([待验证的设计问题]) --> Branch{问题类型？}
+
+    subgraph LogicBranch["逻辑分支 (LOGIC.md)"]
+        L1["状态模型/业务规则验证"] --> L2["单文件 HTML 演示页面"]
+        L2 --> L3["抽离纯逻辑模块<br/>+ 可点击自由操作面板"]
+    end
+
+    subgraph UIBranch["UI 分支 (UI.md)"]
+        U1["视觉外观/交互体验探索"] --> U2["同一路由生成 N 个变体"]
+        U2 --> U3["悬浮底栏与参数切换<br/>(键盘左右键快捷切片)"]
+    end
+
+    Branch -- 业务逻辑/状态机 --> LogicBranch
+    Branch -- 页面外观/组件形态 --> UIBranch
+
+    L3 --> Rule["铁律: 零测试/无持久化/外露状态"]
+    U3 --> Rule
+    Rule --> Capture([验证完成: 沉淀决策到主干<br/>代码归档至原型临时分支])
+```
+
 明确当前究竟是要回答哪一类问题 —— 可以从用户的提示词、周边的上下文代码中判断，或者如果用户在线则直接询问：
 
 - **“这种业务逻辑 / 状态模型感觉对不对？”** → 参阅 [LOGIC.md](./12-prototype_LOGIC.md)。构建一个单独且易于分享的 HTML 文件 —— 包含自由操作按钮与带标签的引导式分步演示 —— 将状态机推向在纸面上极难推演的复杂边界场景，且任何非技术人员都能轻松点击操作。

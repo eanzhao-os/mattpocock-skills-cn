@@ -54,7 +54,7 @@
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 # RESOURCES.md Format
 
 `RESOURCES.md` is the curated set of trusted sources for this topic. Knowledge for explainers should be drawn from here, not from parametric guesses. Wisdom comes from the communities listed here.
@@ -87,6 +87,6 @@
 - **Surface gaps explicitly.** If no good resource exists for an area the mission needs, write a `## Gaps` section listing what is missing. This drives future search.
 - **Prune ruthlessly.** A resource that turned out to be wrong, shallow, or off-mission should be removed, not buried. Better five sharp sources than thirty mediocre ones.
 - **Record community preferences.** If the user has opted out of joining communities, note it here so future sessions don't keep proposing them.
-```
+````
 
 </details>

@@ -93,7 +93,7 @@ interface ThemeConfig {
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 # Out-of-Scope Knowledge Base
 
 The `.out-of-scope/` directory in a repo stores persistent records of rejected feature requests. It serves two purposes:
@@ -199,6 +199,6 @@ If the maintainer changes their mind about a previously rejected concept:
 - Delete the `.out-of-scope/` file
 - The skill does not need to reopen old issues — they're historical records
 - The new issue that triggered the reconsideration proceeds through normal triage
-```
+````
 
 </details>

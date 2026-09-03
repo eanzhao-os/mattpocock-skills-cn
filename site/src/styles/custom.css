@@ -1,0 +1,43 @@
+/* 自定义全局样式 */
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+main, .main-pane, .content-panel, .sl-container, .sl-markdown-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mermaid {
+  display: block;
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1rem 0.5rem;
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mermaid svg {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 确保表格与代码块在小屏下内部滚动，不撑大视口 */
+.sl-markdown-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .mermaid {
+    padding: 0.5rem;
+  }
+}

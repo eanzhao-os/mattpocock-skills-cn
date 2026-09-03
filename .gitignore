@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+*.log
+
+# site build artifacts and sync content
+site/node_modules/
+site/dist/
+site/.astro/
+site/src/content/docs/engineering/
+site/src/content/docs/productivity/
+site/src/content/docs/in-progress/
+site/src/content/docs/misc/
+site/src/sidebar.json
+
+# test screenshots
+screenshots/

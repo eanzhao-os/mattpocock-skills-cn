@@ -85,7 +85,7 @@ _Avoid_: Client（委托人）, buyer（买家）, account（账户）
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 # CONTEXT.md Format
 
 ## Structure
@@ -146,6 +146,6 @@ The skill infers which structure applies:
 - If neither exists, create a root `CONTEXT.md` lazily when the first term is resolved
 
 When multiple contexts exist, infer which one the current topic relates to. If unclear, ask.
-```
+````
 
 </details>

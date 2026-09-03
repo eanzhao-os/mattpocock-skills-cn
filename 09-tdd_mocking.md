@@ -78,7 +78,7 @@ const api = {
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 # When to Mock
 
 Mock at **system boundaries** only:
@@ -138,6 +138,6 @@ The SDK approach means:
 - No conditional logic in test setup
 - Easier to see which endpoints a test exercises
 - Type safety per endpoint
-```
+````
 
 </details>

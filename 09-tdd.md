@@ -28,6 +28,20 @@ TDD 是由“红（失败）→ 绿（通过）”构成的迭代循环。本 sk
 
 ## 循环的核心准则（Rules of the loop）
 
+下图是 TDD 核心切片循环（Red-Green Loop）与边界约束的总览：
+
+```mermaid
+flowchart TD
+    Start([开始一个垂直切片]) --> Seam["确认公共架构接缝<br/>(Confirm Seam)"]
+    Seam --> Red["1. 编写失败测试<br/>(Red: 杜绝耦合与自证)"]
+    Red --> VerifyRed["运行测试确认红灯<br/>(报出预期业务错误)"]
+    VerifyRed --> Green["2. 编写最小实现<br/>(Green: 刚好变绿)"]
+    Green --> VerifyGreen["运行测试确认通过<br/>(保持单切片聚焦)"]
+    VerifyGreen --> Next{当前切片<br/>是否完成？}
+    Next -- 否 --> Red
+    Next -- 是 --> Done([进入代码审查重构<br/>code-review 阶段])
+```
+
 - **先红后绿（Red before green）**：必须先写出能够复现失败的测试（红），然后只写刚好足够让测试通过的最小代码（绿）。不要预先猜测未来的测试，也不要提前编写投机性的额外功能。
 - **一次推进一个切片（One slice at a time）**：每个循环周期只聚焦：一个接缝、一个测试、一次最小实现。
 - **代码重构不属于本循环（Refactoring is not part of the loop）**：重构操作严格归属于后续的代码审查阶段（详见 `code-review` skill），绝不要塞进“红→绿”的实现开发循环内部。

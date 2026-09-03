@@ -16,6 +16,17 @@ disable-model-invocation: true
 
 ## 流程
 
+下图是架构重构与内聚深化（Improve Architecture）核心流程的总览：
+
+```mermaid
+flowchart TD
+    Start([代码库维护 / 闲暇扫描]) --> Step1["1. 范围勘测与热点定位<br/>(Git 热点/摩擦点/删除测试)"]
+    Step1 --> Step2["2. 生成临时 HTML 报告<br/>(Tailwind + Mermaid 对比)"]
+    Step2 --> Step3["3. 深度访谈确认方案<br/>(基于 grilling 与 ADR)"]
+    Step3 --> Step4["4. 沉淀至 grill-with-docs<br/>(进入主流程执行重构)"]
+    Step4 --> Done([架构接缝深化完成])
+```
+
 ### 1. 探索与勘测（Explore）
 
 **在扫描前先明确范围 —— 坚持 YAGNI 原则（如无必要勿增实体）**。加深一个模块的内聚性，其核心回报在于让该模块在未来的修改变得更加容易，因此应该将更多权重放在代码库近期频繁变更的高发区域。在动手前先决定**去哪里看**：

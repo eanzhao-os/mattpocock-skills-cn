@@ -20,7 +20,7 @@ argument-hint: "您希望学习哪个主题领域？"
 - `RESOURCES.md`：用于为教学提供上下文背景认知、或用于汲取权威知识与智慧的高质量参考资源清单。编写格式严格遵循 [RESOURCES-FORMAT.md](./23-teach_RESOURCES-FORMAT.md)。
 - `./learning-records/*.md`：学习记录归档目录，专门用于记录用户**真正掌握内化了什么**。其作用大体等同于软件开发中的架构决策记录（ADR） —— 记录那些非显而易见的认知教训、关键顿悟，这些记录可能会在日后被修正，或者驱动未来的教学会话。它们主要用于精准计算用户的**最近发展区（Zone of Proximal Development）**。文件命名为 `0001-<dash-case-name>.md`，序号依次递增。格式遵循 [LEARNING-RECORD-FORMAT.md](./23-teach_LEARNING-RECORD-FORMAT.md)。
 - `./lessons/*.html`：微课程目录。一门**微课（lesson）**是一个单独、自包含的 HTML 交互文件，负责讲透一件与用户终极目标紧密绑定、范围聚焦的知识点。这是本工作区内最主要的教学交付单元。
-- `./assets/*`：可在多个课程之间跨课复用的**共享组件（components）**。详见下方 [Assets 资产](#组件资产库)。
+- `./assets/*`：可在多个课程之间跨课复用的**共享组件（components）**。详见下方 [Assets 资产](#组件资产库assets)。
 - `NOTES.md`：你的临时草稿本，用于随时记录用户的个人学习偏好或工作备忘。
 
 ---

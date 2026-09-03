@@ -97,7 +97,7 @@ test("calculateTotal 正确累加明细项金额", () => {
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 # Good and Bad Tests
 
 ## Good Tests
@@ -175,6 +175,6 @@ test("calculateTotal sums line items", () => {
   expect(calculateTotal([{ price: 10 }, { price: 5 }])).toBe(15);
 });
 ```
-```
+````
 
 </details>

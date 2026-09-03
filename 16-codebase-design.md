@@ -138,7 +138,7 @@ description: 为设计深模块（deep modules）提供统一的词汇体系。�
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 ---
 name: codebase-design
 description: Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.
@@ -253,6 +253,6 @@ Good interfaces make testing natural:
 
 - **Deepening a cluster given its dependencies** — see [DEEPENING.md](./16-codebase-design_DEEPENING.md): dependency categories, seam discipline, and replace-don't-layer testing.
 - **Exploring alternative interfaces** — see [DESIGN-IT-TWICE.md](./16-codebase-design_DESIGN-IT-TWICE.md): spin up parallel sub-agents to design the interface several radically different ways, then compare on depth, locality, and seam placement.
-```
+````
 
 </details>

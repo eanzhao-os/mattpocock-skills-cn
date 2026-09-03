@@ -28,6 +28,22 @@ Wayfinder 在默认情况下**完全聚焦于规划决策**：每张工单负责
 
 ## 导航地图的组织结构（The Map）
 
+下图是 Wayfinder 决策地图从迷雾探索到路径收敛的流转总览：
+
+```mermaid
+flowchart TD
+    Start([超大模糊工程]) --> Map["创建导航地图 Issue<br/>(确立终点目标 Destination)"]
+    Map --> InitTickets["拆解首批决策工单<br/>(标记阻塞依赖 Blocking)"]
+    InitTickets --> LoopStart["识别当前决策前沿<br/>(Frontier: 无阻塞未认领)"]
+    LoopStart --> Claim["认领并攻克前沿工单<br/>(调研/原型/访谈/任务)"]
+    Claim --> Resolve["记录敲定决策关闭工单"]
+    Resolve --> UpdateMap["更新地图驱散迷雾<br/>(晋升新工单或标出范围)"]
+    UpdateMap --> CheckDone{迷雾是否散去<br/>前沿是否清空？}
+    CheckDone -- 否 --> LoopStart
+    CheckDone -- 是 --> ToSpec["收拢压缩为需求规范<br/>(/to-spec)"]
+    ToSpec --> Ship["汇入主流程实现<br/>(to-tickets/implement)"]
+```
+
 导航地图是当前仓库工单系统中的一个单独 Issue，被打上 `wayfinder:map` 标签 —— 这是整个工程的**权威凭据产物（canonical artifact）**。所有的具体决策工单都是该地图 Issue 下属的子 Issue。
 
 地图本质上是一份**索引目录（index）**，而不是数据的倾倒仓库。它汇总列出已经敲定的各项决策，并精准指向承载这些决策细节的对应工单；每一项决策有且仅有一个归属地 —— 即其专属的决策工单 —— 因此地图本身绝不会对细节进行车轱辘话复述，仅提供一句话要点概括与跳转链接。
@@ -72,7 +88,7 @@ Wayfinder 在默认情况下**完全聚焦于规划决策**：每张工单负责
 <本工单需要攻克并敲定的核心技术决策或调研方向>
 ```
 
-每张工单都打上 `wayfinder:<type>` 标签 —— 分别为 `research`、`prototype`、`grilling`、`task` 之一（详见下方[工单类型定义](#工单类型定义)）。
+每张工单都打上 `wayfinder:<type>` 标签 —— 分别为 `research`、`prototype`、`grilling`、`task` 之一（详见下方[工单类型定义](#工单类型定义ticket-types)）。
 
 **工单认领机制**：会话在展开任何实际工作之前，**首先**将工单指派给正在驱动地图的开发者来**认领（claim）**它，以确保并发运行的其他会话会自觉跳过该工单。该被指派人*本身就代表着*认领状态：未指派的打开工单即视为尚未认领。
 
@@ -165,7 +181,7 @@ Wayfinder 在默认情况下**完全聚焦于规划决策**：每张工单负责
 <details>
 <summary><b>📄 点击展开查看英文原文 (原版可直接复制)</b></summary>
 
-```markdown
+````markdown
 ---
 name: wayfinder
 description: Plan a huge chunk of work — more than one agent session can hold — as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.
@@ -294,6 +310,6 @@ User invokes with a map (URL or number). A ticket is **optional** — without on
 5. Add newly-surfaced tickets (create-then-wire); graduate any fog the answer has made specifiable, clearing each graduated patch from **Not yet specified** so it lives only as its new ticket. If the answer reveals a ticket — this one or another — sits beyond the destination, **rule it out of scope** rather than resolving it on the route. If the decision invalidates other parts of the map, update or delete those tickets.
 
 The user may run unblocked tickets in parallel, so expect other sessions to be editing the tracker concurrently.
-```
+````
 
 </details>

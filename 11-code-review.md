@@ -16,6 +16,27 @@ description: 沿着两条独立轴线对自某个固定基准点（commit / bran
 
 ## 流程
 
+下图是双轴代码审查（Code Review）并行子代理与汇总汇报的总览：
+
+```mermaid
+flowchart TD
+    Diff["锁定固定基准点<br/>(git diff 三点比对)"] --> Fork{分流并行审查}
+
+    subgraph Sub1["子代理 1: 编码规范轴 (Standards)"]
+        S1["加载仓库规范文档<br/>+ 内置代码坏味道"] --> S2["逐行审查代码模式<br/>启发式主观裁量"]
+    end
+
+    subgraph Sub2["子代理 2: 需求契合轴 (Spec)"]
+        P1["定位原始需求规范<br/>(commit/issue/spec)"] --> P2["逐条比对用户故事<br/>检查需求完整度"]
+    end
+
+    Fork --> Sub1
+    Fork --> Sub2
+    S2 --> Merge[汇总并排报告发现]
+    P2 --> Merge
+    Merge --> Output([向用户输出双轴结论])
+```
+
 ### 1. 锁定固定基准点（Fixed Point）
 采用用户所指定的基准点 —— 可以是 commit SHA、分支名、标签名、`main`、`HEAD~5` 等。如果用户未指定，主动向用户询问。
 

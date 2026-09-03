@@ -52,7 +52,7 @@ src/packages/
 **完成判据：** `package.json` 的 `devDependencies` 中已成功包含 `dependency-cruiser`。
 
 ### 3. 写入规则配置文件（Write the config）
-将配套的 [`dependency-cruiser.config.cjs`](./dependency-cruiser.config.cjs) 复制到代码库根目录下，命名为 `.dependency-cruiser.cjs`。将 `PACKAGES_ROOT` 常量设置为步骤 1 中探测到的根路径。由于规则完全基于路径深度判断且扩展名无关，因此无需再做任何其他定制修改。
+将配套的 [`dependency-cruiser.config.cjs`](https://github.com/mattpocock/skills/blob/main/skills/in-progress/setup-ts-deep-modules/dependency-cruiser.config.cjs) 复制到代码库根目录下，命名为 `.dependency-cruiser.cjs`。将 `PACKAGES_ROOT` 常量设置为步骤 1 中探测到的根路径。由于规则完全基于路径深度判断且扩展名无关，因此无需再做任何其他定制修改。
 
 **完成判据：** `.dependency-cruiser.cjs` 文件存在、配置了正确的 `PACKAGES_ROOT`、且四条核心禁止规则全部就位。
 
@@ -184,7 +184,7 @@ Install `dependency-cruiser` as a devDependency with the detected package manage
 
 ### 3. Write the config
 
-Copy [`dependency-cruiser.config.cjs`](./dependency-cruiser.config.cjs) to the repo root as `.dependency-cruiser.cjs`. Set `PACKAGES_ROOT` to the root detected in step 1. The rules are path-depth based and extension-agnostic, so nothing else needs adapting.
+Copy [`dependency-cruiser.config.cjs`](https://github.com/mattpocock/skills/blob/main/skills/in-progress/setup-ts-deep-modules/dependency-cruiser.config.cjs) to the repo root as `.dependency-cruiser.cjs`. Set `PACKAGES_ROOT` to the root detected in step 1. The rules are path-depth based and extension-agnostic, so nothing else needs adapting.
 
 **Done when:** `.dependency-cruiser.cjs` exists with the correct `PACKAGES_ROOT`, and the four forbidden rules are present.
 

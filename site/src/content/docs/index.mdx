@@ -1,0 +1,61 @@
+---
+title: Matt Pocock Agent Skills 中文版
+description: Matt Pocock Agent Skills 中文精读与实战指南 —— 35 篇主 Skill + 22 篇 Companion 全景文档
+template: splash
+hero:
+  tagline: 35 个 Agent Skills 及 22 个 Companion 协议文档精读指南。提供中英双语对照、通俗意译、结构化图解与全景导航。
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: 🌟 首篇必读：01. ask-matt
+      link: /mattpocock-skills-cn/engineering/01-ask-matt/
+      icon: right-arrow
+      variant: primary
+    - text: 浏览工程主流程
+      link: /mattpocock-skills-cn/engineering/02-setup-matt-pocock-skills/
+      icon: rocket
+      variant: secondary
+    - text: GitHub 仓库
+      link: https://github.com/eanzhao-os/mattpocock-skills-cn
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 🗂️ 核心分类板块
+
+<CardGrid stagger>
+  <Card title="🛠️ engineering/（工程核心主流程）" icon="setting">
+    覆盖日常开发主闭环：从需求访谈（`grill-with-docs`）、需求规范（`to-spec`）、工单拆解（`to-tickets`）到测试驱动开发（`tdd`）、单工单实现（`implement`）与双轴代码审查（`code-review`）。
+    <br/><br/>
+    👉 [进入工程流程](/mattpocock-skills-cn/engineering/01-ask-matt/)
+  </Card>
+
+  <Card title="💡 productivity/（效能与人机协作）" icon="open-book">
+    包含深度追问访谈核心算法（`grilling`）、跨会话与跨环境交接导出（`handoff`）、沟通脱节纠偏（`wait-what`）以及交互式系统化教学（`teach`）。
+    <br/><br/>
+    👉 [探索效能技能](/mattpocock-skills-cn/productivity/03-grill-me/)
+  </Card>
+
+  <Card title="🔬 in-progress/（探索与演进）" icon="laptop">
+    收录演进探索中的前沿技能：TypeScript 深模块规范（`setup-ts-deep-modules`）、节拍式写作（`writing-beats`）与结构形态成文（`writing-shape`）。
+    <br/><br/>
+    👉 [查看探索项目](/mattpocock-skills-cn/in-progress/26-claude-handoff/)
+  </Card>
+
+  <Card title="📦 misc/（基础设施与工具）" icon="puzzle">
+    开发辅助工具与自动化安全护栏：Git 关键操作护栏（`git-guardrails-claude-code`）、Pre-commit 自动化检查脚手架（`setup-pre-commit`）等。
+    <br/><br/>
+    👉 [查阅配套工具](/mattpocock-skills-cn/misc/32-git-guardrails-claude-code/)
+  </Card>
+</CardGrid>
+
+---
+
+## 🧭 推荐阅读路线
+
+1. **🌟 首篇必读**：[01. ask-matt](/mattpocock-skills-cn/engineering/01-ask-matt/) —— 建立对整套体系的**全景路线图（Idea → Spec → Tickets → TDD → Implement）与阶段边界决策**的全局心智模型。
+2. **核心闭环**：`02` ~ `14` —— 从工程脚手架配置到完整人机协作工程落地。
+3. **横切支柱**：`15`（领域建模与 ADR）、`16`（深模块设计）、`19`（Wayfinder 复杂工程迷雾路线图）。
+4. **其他扩展**：按具体业务场景查阅（效能沟通、写作、脚手架等）。

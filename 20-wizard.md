@@ -9,7 +9,7 @@ description: 生成一个交互式的 Bash 向导脚本（interactive bash wizar
 
 **向导（wizard）** 是一个交互式的 Bash 脚本，用于一步一步引导人类完成某项手工操作流程 —— 这些流程如果完全靠人肉去操作会极其繁琐枯燥，而每次都要重新向 AI 解释一遍也同样费时费力。脚本会自动打开各个目标网页 URL，明确指导人类在页面上点击什么、复制什么，自动捕获用户输入的数值，并将其精准写入到该去的地方（本地 `.env` 环境文件、GitHub Secrets 密钥仓库），在每一个阶段都设置确认关卡，并实时显示还剩余多少个阶段。它可以用于配置第三方云服务、运行一次性数据迁移、或将项目从一个阶段平滑过渡到另一个阶段。
 
-令人愉悦的用户交互体验已经在 [template.sh](template.sh) 中封装完毕 —— 包含阶段式进度指示、确认关卡门禁、跨平台自动打开浏览器 URL（包括 WSL 环境）、敏感密钥隐藏式输入、幂等的 `.env` 文件增补与更新、`gh secret` / `gh variable` 命令行自动写入、以及最终的完成汇总摘要。**你的核心工作仅仅是界定流程范围并编写具体的执行阶段。** 脚本中 `STAGES` 标记上方的所有底层函数库在每一个向导中都是完全相同且标准化的；保持这种体验的高度一致性是本 skill 的灵魂所在 —— 绝不要手动去修改底层的通用函数库。
+令人愉悦的用户交互体验已经在 [template.sh](https://github.com/mattpocock/skills/blob/main/skills/engineering/wizard/template.sh) 中封装完毕 —— 包含阶段式进度指示、确认关卡门禁、跨平台自动打开浏览器 URL（包括 WSL 环境）、敏感密钥隐藏式输入、幂等的 `.env` 文件增补与更新、`gh secret` / `gh variable` 命令行自动写入、以及最终的完成汇总摘要。**你的核心工作仅仅是界定流程范围并编写具体的执行阶段。** 脚本中 `STAGES` 标记上方的所有底层函数库在每一个向导中都是完全相同且标准化的；保持这种体验的高度一致性是本 skill 的灵魂所在 —— 绝不要手动去修改底层的通用函数库。
 
 向导脚本在默认情况下是**用后即弃的（ephemeral）** —— 为单次操作而编写，保存在临时目录或项目的 `scripts/` 路径下，工作完成后即可删除。只有当用户希望将其沉淀为一套可在代码库中长期保留、供团队反复执行的标准化初始化流程时，才将其正式提交到 Git 中。
 
@@ -85,7 +85,7 @@ description: Generate an interactive bash wizard that walks a human through step
 
 A **wizard** is a bash script that walks a human, step by step, through a manual procedure that's tedious to do by hand and tedious to re-explain to an AI every time. It opens each URL, says exactly what to click and copy, captures the values, writes them where they belong (`.env`, GitHub secrets), confirms at every stage, and shows how many stages are left. It might configure third-party services, run a one-off migration, or move the project from one state to another.
 
-The delightful UX is already solved by [template.sh](template.sh) — stage-by-stage progress, confirmation gates, cross-platform URL opening (including WSL), hidden secret entry, idempotent `.env` upserts, `gh secret`/`gh variable` writes, and a closing summary. **Your job is only to scope the procedure and author its stages.** The library above the `STAGES` marker is identical in every wizard; that consistency is the point — never hand-edit it.
+The delightful UX is already solved by [template.sh](https://github.com/mattpocock/skills/blob/main/skills/engineering/wizard/template.sh) — stage-by-stage progress, confirmation gates, cross-platform URL opening (including WSL), hidden secret entry, idempotent `.env` upserts, `gh secret`/`gh variable` writes, and a closing summary. **Your job is only to scope the procedure and author its stages.** The library above the `STAGES` marker is identical in every wizard; that consistency is the point — never hand-edit it.
 
 A wizard is ephemeral by default — built for one run, saved to a scratch or `scripts/` path, deleted when the job's done. Commit it only when the user wants a repeatable setup path that should live in the repo.
 

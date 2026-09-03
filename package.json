@@ -1,0 +1,18 @@
+{
+  "name": "mattpocock-skills-cn",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint-md": "node scripts/lint-md.mjs",
+    "test:lint": "node scripts/test-lint-md.mjs",
+    "test:links": "node scripts/check-dist-links.mjs",
+    "test:smoke": "node scripts/smoke-test.mjs",
+    "test": "npm run test:lint && npm run test:links && npm run test:smoke",
+    "build": "npm --prefix site run build",
+    "dev": "npm --prefix site run dev"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}

@@ -21,6 +21,33 @@ disable-model-invocation: true
 积极寻找在正式实现前做 **预重构（prefactor）** 的机会，让后续实现变得更加轻松 —— 秉承理念：“先让变更变容易，再去实现那个容易的变更（Make the change easy, then make the easy change）”。
 
 ### 3. 起草垂直切片工单
+
+下图是工单阻塞前置依赖（Blocking Edges）与执行前沿（Frontier）的有向无环图（DAG）示例：
+
+```mermaid
+flowchart TD
+    subgraph Frontier["执行前沿集合 (Frontier: 无阻塞可立即开工)"]
+        direction LR
+        T1["01: 预重构提取接缝<br/>(prefactor)"]
+        T2["02: 核心协议类型定义<br/>(types)"]
+    end
+
+    subgraph Blocked["受阻待办工单 (Blocked: 存在未完成前置)"]
+        direction TB
+        T3["03: 数据层实现与测试<br/>(data layer)"]
+        T4["04: 核心服务接口实现<br/>(service)"]
+        T5["05: API 路由与接入<br/>(api route)"]
+        T6["06: UI 交互与端到端集成<br/>(ui & e2e)"]
+    end
+
+    T1 --> T3
+    T2 --> T3
+    T2 --> T4
+    T3 --> T5
+    T4 --> T5
+    T5 --> T6
+```
+
 将整体工作拆解为 **纵深穿透（tracer bullet）** 工单：
 
 **垂直切片核心规则：**
