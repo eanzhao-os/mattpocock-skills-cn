@@ -4,15 +4,15 @@
 
 📖 **在线阅读**：<https://eanzhao-os.github.io/mattpocock-skills-cn/>（由 `gh-pages` 分支持续部署）
 
-收录了原仓库全部 35 个 Agent Skills 及 22 个 Companion 协议文档，提供中英双语对照、通俗意译与可直接跳转的完整导航，适合在使用 Claude Code / Cursor / Cline 等工具时作为技能（Skills）参考。
+收录了原仓库全部 37 个 Agent Skills 及 22 个 Companion 协议文档，提供中英双语对照、通俗意译与可直接跳转的完整导航，适合在使用 Claude Code / Cursor / Cline 等工具时作为技能（Skills）参考。
 
 ---
 
 ## 📌 项目说明
 
 - **上游仓库**：[mattpocock/skills](https://github.com/mattpocock/skills)
-- **版本快照**：基于 **2026 年 8 月 8 日** 上游仓库快照翻译整理（紧接 2026-08-05 的 Commit [`355fa74`](https://github.com/mattpocock/skills/commit/355fa74) `feat: add wait-what`；*注：上游仓库后续若有演进变动，本项目不保证实时跟进同步*）。
-- **涵盖范围**：全量 35 个主 Skill（`01`~`35`）+ 22 个 Companion 附属协议/规范文件，共计 57 篇文档。
+- **版本快照**：基于 **2026 年 8 月 24 日** 上游仓库快照翻译整理（Commit [`6654f6b`](https://github.com/mattpocock/skills/commit/6654f6b) `feat: add 'Information access' category to retrospective skill`；*注：上游仓库后续若有演进变动，本项目不保证实时跟进同步*）。
+- **涵盖范围**：全量 37 个主 Skill（`01`~`37`）+ 22 个 Companion 附属协议/规范文件，共计 59 篇文档。
 - **阅读建议**：
   - 🌟 **首篇必读**：[01. ask-matt](./01-ask-matt.md) —— 先建立对整套体系的**全景路线图（Idea → Spec → Tickets → TDD → Implement）与阶段边界决策**的全局认知。
   - **核心闭环**：`02` ~ `14` —— 从工程脚手架配置到完整人机协作工程落地。
@@ -73,6 +73,8 @@
 - `writing-beats` → [29. 节拍写作法](./29-writing-beats.md)
 - `writing-fragments` → [30. 碎片写作法](./30-writing-fragments.md)
 - `writing-shape` → [31. 结构形态写作法](./31-writing-shape.md)
+- `implement-spec` → [36. 规范整体落地实现](./36-implement-spec.md)（多子代理并行实现一份 Spec）
+- `retro` → [37. 编码会话复盘](./37-retro.md)（改进 Agent 运行环境）
 
 ### 📦 misc/（基础设施与工具）
 
@@ -80,3 +82,16 @@
 - `migrate-to-shoehorn` → [33. 迁移至 Shoehorn](./33-migrate-to-shoehorn.md)
 - `scaffold-exercises` → [34. 编程练习题脚手架](./34-scaffold-exercises.md)
 - `setup-pre-commit` → [35. 配置 pre-commit 检查](./35-setup-pre-commit.md)
+
+---
+
+## 🔄 同步记录
+
+### 2026-09-04 · 同步至上游 2026-08-24 快照（`6654f6b`）
+
+- **新增技能**：`implement-spec`（36，规范整体落地实现）、`retro`（37，编码会话复盘）。
+- **技能迁移**：`wait-what` 由 `in-progress/` 转正至 `productivity/`。
+- **内容修订**（同步至对应译文）：`grilling` 每轮问题间以水平线分隔；`grill-with-docs` 删除「单一写者」假设章节；`domain-modeling` 触发条件改为显式基于 `CONTEXT.md`/ADR 写入与术语讨论；`diagnosing-bugs` 子代理派发措辞中立化（harness-neutral）；`wizard` 描述重写为 model-invoked 定位；`ask-matt` 中 `prototype`（保留为 `prototype/<name>` 分支上的一手事实源）与 `improve-codebase-architecture`（survey 而非 rescue）定位更新；`wayfinder`「调查工单」改为「决策工单（decision tickets）」；`retro` 新增「信息访问（Information access）」复盘类别。
+- **全仓库风格**：上游移除全部 em-dash、frontmatter description 含冒号者加引号，全部内嵌英文原文已同步刷新。
+- **基线修正**：`setup-matt-pocock-skills` 的三篇 companion（`domain`、`issue-tracker-github`、`issue-tracker-gitlab`）此前翻译基线早于 2026-08-05 快照、整章缺失（Conventions、wayfinder:map 模型等），本次已按最新上游**整体重写补齐**。
+- 上游删除了 `skills/personal/` 与 `skills/deprecated/` 下未收录技能，对本项目无影响。

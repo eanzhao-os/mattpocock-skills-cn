@@ -29,7 +29,7 @@ sequenceDiagram
 
 编写一份交接文档，系统总结当前会话的上下文与进展，以便全新的 Agent 能够直接接续工作。**将其保存到用户操作系统的临时目录（temp directory）中，而不是当前的工作区代码目录内**。
 
-文档中必须包含一个 **“建议调用的技能（suggested skills）”** 章节，明确指出接手工作的 Agent 接下来应该调用哪些 skills。
+文档中必须包含一个 **“建议调用的技能（suggested skills）”** 章节，明确指出下一个接手的 Agent 应当通过 Skill 工具调用哪些技能。
 
 **不要重复搬运已经记录在其他产物中的内容**（例如已有的 specs 需求规范、plans 计划、ADRs 架构决策记录、工单 issues、提交记录 commits 或代码 diffs）。请直接使用文件路径或 URL 链接来引用它们。
 
@@ -65,7 +65,7 @@ disable-model-invocation: true
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS - not the current workspace.
 
-Include a "suggested skills" section in the document, which suggests skills that the agent should invoke.
+Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
 Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 

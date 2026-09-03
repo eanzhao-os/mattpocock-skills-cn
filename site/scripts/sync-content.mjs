@@ -2,10 +2,10 @@
 
 /**
  * sync-content.mjs
- * 在 Astro 构建/开发前，将仓库根目录的 57 篇单一事实源 Markdown 转换为 Starlight content docs。
+ * 在 Astro 构建/开发前，将仓库根目录的 59 篇单一事实源 Markdown 转换为 Starlight content docs。
  *
  * 核心功能：
- * 1. 静态维护 57 篇文档与 4 个 bucket 的完整映射表，未登记文件直接阻断报错；
+ * 1. 静态维护 59 篇文档与 4 个 bucket 的完整映射表，未登记文件直接阻断报错；
  * 2. 提取首个 H1 注入 frontmatter（title、sidebar.order 等）；
  * 3. 将 136 处内部相对链接重写为站点完整路由路径，保持锚点跳转正常；
  * 4. 将 ```mermaid 代码块包装为 <div class="mermaid">，支持客户端双主题渲染；
@@ -24,7 +24,7 @@ const SIDEBAR_FILE = path.resolve(SITE_DIR, 'src/sidebar.json');
 
 const BASE_PATH = '/mattpocock-skills-cn';
 
-// 57 篇文档的静态显式映射表（若根目录新增或变动未在此登记，脚本会直接报错）
+// 59 篇文档的静态显式映射表（若根目录新增或变动未在此登记，脚本会直接报错）
 export const BUCKET_MAPPING = {
   // --- engineering/ (35 篇) ---
   '01-ask-matt.md': 'engineering',
@@ -77,13 +77,15 @@ export const BUCKET_MAPPING = {
   '23-teach_RESOURCES-FORMAT.md': 'productivity',
   '24-to-questionnaire.md': 'productivity',
 
-  // --- in-progress/ (6 篇) ---
+  // --- in-progress/ (8 篇) ---
   '26-claude-handoff.md': 'in-progress',
   '27-loop-me.md': 'in-progress',
   '28-setup-ts-deep-modules.md': 'in-progress',
   '29-writing-beats.md': 'in-progress',
   '30-writing-fragments.md': 'in-progress',
   '31-writing-shape.md': 'in-progress',
+  '36-implement-spec.md': 'in-progress',
+  '37-retro.md': 'in-progress',
 
   // --- misc/ (4 篇) ---
   '32-git-guardrails-claude-code.md': 'misc',

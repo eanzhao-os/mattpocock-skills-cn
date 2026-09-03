@@ -69,7 +69,7 @@ argument-hint: "您希望学习哪个主题领域？"
 
 ## 组件资产库（Assets）
 
-微课程是由一系列存放在 `./assets/` 目录下的可复用**组件（components）**组装而成的：全局样式表、测验小挂件、模拟器、图解绘制辅助器 —— 任何可能被后续课程复用到的构件。
+微课程是由一系列存放在 `./assets/` 目录下的可复用**组件（components）**组装而成的：全局样式表、测验小挂件、模拟器、图解绘制辅助器 —— 以及任何其他可能被后续课程复用到的构件。
 
 **复用是默认法则，而不是罕见特例。** 在编写新课之前，首先阅读 `./assets/` 目录，优先基于已有组件进行构建。当某一门课需要全新且具备通用价值的能力时，将其作为组件写入 `./assets/` 并通过外链引入 —— 绝不要内联那些未来课程极可能会重复复制的代码。
 
@@ -235,9 +235,9 @@ Fluency can give the user an illusory sense of mastery, but storage strength is 
 
 ## Lessons
 
-A lesson is the main thing you produce — the unit in which knowledge and skills reach the user. Each lesson is one self-contained HTML file, saved to `./lessons/` and titled `0001-<dash-case-name>.html` where the number increments each time.
+A lesson is the main thing you produce: the unit in which knowledge and skills reach the user. Each lesson is one self-contained HTML file, saved to `./lessons/` and titled `0001-<dash-case-name>.html` where the number increments each time.
 
-A lesson should be **beautiful** — clean, readable typography and layout — since the user will return to these later to review. Think Tufte.
+A lesson should be **beautiful**, with clean, readable typography and layout, since the user will return to these later to review. Think Tufte.
 
 The lesson should be short, and completable very quickly. Learners' working memory is very small, and we need to stay within it. But each lesson should give the user a single tangible win that they can build on. It should be directly tied to the mission, and should be in the user's zone of proximal development.
 
@@ -251,9 +251,9 @@ Each lesson should contain a reminder to ask followup questions to the agent. Th
 
 ## Assets
 
-Lessons are built from reusable **components**, stored in `./assets/`: stylesheets, quiz widgets, simulators, diagram helpers — anything a second lesson could reuse.
+Lessons are built from reusable **components**, stored in `./assets/`: stylesheets, quiz widgets, simulators, diagram helpers, and anything else a second lesson could reuse.
 
-Reuse is the default, not the exception. Before authoring a lesson, read `./assets/` and build from the components already there. When a lesson needs something new and reusable, write it as a component in `./assets/` and link to it — never inline code a future lesson would duplicate.
+Reuse is the default, not the exception. Before authoring a lesson, read `./assets/` and build from the components already there. When a lesson needs something new and reusable, write it as a component in `./assets/` and link to it; never inline code a future lesson would duplicate.
 
 A shared stylesheet is the first component every workspace earns: every lesson links it, so the lessons look like one consistent course rather than a pile of one-offs. As the workspace grows, so should the component library.
 

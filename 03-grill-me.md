@@ -6,7 +6,7 @@ description: 一场刨根问底式的深度访谈，用于打磨方案或设计�
 disable-model-invocation: true
 ```
 
-启动一场 `/grilling` 深度访谈会话。
+通过 Skill 工具调用 "grilling"（深度访谈）。
 
 ---
 
@@ -33,7 +33,7 @@ description: A relentless interview to sharpen a plan or design.
 disable-model-invocation: true
 ---
 
-Run a `/grilling` session.
+Call the Skill tool with "grilling".
 ```
 
 </details>

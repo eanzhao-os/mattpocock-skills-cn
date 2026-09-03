@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 本 skill 读取当前的对话上下文以及对代码库的理解，直接生成一份需求规范（spec）。**切勿再次向用户发起访谈或盘问** —— 仅忠实综合提炼你已经掌握的所有信息。
 
-工单系统（issue tracker）与分类标签（triage labels）的词汇表应该已经预先配置完毕 —— 如果尚未配置，请先运行 `/setup-matt-pocock-skills`。
+工单系统（issue tracker）与分类标签（triage labels）的词汇表应该已经预先配置完毕 —— 如果尚未配置，请提示用户先运行 `/setup-matt-pocock-skills`。
 
 ## 流程
 
@@ -80,13 +80,13 @@ disable-model-invocation: true
 ```markdown
 ---
 name: to-spec
-description: Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.
+description: "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed."
 disable-model-invocation: true
 ---
 
-This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user — just synthesize what you already know.
+This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 
-The issue tracker and triage label vocabulary should have been provided to you — run `/setup-matt-pocock-skills` if not.
+The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
 
 ## Process
 
@@ -134,7 +134,7 @@ A list of implementation decisions that were made. This can include:
 
 Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
 
-Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.
+Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
 
 ## Testing Decisions
 

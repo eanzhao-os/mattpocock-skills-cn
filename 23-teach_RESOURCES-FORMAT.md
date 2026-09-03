@@ -11,9 +11,9 @@
 
 ## Knowledge（体系化硬核知识）
 
-- [经典专著：《力量训练的科学与实践》 — Zatsiorsky & Kraemer](https://example.com)
+- [经典专著：《力量训练的科学与实践》（Zatsiorsky & Kraemer 著）](https://example.com)
   训练周期与身体机能适应的基石典籍。查阅场景：任何涉及周期规划、疲劳恢复、强度区间的内容。
-- [深度长文：“我到底应该训练多少量？” — Greg Nuckols (Stronger By Science)](https://example.com)
+- [深度长文：“我到底应该训练多少量？”（Greg Nuckols 著，Stronger By Science）](https://example.com)
   基于循证的训练量里程碑综述。查阅场景：各肌群每周训练组数目标的设定。
 
 ## Wisdom（高信噪比实战社区）
@@ -66,9 +66,9 @@
 
 ## Knowledge
 
-- [Book: _The Science and Practice of Strength Training_ — Zatsiorsky & Kraemer](https://example.com)
+- [Book: _The Science and Practice of Strength Training_ by Zatsiorsky & Kraemer](https://example.com)
   Foundational text on programming and adaptation. Use for: anything to do with periodisation, recovery, intensity zones.
-- [Article: "How Much Should I Train?" — Greg Nuckols (Stronger By Science)](https://example.com)
+- [Article: "How Much Should I Train?" by Greg Nuckols (Stronger By Science)](https://example.com)
   Evidence-based review of volume landmarks. Use for: weekly set targets per muscle group.
 
 ## Wisdom (Communities)

@@ -2,7 +2,7 @@
 
 ```yaml
 name: domain-modeling
-description: 主动构建并打磨项目的领域模型（domain model）。当用户希望敲定领域术语或通用统一语言（ubiquitous language）、记录架构决策、或当其他 skill 需要维护领域模型时触发。
+description: 主动构建并打磨项目的领域模型（domain model）。在讨论代码库术语（codebase terminology）、编写或修改 CONTEXT.md、或记录/修订 ADR（架构决策记录）时触发。
 ```
 
 在设计过程中，**主动**构建并不断打磨项目的领域模型。这是一项**积极介入**的工程纪律 —— 主动质疑模糊术语、构思极端边界场景、并在词汇与决策一旦成型的瞬间将其落盘为词汇表和架构决策记录。（仅仅在调用其他 skill 时为了获取术语而*阅读* `CONTEXT.md` 并不属于本 skill —— 那是任何 skill 都可以顺带做的一行常规操作。本 skill 专门用于当你需要**改变和演进领域模型**、而不仅是被动**消费**它的时候。）
@@ -16,6 +16,8 @@ description: 主动构建并打磨项目的领域模型（domain model）。当�
 ├── CONTEXT.md                    ← 领域词汇表（Glossary）
 ├── docs/
 │   └── adr/                      ← 架构决策记录（ADRs）
+│       ├── 0001-event-sourced-orders.md
+│       └── 0002-postgres-for-write-model.md
 └── src/
 ```
 
@@ -76,7 +78,7 @@ description: 主动构建并打磨项目的领域模型（domain model）。当�
 | path | `skills/engineering/domain-modeling/` |
 | url | https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling |
 | name | `domain-modeling` |
-| 触发方式 | description：敲定 domain 术语 / ubiquitous language、记录架构决策、或其他 skill 需要维护 domain model 时（model-invoked） |
+| 触发方式 | description：讨论 codebase 术语 / 编写或修改 CONTEXT.md / 记录或修订 ADR 时（model-invoked） |
 | companions | [CONTEXT-FORMAT.md](./15-domain-modeling_CONTEXT-FORMAT.md)、[ADR-FORMAT.md](./15-domain-modeling_ADR-FORMAT.md)——本页只列角色，不全文翻译 |
 | 产物 | 根或 context 内 `CONTEXT.md`（glossary）；`docs/adr/`（决策，按需） |
 | 消费方 | `grill-with-docs`、`to-spec`、`to-tickets`、`tdd`、`triage`、`wayfinder`、`improve-codebase-architecture` 等几乎所有 engineering skill |
@@ -89,12 +91,12 @@ description: 主动构建并打磨项目的领域模型（domain model）。当�
 ````markdown
 ---
 name: domain-modeling
-description: Build and sharpen a project's domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.
+description: Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a CONTEXT.md, or recording or editing an ADR.
 ---
 
 # Domain Modeling
 
-Actively build and sharpen the project's domain model as you design. This is the *active* discipline — challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `CONTEXT.md` for vocabulary is not this skill — that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)
+Actively build and sharpen the project's domain model as you design. This is the *active* discipline: challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `CONTEXT.md` for vocabulary is not this skill: that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)
 
 ## File structure
 
@@ -105,6 +107,8 @@ Most repos have a single context:
 ├── CONTEXT.md
 ├── docs/
 │   └── adr/
+│       ├── 0001-event-sourced-orders.md
+│       └── 0002-postgres-for-write-model.md
 └── src/
 ```
 
@@ -124,17 +128,17 @@ If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The ma
 │       └── docs/adr/
 ```
 
-Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+Create files lazily: only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
 
 ## During the session
 
 ### Challenge against the glossary
 
-When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
+When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y. Which is it?"
 
 ### Sharpen fuzzy language
 
-When the user uses vague or overloaded terms, propose a precise canonical term. "You're saying 'account' — do you mean the Customer or the User? Those are different things."
+When the user uses vague or overloaded terms, propose a precise canonical term. "You're saying 'account': do you mean the Customer or the User? Those are different things."
 
 ### Discuss concrete scenarios
 
@@ -142,11 +146,11 @@ When domain relationships are being discussed, stress-test them with specific sc
 
 ### Cross-reference with code
 
-When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
+When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible. Which is right?"
 
 ### Update CONTEXT.md inline
 
-When a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./15-domain-modeling_CONTEXT-FORMAT.md).
+When a term is resolved, update `CONTEXT.md` right there. Don't batch these up: capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./15-domain-modeling_CONTEXT-FORMAT.md).
 
 `CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 
@@ -154,9 +158,9 @@ When a term is resolved, update `CONTEXT.md` right there. Don't batch these up �
 
 Only offer to create an ADR when all three are true:
 
-1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
-3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
+1. **Hard to reverse**: the cost of changing your mind later is meaningful
+2. **Surprising without context**: a future reader will wonder "why did they do it this way?"
+3. **The result of a real trade-off**: there were genuine alternatives and you picked one for specific reasons
 
 If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./15-domain-modeling_ADR-FORMAT.md).
 ````

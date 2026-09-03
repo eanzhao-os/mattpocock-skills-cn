@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 始终通过 `-n` / `--name` 传入一个具有清晰业务含义的名称（例如 `--name "修复登录缺陷"`） —— 这将决定任务列表、会话选择器以及终端标题中显示的直观名称。
 
-在交接总结中**必须包含一个 “建议调用的技能（suggested skills）” 章节**，明确建议接班的 Agent 应当调用哪些 skill。
+在交接总结中**必须包含一个 “建议调用的技能（suggested skills）” 章节**，明确指出下一个接手的 Agent 应当通过 Skill 工具调用哪些技能。
 
 **严禁重复复制已经在其他工件中记录过的内容**（包括 spec 需求规范、执行计划、ADR 架构决策记录、工单、Git 提交记录、代码 diff 等）。改为直接通过文件路径或 URL 链接进行精准引用。
 
@@ -50,13 +50,13 @@ disable-model-invocation: true
 
 Write a handoff summary of the current conversation so a fresh agent can continue the work. Instead of saving it, launch a background agent seeded with the summary as its prompt: `claude --bg --name "<descriptive name>" "<handoff summary>"`. It starts in the current working directory and returns immediately; the user manages it with `claude agents`.
 
-Always pass `-n`/`--name` with a descriptive name (e.g. `--name "Fix login bug"`) — it sets the display name shown in the job list, session picker, and terminal title.
+Always pass `-n`/`--name` with a descriptive name (e.g. `--name "Fix login bug"`); it sets the display name shown in the job list, session picker, and terminal title.
 
-Include a "suggested skills" section in the summary, which suggests skills that the agent should invoke.
+Include a "suggested skills" section in the summary, naming which skills the next agent should call the Skill tool for.
 
 Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
-Redact any sensitive information, such as API keys, passwords, or personally identifiable information — the summary becomes the agent's prompt.
+Redact any sensitive information, such as API keys, passwords, or personally identifiable information, since the summary becomes the agent's prompt.
 
 If the user passed arguments, treat them as a description of what the next session will focus on and tailor the summary accordingly.
 ```

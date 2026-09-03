@@ -44,7 +44,7 @@ flowchart TD
 
 1. **从第一天起就是用后即弃的，并且必须明确标出**。将原型代码存放在紧邻它实际会被使用的地方（紧挨着它为其做原型的模块或页面），以便上下文一目了然 —— 但命名必须让任何读者一眼就能看出它是原型而非生产代码。对于用后即弃的 UI 路由，严格遵循项目既有的路由约定；不要凭空发明新的顶层结构。
 2. **极易启动（Trivial to run）**。UI 原型必须能通过项目任务运行器的一条命令直接启动（如 `pnpm <name>`、`python <path>`、`bun <path>` 等）。逻辑演示则是一个用户直接双击就能在浏览器打开的单 HTML 文件。无论哪种形式，启动过程都不需要任何思考。
-3. **默认不引入持久化存储（No persistence by default）**。所有状态均保存在内存中。数据持久化是原型**要去检验**的对象，而不是原型本身应该依赖的前提。如果问题明确涉及数据库，使用临时数据库（scratch DB）或带有明确 “PROTOTYPE — wipe me（原型数据，随时清除）” 标记的本地文件。
+3. **默认不引入持久化存储（No persistence by default）**。所有状态均保存在内存中。数据持久化是原型**要去检验**的对象，而不是原型本身应该依赖的前提。如果问题明确涉及数据库，使用临时数据库（scratch DB）或带有明确 “PROTOTYPE, wipe me（原型数据，随时清除）” 标记的本地文件。
 4. **拒绝任何过度润色（Skip the polish）**。不写测试，不做超出“让原型可运行”之外的错误处理，不搞过度抽象。核心目的只有一个：尽快验证、尽快学到东西。
 5. **状态变化实时外露（Surface the state）**。在每一次操作（逻辑原型）之后，或者在每次切换变体（UI 原型）时，直接打印或渲染出完整的相关状态，让用户能够清晰看到底层发生了什么变化。
 6. **验证完成后妥善归档（Capture it when done）**。将经过验证敲定的决策融入正式代码，然后将原型代码本身作为**一手原始资料（primary source）**进行归档：将其提交到一个脱离 main 主干的用后即弃分支上，并在实现工单中留下指向该分支的上下文指针。同时将结论 —— 即验证得到的明确答案及其解决的核心问题 —— 记录在工单或 commit 提交信息中。main 主干分支上只保留最终验证过的设计决策。
@@ -100,21 +100,21 @@ A prototype is **throwaway code that answers a question**. The question decides 
 
 ## Pick a branch
 
-Identify which question is being answered — from the user's prompt, the surrounding code, or by asking if the user is around:
+Identify which question is being answered, using the user's prompt, the surrounding code, or by asking if the user is around:
 
-- **"Does this logic / state model feel right?"** → [LOGIC.md](./12-prototype_LOGIC.md). Build a single shareable HTML file — free-play buttons plus tabbed guided walkthroughs — that pushes the state machine through cases that are hard to reason about on paper, and that a non-developer can drive.
+- **"Does this logic / state model feel right?"** → [LOGIC.md](./12-prototype_LOGIC.md). Build a single shareable HTML file (free-play buttons plus tabbed guided walkthroughs) that pushes the state machine through cases that are hard to reason about on paper, and that a non-developer can drive.
 - **"What should this look like?"** → [UI.md](./12-prototype_UI.md). Generate several radically different UI variations on a single route, switchable via a URL search param and a floating bottom bar.
 
-The two branches produce very different artifacts — getting this wrong wastes the whole prototype. If the question is genuinely ambiguous and the user isn't reachable, default to whichever branch better matches the surrounding code (a backend module → logic; a page or component → UI) and state the assumption at the top of the prototype.
+The two branches produce very different artifacts, so getting this wrong wastes the whole prototype. If the question is genuinely ambiguous and the user isn't reachable, default to whichever branch better matches the surrounding code (a backend module → logic; a page or component → UI) and state the assumption at the top of the prototype.
 
 ## Rules that apply to both
 
-1. **Throwaway from day one, and clearly marked as such.** Locate the prototype code close to where it will actually be used (next to the module or page it's prototyping for) so context is obvious — but name it so a casual reader can see it's a prototype, not production. For throwaway UI routes, obey whatever routing convention the project already uses; don't invent a new top-level structure.
-2. **Trivial to run.** A UI prototype starts from one command in the project's task runner — `pnpm <name>`, `python <path>`, `bun <path>`, etc. A logic demo is a single HTML file the user double-clicks. Either way, no thinking required to start it.
-3. **No persistence by default.** State lives in memory. Persistence is the thing the prototype is _checking_, not something it should depend on. If the question explicitly involves a database, hit a scratch DB or a local file with a clear "PROTOTYPE — wipe me" name.
+1. **Throwaway from day one, and clearly marked as such.** Locate the prototype code close to where it will actually be used (next to the module or page it's prototyping for) so context is obvious, but name it so a casual reader can see it's a prototype, not production. For throwaway UI routes, obey whatever routing convention the project already uses; don't invent a new top-level structure.
+2. **Trivial to run.** A UI prototype starts from one command in the project's task runner: `pnpm <name>`, `python <path>`, `bun <path>`, etc. A logic demo is a single HTML file the user double-clicks. Either way, no thinking required to start it.
+3. **No persistence by default.** State lives in memory. Persistence is the thing the prototype is _checking_, not something it should depend on. If the question explicitly involves a database, hit a scratch DB or a local file with a clear "PROTOTYPE, wipe me" name.
 4. **Skip the polish.** No tests, no error handling beyond what makes the prototype _runnable_, no abstractions. The point is to learn something fast.
 5. **Surface the state.** After every action (logic) or on every variant switch (UI), print or render the full relevant state so the user can see what changed.
-6. **Capture it when done.** Fold any validated decision into the real code, then capture the prototype itself as a **primary source**: commit it to a throwaway branch, out of main, and leave a context pointer to that branch on the implementation issue. Capture the answer too — the verdict and the question it settled — in the issue or a commit. The main branch keeps only the validated decision.
+6. **Capture it when done.** Fold any validated decision into the real code, then capture the prototype itself as a **primary source**: commit it to a throwaway branch, out of main, and leave a context pointer to that branch on the implementation issue. Capture the answer too (the verdict and the question it settled) in the issue or a commit. The main branch keeps only the validated decision.
 ```
 
 </details>
