@@ -18,14 +18,55 @@
 
 ## 安装执行步骤
 
-1. **询问安装生效范围（Ask scope）**：向用户请示确认 —— 仅为**当前项目安装**（配置写入 `.claude/settings.json`），还是进行**全局全局安装**（配置写入 `~/.claude/settings.json`）？
+1. **询问安装生效范围（Ask scope）**：向用户请示确认 —— 仅为**当前项目安装**（配置写入 `.claude/settings.json`），还是进行**全局安装**（配置写入 `~/.claude/settings.json`）？
 2. **复制拦截脚本（Copy the hook script）**：附带的脚本文件位于 `scripts/block-dangerous-git.sh`。根据用户选择的生效范围将其复制到目标路径：
    - **当前项目生效**：`.claude/hooks/block-dangerous-git.sh`；
    - **全局生效**：`~/.claude/hooks/block-dangerous-git.sh`。
+
    随后执行 `chmod +x` 为其赋予可执行权限；
-3. **将 Hook 注入配置文件（Add hook to settings）**：在对应的配置文件中挂载钩子（若配置文件已存在，将其**平滑合并**进既有的 `hooks.PreToolUse` 数组中 —— 绝不要覆盖抹除用户的其他配置）；
+3. **将 Hook 注入配置文件（Add hook to settings）**：在对应的配置文件中挂载钩子：
+
+   **当前项目**（`.claude/settings.json`）：
+   ```json
+   {
+     "hooks": {
+       "PreToolUse": [
+         {
+           "matcher": "Bash",
+           "hooks": [
+             {
+               "type": "command",
+               "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-dangerous-git.sh"
+             }
+           ]
+         }
+       ]
+     }
+   }
+   ```
+
+   **全局**（`~/.claude/settings.json`）：
+   ```json
+   {
+     "hooks": {
+       "PreToolUse": [
+         {
+           "matcher": "Bash",
+           "hooks": [
+             {
+               "type": "command",
+               "command": "~/.claude/hooks/block-dangerous-git.sh"
+             }
+           ]
+         }
+       ]
+     }
+   }
+   ```
+
+   若配置文件已存在，将其**平滑合并**进既有的 `hooks.PreToolUse` 数组中 —— 绝不要覆盖用户的其他配置；
 4. **询问个性化定制需求（Ask about customization）**：向用户询问是否需要从拦截黑名单中追加或移除某些特定命令模式。根据用户的反馈就地编辑刚才复制过去的拦截脚本；
-5. **执行冒烟测试验证（Verify）**：通过管道模拟一次 JSON 输入来快速自测脚本拦截能力。脚本应当以退出码 2（exit code 2）终止退出，并在标准错误输出（stderr）中清晰打印出阻断报错。
+5. **执行冒烟测试验证（Verify）**：通过管道模拟一次 JSON 输入来快速自测脚本拦截能力：`echo '{"tool_input":{"command":"git push origin main"}}' | <path-to-script>`。脚本应当以退出码 2（exit code 2）终止退出，并在标准错误输出（stderr）中清晰打印 `BLOCKED` 报错信息。
 
 ---
 
@@ -40,7 +81,7 @@
 - companion 文件：
   - `scripts/block-dangerous-git.sh`（PreToolUse 实际拦截脚本）
   - `agents/openai.yaml`
-- **低频 / 强环境绑定**：仅 Claude Code 的 `PreToolUse` + `settings.json` hooks 模型；不直接移植到 Codex/Cursor/其他 harness，除非对等 hook 面存在。
+- **低频 / 强环境绑定**：仅 Claude Code 的 `PreToolUse` + `settings.json` hooks 模型；不直接移植到 Codex/Cursor/其他 harness，除非存在对等的 hook 接口。
 
 <br>
 

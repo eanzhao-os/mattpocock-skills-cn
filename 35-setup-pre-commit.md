@@ -67,7 +67,7 @@
 - 触发方式：description 驱动——用户要加 pre-commit、装 Husky、配 lint-staged、或 commit 时格式化/typecheck/test
 - companion 文件：
   - `agents/openai.yaml`
-- **低频 / 中强环境绑定**：绑 Node 包管理器生态（npm/pnpm/yarn/bun）+ Husky v9 + lint-staged + Prettier；一次装成后少再跑。非 JS 仓或已有 pre-commit（Python `pre-commit` 框架等）则不适用或需改写。
+- **低频 / 中强环境绑定**：绑 Node 包管理器生态（npm/pnpm/yarn/bun）+ Husky v9 + lint-staged + Prettier；一次装成后很少再跑。非 JS 仓或已有 pre-commit（Python `pre-commit` 框架等）则不适用或需改写。
 
 <br>
 

@@ -8,7 +8,7 @@
 
 在测试代码中滥用 `as` 的典型痛点：
 - 现代 TypeScript 规范反复告诫开发者不要滥用类型断言；
-- 每次断言都必须手动繁琐指定目标类型名称；
+- 每次断言都必须手动指定目标类型名称，颇为繁琐；
 - 在刻意构造非法测试数据时，不得不使用极其丑陋的双重断言（`as unknown as Type`）。
 
 ---
@@ -31,7 +31,7 @@ type Request = {
   body: { id: string };
   headers: Record<string, string>;
   cookies: Record<string, string>;
-  // ...以及其他 20 多个无须关心的属性
+  // ...以及其他 20 个无须关心的属性
 };
 
 it("gets user by id", () => {
@@ -94,7 +94,7 @@ getUser(fromAny({ body: { id: 123 } }));
 | --- | --- |
 | `fromPartial()` | 传入只包含部分字段、但依然受类型系统严格校验的局部数据 |
 | `fromAny()` | 刻意传入非法或错误的数据结构（同时保留 IDE 的自动补全能力） |
-| `fromExact()` | 强行要求完整对象（后续可平滑无缝重构为 `fromPartial`） |
+| `fromExact()` | 强行要求完整对象（后续可无缝切换为 `fromPartial`） |
 
 ---
 

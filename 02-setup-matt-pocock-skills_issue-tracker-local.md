@@ -30,11 +30,11 @@
 
 用于配合 `/wayfinder` 解决超大型探索任务。**导航地图（map）** 是一个根文件，每一个决策工单对应一个 **子文件（child file）**：
 
-- **根导航地图（Map）**：保存在 `.scratch/<effort>/map.md` —— 正文涵盖基础备忘（Notes）、截至目前的决策沉淀（Decisions-so-far）以及未来的战争迷雾（Fog）；
+- **导航地图（Map）**：保存在 `.scratch/<effort>/map.md` —— 正文涵盖基础备忘（Notes）、截至目前决策（Decisions-so-far）以及未来的战争迷雾（Fog）；
 - **决策子工单（Child ticket）**：保存在 `.scratch/<effort>/issues/NN-<slug>.md`，编号从 `01` 开始递增，正文记录具体待解答的疑难问题。在正文顶部用 `Type:` 行记录工单类型（`research`、`prototype`、`grilling`、`task`）；用 `Status:` 行标记当前状态（`claimed` 已认领 / `resolved` 已解决）；
-- **依赖阻塞关系（Blocking）**：在文件顶部附近标注 `Blocked by: NN, NN`。当且仅当其所列出的所有前置工单的 `Status:` 均变为 `resolved` 时，该工单自动解除阻塞；
-- **开拓前沿扫描（Frontier）**：扫描 `.scratch/<effort>/issues/` 目录，找出所有处于开启状态、依赖已全部解决、且尚未被任何人认领的工单；按照文件编号升序排列，排在最前的第一张工单胜出；
-- **认领任务（Claim）**：在动工执行实质工作之前，在文件顶部将状态设置为 `Status: claimed` 并保存落盘 —— 作为当前会话的**第一次写操作**；
+- **依赖阻塞关系（Blocking）**：在文件顶部附近标注 `Blocked by: NN, NN`。当且仅当其所列出的所有前置工单的 `Status:` 均变为 `resolved` 时，该工单自动宣告**阻塞解除（unblocked）**；
+- **开拓前沿扫描（Frontier）**：扫描 `.scratch/<effort>/issues/` 目录，找出所有处于开启状态、依赖已全部解决、且尚未被任何人认领的工单；按照文件编号升序排列，排在最前的一张工单胜出；
+- **认领任务（Claim）**：在动工执行任何实质工作之前，在文件顶部将状态设置为 `Status: claimed` 并保存落盘 —— 作为当前会话的**第一次写操作**；
 - **顺利解决（Resolve）**：在工单底部 `## Answer` 标题下追加详细解答，将状态置为 `Status: resolved`，随后在根地图 `map.md` 的“截至目前决策（Decisions-so-far）”章节追加一行带链接的上下文指针（极简结论要点 + 相对文件路径链接）。
 
 ---

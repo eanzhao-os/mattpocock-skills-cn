@@ -2,6 +2,8 @@
 
 本项目是 [mattpocock/skills](https://github.com/mattpocock/skills) 的中文翻译与精读指南。
 
+📖 **在线阅读**：<https://eanzhao-os.github.io/mattpocock-skills-cn/>（由 `gh-pages` 分支持续部署）
+
 收录了原仓库全部 35 个 Agent Skills 及 22 个 Companion 协议文档，提供中英双语对照、通俗意译与可直接跳转的完整导航，适合在使用 Claude Code / Cursor / Cline 等工具时作为技能（Skills）参考。
 
 ---

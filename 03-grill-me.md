@@ -1,8 +1,8 @@
-# 03. grill-me（grill-me（纯对话打磨））
+# 03. grill-me（纯对话打磨）
 
 ```yaml
 name: grill-me
-description: 深度严谨的追问访谈，用于打磨和完善方案或设计。
+description: 一场刨根问底式的深度访谈，用于打磨方案或设计。
 disable-model-invocation: true
 ```
 

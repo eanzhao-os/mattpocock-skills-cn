@@ -20,7 +20,7 @@
 每一个练习目录内部必须至少包含以下子文件夹中的一种：
 - `problem/` — 学员实操工作区，包含待填空的 TODO 任务；
 - `solution/` — 官方标准参考实现；
-- `explainer/` — 纯概念讲解与原理解析物料，不包含实操 TODO。
+- `explainer/` — 概念讲解材料，不包含实操 TODO。
 
 在生成桩代码脚手架（Stubbing）时，除非教学规划中另有明确要求，否则默认创建 `explainer/` 模式。
 
@@ -30,7 +30,7 @@
 
 每一个变体子文件夹（`problem/`、`solution/`、`explainer/`）内部都必须配备一份 `readme.md`：
 - **严禁为空文件**（必须包含切实的文本内容，哪怕仅有一行标题）；
-- 严禁包含任何失效断裂的超链接。
+- 严禁包含任何失效的超链接。
 
 在生成脚手架时，生成包含标题与简短描述的最小化自说明 README：
 ```markdown
@@ -56,8 +56,8 @@
 ## Lint 校验规则总览
 
 底层校验器（`pnpm ai-hero-cli internal lint`）负责严苛审查以下事项：
-- 每一个练习都必须划分合规的子文件夹（`problem/`、`solution/`、`explainer/`）；
-- 必须至少存在 `problem/`、`explainer/`、或 `explainer.1/` 之一；
+- 每一个练习都必须包含合规的子文件夹（`problem/`、`solution/`、`explainer/`）；
+- 必须至少存在 `problem/`、`explainer/` 或 `explainer.1/` 之一；
 - 主变体子文件夹中的 `readme.md` 真实存在且非空；
 - **严禁残留 `.gitkeep` 占位文件**；
 - **严禁残留 `speaker-notes.md` 讲师草稿文件**；
@@ -73,6 +73,43 @@
 1. **统一使用 `git mv`（严禁使用普通 `mv`）** 进行目录重命名 —— 从而完美保留 Git 提交历史；
 2. 相应更新数字前缀以维持全局顺序递增；
 3. 移动完成后重新运行 Lint 校验确保无误。
+
+示例：
+
+```bash
+git mv exercises/01-retrieval/01.03-embeddings exercises/01-retrieval/01.04-embeddings
+```
+
+---
+
+## 从课程规划生成脚手架的示例（Example: stubbing from a plan）
+
+假设课程规划如下：
+
+```
+Section 05: Memory Skill Building
+- 05.01 Introduction to Memory
+- 05.02 Short-term Memory (explainer + problem + solution)
+- 05.03 Long-term Memory
+```
+
+则对应创建目录：
+
+```bash
+mkdir -p exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer
+mkdir -p exercises/05-memory-skill-building/05.02-short-term-memory/{explainer,problem,solution}
+mkdir -p exercises/05-memory-skill-building/05.03-long-term-memory/explainer
+```
+
+随后生成 README 占位骨架：
+
+```
+exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer/readme.md -> "# Introduction to Memory"
+exercises/05-memory-skill-building/05.02-short-term-memory/explainer/readme.md -> "# Short-term Memory"
+exercises/05-memory-skill-building/05.02-short-term-memory/problem/readme.md -> "# Short-term Memory"
+exercises/05-memory-skill-building/05.02-short-term-memory/solution/readme.md -> "# Short-term Memory"
+exercises/05-memory-skill-building/05.03-long-term-memory/explainer/readme.md -> "# Long-term Memory"
+```
 
 ---
 

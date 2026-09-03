@@ -1,4 +1,4 @@
-# 26 claude-handoff 精读（Claude Handoff（派发后台接力 Agent））
+# 26. claude-handoff（Claude Handoff（派发后台接力 Agent））
 
 ```yaml
 name: claude-handoff
@@ -7,15 +7,15 @@ argument-hint: "下一个会话将主要用于做什么？"
 disable-model-invocation: true
 ```
 
-撰写一份当前会话的交接总结（handoff summary），以便一个崭新的 Agent 能够无缝接力继续推进工作。**不同于将其保存为静态文件**，而是直接启动一个以该交接总结作为初始 Prompt 提示词的后台 Agent：`claude --bg --name "<描述性名称>" "<交接总结>"`。它在当前工作目录下启动并立即返回控制权；用户可以通过 `claude agents` 命令对其进行管理。
+撰写一份当前会话的交接总结（handoff summary），以便一个崭新的 Agent 能够无缝接力继续推进工作。**不同于将其保存为静态文件**，而是直接启动一个以该交接总结作为初始提示词的后台 Agent：`claude --bg --name "<描述性名称>" "<交接总结>"`。它在当前工作目录下启动并立即返回控制权；用户可以通过 `claude agents` 命令对其进行管理。
 
 始终通过 `-n` / `--name` 传入一个具有清晰业务含义的名称（例如 `--name "修复登录缺陷"`） —— 这将决定任务列表、会话选择器以及终端标题中显示的直观名称。
 
-在交接总结中**必须包含一个 “建议调用的技能（suggested skills）” 章节**，明确建议接班的 Agent 应当主动激活哪些 skill。
+在交接总结中**必须包含一个 “建议调用的技能（suggested skills）” 章节**，明确建议接班的 Agent 应当调用哪些 skill。
 
-**严禁重复复制已经在其他工件中记录过的内容**（包括 spec 规范、执行计划、ADR 决策记录、工单、Git 提交记录、代码 diff 等）。改为直接通过文件路径或 URL 链接进行精准引用。
+**严禁重复复制已经在其他工件中记录过的内容**（包括 spec 需求规范、执行计划、ADR 架构决策记录、工单、Git 提交记录、代码 diff 等）。改为直接通过文件路径或 URL 链接进行精准引用。
 
-**严格脱敏一切敏感机密信息** —— 包括 API 密钥、数据库密码或个人隐私数据 —— 因为该交接总结将直接暴露为新 Agent 的初始提示词。
+**严格脱敏一切敏感机密信息** —— 包括 API 密钥、密码或个人身份信息 —— 因为该交接总结将直接暴露为新 Agent 的初始提示词。
 
 如果用户在调用时传入了参数，将其视为下一个会话应当聚焦的核心任务描述，并据此针对性裁剪交接总结的内容。
 
@@ -31,7 +31,7 @@ disable-model-invocation: true
 | bucket | in-progress |
 | 上游 | https://github.com/mattpocock/skills |
 | companion | 无写作 companion |
-| 触发 | 把当前对话交给立刻开工的 fresh background agent |
+| 触发 | 把当前对话交接给立刻开工的全新后台 Agent |
 | 调用方式 | user-invoked（`disable-model-invocation: true`） |
 | 状态 | **未定型，吸收优先级低** |
 

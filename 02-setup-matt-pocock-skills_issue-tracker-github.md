@@ -7,7 +7,7 @@
 ## 1. 当其他技能指示“发布到工单系统（publish to the issue tracker）”时
 
 使用 `gh issue create` 命令创建新工单：
-- **工单标题**：必须与 spec 规范或 ticket 工单的原生标题完全保持一致；
+- **工单标题**：必须与 spec 规范或 ticket 工单的原标题完全保持一致；
 - **工单正文**：完整填入 spec 或 ticket 的 Markdown 全文内容。
 
 ---
@@ -28,12 +28,12 @@
 
 ## 4. 迷雾寻路导航规范（Wayfinding operations，供 `/wayfinder` 技能调用）
 
-在超大型探索任务中，**导航地图（map）** 是打上 `epic` 标签的根 Issue，一张地图下挂若干代表决策工单的 **子任务 Issue（child tickets）**：
+在超大型探索任务中，**导航地图（map）** 是打上 `epic` 标签的根 Issue，一张地图下挂若干代表决策工单的 **子工单（child tickets）**：
 
-- **导航地图（Map）**：标记为 `epic` 的 Issue —— 其正文涵盖基础备忘（Notes）、截至目前的决策沉淀（Decisions-so-far）以及未来的战争迷雾（Fog）；
+- **导航地图（Map）**：标记为 `epic` 的 Issue —— 其正文涵盖基础备忘（Notes）、截至目前决策（Decisions-so-far）以及未来的战争迷雾（Fog）；
 - **创建子工单（Child ticket）**：执行 `gh issue create --title "<简述>" --body "<具体决策难题>" --label "task"`。在正文顶部用 `Type:` 行标注工单类型（`research`、`prototype`、`grilling`、`task`）；
-- **依赖阻塞关系（Blocking）**：优先使用 GitHub **原生的 Sub-issues / Tracked-by 关联链接**（通过 GraphQL 变更接口挂载，在网页 UI 上直观可视）。由于原生链接在 GitHub 免费版上受限，降级容错方案是在正文顶部第一行注明 `Blocked by: #<n>, #<n>`。当一个工单所依赖的所有前置工单均已关闭时，该工单自动宣告**阻塞解除（unblocked）**；
-- **开拓前沿查询（Frontier query）**：运行 `gh issue list --label task --json number,title,labels,assignees` 检索地图下的所有子工单。过滤剔除那些存在未关闭前置依赖、或已经被分配认领的工单；按照地图既定顺序挑选排在最前的第一张未阻塞工单作为当前突破口；
+- **依赖阻塞关系（Blocking）**：优先使用 GitHub **原生的 Sub-issues / Tracked-by 关联链接**（通过 GraphQL 变更接口 `tracked-issues` / `trackBySubIssues` 挂载，在网页 UI 上直观可视）。由于原生链接在 GitHub 免费版上受限，降级容错方案是在正文顶部第一行注明 `Blocked by: #<n>, #<n>`。当一个工单所依赖的所有前置工单均已关闭时，该工单自动宣告**阻塞解除（unblocked）**；
+- **开拓前沿查询（Frontier query）**：运行 `gh issue list --label task --json number,title,labels,assignees` 检索地图下的所有子工单。过滤剔除那些存在未关闭前置依赖（处于开启状态的原生 tracked-by 父工单，或 `Blocked by` 行中尚未关闭的工单）、或已经被分配认领的工单；按照地图既定顺序挑选排在最前的一张未阻塞工单作为当前突破口；
 - **认领任务（Claim）**：在动工执行任何实质工作之前，首先执行 `gh issue edit <n> --add-assignee "@me"` 抢占工单所有权 —— 作为当前会话的**第一次写操作**；
 - **顺利解决（Resolve）**：将最终结论评论回贴：`gh issue comment <n> --body "<结论答案>"`，随后执行 `gh issue close <n>` 关闭工单，并在根地图 Issue 的“截至目前决策（Decisions-so-far）”章节追加一行带链接的上下文指针（极简核心要点 + 对应 Issue URL）。
 

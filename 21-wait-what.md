@@ -6,7 +6,7 @@ description: 等一下。刚才那句话我完全没听懂 —— 请换种更�
 disable-model-invocation: true
 ```
 
-等等 —— 我完全没跟上你的思路，不知道你刚才说的那段到底想表达什么。请重新表述一遍：先给我交代一点必要的背景上下文，使用 **ASD-STE100 国际标准简化技术英语（Simplified Technical English）** 的表达风格（短小明晰的陈述句、杜绝长难句与黑话），并且严格使用 `CONTEXT.md` 中已经确立的通用领域统一语言（ubiquitous language）。
+等等 —— 我完全没跟上你的思路，不知道你刚才说的那段到底想表达什么。请重新表述一遍：先给我交代一点必要的背景上下文，使用 **ASD-STE100 国际标准简化技术英语（Simplified Technical English）** 的表达风格（短小明晰的陈述句、杜绝长难句与黑话），并且严格使用 `CONTEXT.md` 中已经确立的通用统一语言（ubiquitous language）。
 
 ---
 

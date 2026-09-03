@@ -5,7 +5,7 @@ name: domain-modeling
 description: 主动构建并打磨项目的领域模型（domain model）。当用户希望敲定领域术语或通用统一语言（ubiquitous language）、记录架构决策、或当其他 skill 需要维护领域模型时触发。
 ```
 
-在设计过程中，**主动**构建并不断打磨项目的领域模型。这是一项**积极介入**的工程纪律 —— 主动质疑模糊术语、构思极端边界场景、并在词汇与决策一旦成型的瞬间立刻将其落盘为词汇表和架构决策记录。（仅仅在调用其他 skill 时为了获取术语而*阅读* `CONTEXT.md` 并不属于本 skill —— 那是任何 skill 都可以顺带做的一行常规操作。本 skill 专门用于当你需要**改变和演进领域模型**、而不仅是被动**消费**它的时候。）
+在设计过程中，**主动**构建并不断打磨项目的领域模型。这是一项**积极介入**的工程纪律 —— 主动质疑模糊术语、构思极端边界场景、并在词汇与决策一旦成型的瞬间将其落盘为词汇表和架构决策记录。（仅仅在调用其他 skill 时为了获取术语而*阅读* `CONTEXT.md` 并不属于本 skill —— 那是任何 skill 都可以顺带做的一行常规操作。本 skill 专门用于当你需要**改变和演进领域模型**、而不仅是被动**消费**它的时候。）
 
 ## 文件与目录结构
 
@@ -43,7 +43,7 @@ description: 主动构建并打磨项目的领域模型（domain model）。当�
 当用户使用的术语与 `CONTEXT.md` 中已经记录的定义发生冲突时，立刻指出来。例如：“在你的词汇表中，‘cancellation（取消）’ 被定义为 X，但你刚才的表述似乎是指 Y —— 究竟应该以哪一个为准？”
 
 ### 2. 澄清打磨模糊或过载的语言（Sharpen fuzzy language）
-当用户使用模糊不清或职责过载的术语时，主动提议一个精确且权威的规范词汇。例如：“你刚才使用了 ‘account（账户）’ 这个词 —— 你指的是 Customer（客户主体）还是 User（登录用户）？在我们的领域中这两者是截然不同的概念。”
+当用户使用模糊不清或职责过载的术语时，主动提议一个精确的规范术语。例如：“你刚才使用了 ‘account（账户）’ 这个词 —— 你指的是 Customer（客户主体）还是 User（登录用户）？在我们的领域中这两者是截然不同的概念。”
 
 ### 3. 构造具体场景进行压力测试（Discuss concrete scenarios）
 在讨论领域概念之间的关系时，用极其具体的业务场景对其进行压力测试。主动构思那些能够刺探边界情况的具体用例，迫使用户在概念的划分与边界上给出毫不含糊的精确定义。
@@ -57,8 +57,8 @@ description: 主动构建并打磨项目的领域模型（domain model）。当�
 `CONTEXT.md` 中**绝对不能包含任何具体的代码实现细节**。切勿将 `CONTEXT.md` 当成需求规范、草稿备忘录、或实现决策的垃圾桶。**它只是一份纯粹的领域词汇表，除此之外什么都不是。**
 
 ### 6. 极度克制地提出编写 ADR（Offer ADRs sparingly）
-只有当且仅当以下三项条件**全部满足**时，才向用户提议创建 ADR：
-1. **难以逆转（Hard to reverse）** —— 如果日后想要推翻此决定并改变主意，需要付出极其高昂的实质性代价；
+当且仅当以下三项条件**全部满足**时，才向用户提议创建 ADR：
+1. **难以逆转（Hard to reverse）** —— 日后若想改变主意，需要付出实质性的代价；
 2. **缺乏背景时令人困惑（Surprising without context）** —— 未来的接手者如果不了解当时的历史背景，会本能地产生疑问：“他们当初为什么要这么做？”；
 3. **真实权衡取舍的结果（The result of a real trade-off）** —— 明确存在真实可行的其他替代方案，而你们因为非常具体的理由最终权衡挑选了当前这一种。
 
@@ -76,7 +76,7 @@ description: 主动构建并打磨项目的领域模型（domain model）。当�
 | path | `skills/engineering/domain-modeling/` |
 | url | https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling |
 | name | `domain-modeling` |
-| 触发方式 | description：钉死 domain 术语 / ubiquitous language、记录架构决策、或其他 skill 需要维护 domain model 时（model-invoked） |
+| 触发方式 | description：敲定 domain 术语 / ubiquitous language、记录架构决策、或其他 skill 需要维护 domain model 时（model-invoked） |
 | companions | [CONTEXT-FORMAT.md](./15-domain-modeling_CONTEXT-FORMAT.md)、[ADR-FORMAT.md](./15-domain-modeling_ADR-FORMAT.md)——本页只列角色，不全文翻译 |
 | 产物 | 根或 context 内 `CONTEXT.md`（glossary）；`docs/adr/`（决策，按需） |
 | 消费方 | `grill-with-docs`、`to-spec`、`to-tickets`、`tdd`、`triage`、`wayfinder`、`improve-codebase-architecture` 等几乎所有 engineering skill |

@@ -1,8 +1,8 @@
-# 10. implement（implement（执行具体功能实现））
+# 10. implement（执行具体功能实现）
 
 ```yaml
 name: implement
-description: 基于需求规范（spec）或工单集合（tickets）实现具体的功能特性。
+description: 基于需求规范（spec）或工单集合（tickets）实现一项具体工作。
 disable-model-invocation: true
 ```
 
@@ -23,7 +23,7 @@ flowchart TD
     Review --> Commit([提交代码至当前分支<br/>git commit])
 ```
 
-在条件允许的情况下尽可能使用 `/tdd`（测试驱动开发），且严格仅在**预先达成一致的架构接缝（pre-agreed seams）**上进行。
+在条件允许的情况下尽可能使用 `/tdd`（测试驱动开发），并在**预先达成一致的架构接缝（pre-agreed seams）**上进行。
 
 开发期间频繁运行类型检查（typechecking），频繁运行关联的单个测试文件；而**全量测试套件（full test suite）只在最后全部完成后运行一次**。
 

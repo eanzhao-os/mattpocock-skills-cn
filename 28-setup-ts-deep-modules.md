@@ -1,4 +1,4 @@
-# 28 setup-ts-deep-modules 精读（Setup TS Deep Modules（TypeScript 深模块架构约束脚手架））
+# 28. setup-ts-deep-modules（Setup TS Deep Modules（TypeScript 深模块架构约束脚手架））
 
 ```yaml
 name: setup-ts-deep-modules
@@ -27,13 +27,13 @@ src/packages/
 
 四条全级别设为 `error` 报错的铁律：
 1. **入口文件边界约束（Entry-point boundary）** —— 处于 package 外部的代码（应用层代码或其他 package），只允许 import 目标 package 的根入口文件，绝不允许 import 其任何子目录下的内部文件。
-2. **包内相互自由引用（Intra-package freedom）** —— package 内部的各个私有文件之间可以自由相互引用。
+2. **包内相互自由引用（Intra-package freedom）** —— package 内部的各个文件之间可以自由相互引用。
 3. **测试必须跨越入口接缝（Tests through the entry points）** —— `<pkg>/tests/` 目录下的测试文件，可以 import 任何 package 的公开入口文件以及其自身的 `tests/` 夹具，但绝不允许直接深层 import 任何 package 的子目录内部实现（哪怕是自己的 `lib/` 也不行）。跨 package 的集成测试是完全允许的；但绕过入口的深层 import（deep imports）坚决禁止。
 4. **禁止循环依赖（No cycles）** —— 严禁引入任何循环依赖拓扑。
 
 **多入口设计，拒绝大一统 Barrel 文件**。正因为 package 根目录下的*每一个*文件都是合法的公共入口，一个 package 完全可以按需暴露若干小巧的专属入口（如 `index.ts`、`client.ts`、`server.ts`），而不需要把整棵子树的所有内部实现全部粗暴塞进一个巨型的 `index.ts` 重新导出。极力反对大一统 Barrel 文件的做法 —— 保持入口文件小巧清晰，将实现细节深深隐藏在子目录之中。
 
-分层架构约束（即哪些 package 允许依赖哪些 package）属于另一项独立的架构诉求，在配置文件中以注释桩的形式预留，供具体项目后续按需开启。
+分层架构约束（即哪些 package 允许依赖哪些 package）属于另一项独立的架构诉求，在配置文件中以注释桩的形式预留，由本仓库后续按需填写。
 
 ---
 
@@ -77,12 +77,12 @@ src/packages/
 **这是整个 skill 最核心的完成判据** —— 一套在发生违规时不会报错变红的配置是毫无价值的废纸：
 1. 运行 `lint:boundaries`：在干净正常的示例代码上必须**绿灯通过（pass）**；
 2. 临时向 `tests/example.test.ts` 中故意引入一次越权深层导入（例如 `import { thing } from "../lib/impl"`）。再次运行 `lint:boundaries` —— **必须报错失败（fail）**，且错误类型为 `tests-through-entrypoints`；
-3. 恢复还原深层导入代码。最后重新运行一次 —— **必须恢复绿灯通过（pass）**。
+3. 撤销深层导入改动。最后重新运行一次 —— **必须恢复绿灯通过（pass）**。
 
 **完成判据：** 你亲眼观察到了绿灯通过 → 故意越权时红灯报错 → 还原后重新绿灯通过的完整闭环。如果第 2 步没有成功报错，说明规则链条未正确接通 —— 必须修复直至其能够拦截，方可收工。
 
 ### 7. 编写代码规范文档并注入 Agent 指令（Document the convention）
-在 packages 根目录下编写一份规范文档 `<packages-root>/README.md`（紧挨着它所管辖的各个 packages），涵盖：`src/packages/<name>/` 目录布局规范、明确强调“只能通过 package 的根入口文件进行 import”、以及如何运行 `lint:boundaries`。**在文档中明确反对大一统 Barrel 文件** —— 提倡按需暴露若干小巧的根入口，而不是用一个 index 文件重新导出整棵子树。文档篇幅保持精简：一段可复制的代码骨架加上对四条规则的一句话解释即可。
+在 packages 根目录下编写一份规范文档 `<packages-root>/README.md`（紧挨着它所管辖的各个 packages），涵盖：`src/packages/<name>/` 目录布局规范、明确强调“只能通过 package 的根入口文件进行 import”、以及如何运行 `lint:boundaries`。**在文档中明确反对大一统 Barrel 文件** —— 提倡按需暴露若干小巧的根入口，而不是用一个 index 文件重新导出整棵子树。文档篇幅保持精简：一段可复制的代码骨架，加上每条规则各一段的简短解释即可。
 
 随后在仓库的 Agent 顶层指令文件中（优先 `CLAUDE.md`，否则 `AGENTS.md`；若都不存在则创建 `AGENTS.md`）**追加一行上下文指针**。一句精炼的话足矣，例如：`Packages are deep modules — see [src/packages/README.md](./src/packages/README.md) before adding or importing one.（所有包均为深模块 —— 在新增包或引入依赖前请先阅读该文档）`。正是这一行指针，让后续的每一个 Agent 能够主动发现这一边界规则，而不会盲目踩坑报错。
 
@@ -233,7 +233,5 @@ Then add a **context pointer** to it from the repo's agent-instructions file —
 - Packages are **flat**: one tier of immediate children under the root. A package's internals may nest as deep as you like; a package may not contain another package.
 - Use `.cjs` (not `.js`) so the config's `module.exports` works even in `"type": "module"` repos.
 ````
-
-## 中文完整翻译
 
 </details>

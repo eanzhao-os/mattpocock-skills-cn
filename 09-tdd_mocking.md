@@ -21,7 +21,7 @@
 在系统真正的物理边界处，通过精妙的接口设计使其天然易于 Mock：
 
 ### 原则一：采用依赖注入模式（Use Dependency Injection）
-通过函数参数或构造函数显式传入外部依赖，而不是在函数内部写死硬编码实例化：
+通过函数参数或构造函数显式传入外部依赖，而不是在函数内部硬编码实例化：
 
 ```typescript
 // 推荐：极易在测试中进行轻量 Mock 注入
@@ -47,14 +47,14 @@ const api = {
   createOrder: (data) => fetch('/orders', { method: 'POST', body: data }),
 };
 
-// 错误反例：通用粗暴的 fetcher 导致在 Mock 时必须在测试桩内部手写一堆复杂的 URL 分支判定
+// 错误反例：通用粗暴的 fetcher 导致在 Mock 时必须在模拟替身内部手写一堆复杂的 URL 分支判定
 const api = {
   fetch: (endpoint, options) => fetch(endpoint, options),
 };
 ```
 
 #### SDK 领域风格接口带来的巨大工程红利：
-- 每一个 Mock 桩函数都拥有确定唯一的返回值结构，无需在测试中写 `if-else`；
+- 每一个模拟替身函数都拥有唯一确定的返回值结构，无需在测试中写 `if-else`；
 - 测试的前置准备（Test setup）干干净净，零条件分支逻辑；
 - 一目了然看清当前测试到底真正触达了哪些具体的远程接口；
 - 每一个接口端点均享有严谨的端到端 TypeScript 类型安全保障。

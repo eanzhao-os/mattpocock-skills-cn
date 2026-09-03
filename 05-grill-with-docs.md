@@ -1,8 +1,8 @@
-# 05. grill-with-docs（grill-with-docs（结合文档沉淀的深度访谈））
+# 05. grill-with-docs（结合文档沉淀的深度访谈）
 
 ```yaml
 name: grill-with-docs
-description: 深度严谨的追问访谈，用于打磨方案或设计，并在访谈过程中实时沉淀项目文档（架构决策记录 ADR 与领域词汇表 glossary）。
+description: 一场刨根问底式的深度访谈，用于打磨方案或设计，并在访谈过程中实时沉淀项目文档（架构决策记录 ADR 与领域词汇表 glossary）。
 disable-model-invocation: true
 ```
 
