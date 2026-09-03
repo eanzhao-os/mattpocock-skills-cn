@@ -174,7 +174,7 @@ observer.observe(document.documentElement, { attributes: true, attributeFilter: 
 <div class="sl-heading-wrapper level-h2"><h2 id="2-编写铁律rules">2. 编写铁律（Rules）</h2><a class="sl-anchor-link" href="#2-编写铁律rules"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “2. 编写铁律（Rules）”</span></a></div>
 <ul>
 <li><strong>立场鲜明，敢于拍板（Be opinionated）</strong>：当同一个业务概念存在多种混淆叫法时，坚定挑选出最权威的一个，并将其余所有的模糊别名全部列入 <code dir="auto">_Avoid_</code> 禁用清单；</li>
-<li><strong>定义必须极其紧凑（Keep definitions tight）</strong>：最多不超过一至两句话。<strong>清晰定义它“是什么（what it IS）”，而不是去长篇大论它“怎么做（what it does）”</strong>；</li>
+<li><strong>定义必须极其紧凑（Keep definitions tight）</strong>：最多一至两句话。<strong>清晰定义它“是什么（what it IS）”，而不是去长篇大论它“怎么做（what it does）”</strong>；</li>
 <li><strong>仅收录本业务领域特有的专属概念</strong>：通用的编程模式（如超时时间 timeouts、通用错误类型、工具函数模式等）坚决不要收录进来，哪怕代码中到处都在用。在添加新词前严苛拷问：<em>这是本业务领域特有的专属概念，还是放之四海皆准的通用技术概念？</em> 唯有前者才配录入；</li>
 <li><strong>按需划分二级标题聚合</strong>：当术语自然形成业务子聚类时使用小标题分组；如果全局浑然一体，扁平列表即可。</li>
 </ul>
@@ -194,8 +194,8 @@ observer.observe(document.documentElement, { attributes: true, attributeFilter: 
 <ul>
 <li>如果根目录下存在 <code dir="auto">CONTEXT-MAP.md</code>，优先读取该文件以掌握全盘上下文边界；</li>
 <li>如果仅存在根目录下的 <code dir="auto">CONTEXT.md</code>，按照单上下文模式处理；</li>
-<li>如果两者均不存在，在首次敲定并澄清第一个领域术语时，采用<strong>懒加载方式就地创建根 <code dir="auto">CONTEXT.md</code></strong>；</li>
-<li>在多上下文共存时，智能推断当前任务究竟从属于哪个具体上下文；若存在歧义，主动向用户请示确认。</li>
+<li>如果两者均不存在，在首次敲定并澄清第一个领域术语时，**按需惰性创建（Lazy）**根 <code dir="auto">CONTEXT.md</code>；</li>
+<li>在多上下文共存时，智能推断当前任务究竟从属于哪个具体上下文；若存在歧义，主动向用户询问确认。</li>
 </ul>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="-附录技能元信息与英文原文">📑 附录：技能元信息与英文原文</h2><a class="sl-anchor-link" href="#-附录技能元信息与英文原文"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “📑 附录：技能元信息与英文原文”</span></a></div>

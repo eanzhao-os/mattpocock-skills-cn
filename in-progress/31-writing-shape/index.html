@@ -174,23 +174,23 @@ observer.observe(document.documentElement, { attributes: true, attributeFilter: 
 <li><strong>通读素材堆（Read the pile）</strong>：完整阅读输入的原始文件，对其中的所有素材建立全面的心智感知；</li>
 <li><strong>确立前置认知（Establish the prerequisites）</strong>：与用户敲定读者在阅读开篇时已经自带的基础常识 —— 即开篇前就已经**认知立足（grounded）**的既有概念。其余的所有新概念，都必须由前方的某个段落块完成阐释铺垫后，后续段落才能借力引用。详见下文<a href="#%E8%AE%A4%E7%9F%A5%E9%93%BA%E5%9E%AB%E4%B8%8E%E7%AB%8B%E8%B6%B3%E6%9C%BA%E5%88%B6grounding">认知铺垫与立足机制</a>；</li>
 <li><strong>起草 2 到 3 个候选开篇（Draft candidate openings）</strong>：每一个备选开篇都应当代表一个不同的核心论点或切入视角。将它们全部展示出来，由用户亲自挑选一个、或者拼装出一个混合方案。选定的开篇将决定整篇文章后续必须履行的全部论证使命；</li>
-<li><strong>逐段展开生长（Grow paragraph by paragraph）</strong>：开篇敲定后，向用户提问：“基于当前的开篇，读者接下来最需要听到什么？”。从原始素材堆中提取素材来回答该问题。下一个段落块只能依赖已经立足的既有概念，并在自身落地时负责立足新概念。<strong>围绕下一个内容块应采取的具体排版形态展开探讨</strong> —— 是普通段落、无序列表、结构表格、高亮提示块、名言引用、还是代码块。每一种排版形态的选择都必须经过深思熟虑且理由充分；</li>
-<li><strong>实时追加写入文章文件（Append to the article file as you go）</strong>：切勿批量攒批写入。每当一个段落或内容块达成一致，立即将其写入文章文件，让用户亲眼目睹文章一步步成型；</li>
+<li><strong>逐段展开生长（Grow paragraph by paragraph）</strong>：开篇敲定后，向用户提问：“基于当前的开篇，读者接下来最需要听到什么？”从原始素材堆中提取素材来回答该问题。下一个段落块只能依赖已经立足的既有概念，并在自身落地时负责立足新概念。<strong>围绕下一个内容块应采取的具体排版形态展开探讨</strong> —— 是普通段落、无序列表、结构表格、引用提示块、引语、还是代码块。每一种排版形态的选择都必须经过深思熟虑且理由充分；</li>
+<li><strong>实时追加写入文章文件（Append to the article file as you go）</strong>：切勿批量写入。每当一个段落或内容块达成一致，立即将其写入文章文件，让用户亲眼目睹文章一步步成型；</li>
 <li><strong>循环执行步骤 4，直至全文完稿</strong>：由用户最终定夺文章何时正式收尾。</li>
 </ol>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="认知铺垫与立足机制grounding">认知铺垫与立足机制（Grounding）</h2><a class="sl-anchor-link" href="#认知铺垫与立足机制grounding"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “认知铺垫与立足机制（Grounding）”</span></a></div>
-<p>每一个<strong>概念（concept）<strong>在被某个段落块借力使用之前，都必须已经完成</strong>认知立足（grounded）</strong>：读者要么在开篇前就已熟知，要么在前文的某个段落中已经读懂。如果某个段落强行引用了尚未铺垫的陌生概念，就会瞬间让读者脱节。这里的最小度量单元是<strong>概念本身</strong>，而不是某个具体的生词 —— 哪怕通篇没有半点专业黑话，如果一个段落依赖了读者未曾建立的抽象想法，同样会导致理解断层。当一个概念拥有专属名称（<strong>术语 term</strong>）时，完成立足意味着将该想法与术语名称一并让读者彻底心领神会。</p>
+<p>每一个<strong>概念（concept）<strong>在被某个段落块借力使用之前，都必须已经完成</strong>认知立足（grounded）</strong>：读者要么在开篇前就已熟知，要么在前文的某个段落中已经读懂。如果某个段落强行引用了尚未铺垫的陌生概念，就会瞬间让读者脱节。这里的最小度量单元是<strong>概念本身</strong>，而不是某个具体的生词 —— 哪怕通篇没有半点专业黑话，如果一个段落依赖了读者未曾建立的抽象想法，同样会导致理解断层。当一个概念拥有专属名称（<strong>术语 term</strong>）时，完成立足意味着让想法与术语名称在读者脑中一并落地。</p>
 <p>概念通过以下两种途径之一实现立足：</p>
 <ul>
 <li><strong>前置自带认知（Prerequisite）</strong> — 在开篇之前就已经立足。读者入场自带。在开篇之初便已固定；</li>
-<li><strong>文内新引认知（Introduced）</strong> — 由文中的某个段落块负责阐明确立，自此之后便对文章后文的所有内容永久生效。</li>
+<li><strong>文内新引认知（Introduced）</strong> — 由文中的某个段落块负责阐明确立，自此之后在文章余下部分始终立足。</li>
 </ul>
-<p>在协作过程中实时维护一份已立足概念的动态清单。当你提问“读者接下来最需要听到什么”时，如果下一步必须依赖某个尚未立足的概念，答案本身就是：<strong>首先把该概念铺垫立足清楚</strong> —— 无论是在当前段落铺垫还是在更早的段落补充 —— 否则该论述根本无法成立。这是将<a href="#%E4%BB%8E%E7%B4%A0%E6%9D%90%E5%BA%93%E4%B8%AD%E6%B1%B2%E5%8F%96%E5%85%BB%E5%88%86pulling-from-the-pile">从素材库中汲取养分</a>的缺口命名逻辑提升了一个层级：在素材层面缺的是原材料，而在文章层面缺的是认知的基石地基。</p>
+<p>在协作过程中实时维护一份已立足概念的动态清单。当你提问“读者接下来最需要听到什么”时，如果下一步必须依赖某个尚未立足的概念，答案本身就是：<strong>首先把该概念铺垫立足清楚</strong> —— 无论是在当前段落铺垫还是在更早的段落补充 —— 否则该论述根本无法成立。这是将<a href="#%E4%BB%8E%E7%B4%A0%E6%9D%90%E5%BA%93%E4%B8%AD%E6%B1%B2%E5%8F%96%E5%85%BB%E5%88%86pulling-from-the-pile">从素材库中汲取养分</a>的缺口命名逻辑提升了一个层级：在素材层面缺的是原材料，而在文章层面缺的是认知的地基。</p>
 <p>核心控制杠杆依然在于：<strong>哪些划为前置常识，哪些在文内逐步交代</strong>。前置门槛设得过高会把读者拒之门外；文内铺垫过多则会让开篇彻底淹没在繁杂的概念定义中。在确立前置条件时与用户妥善平衡好这一张力。</p>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="探讨式的交互气质conversational-feel">探讨式的交互气质（Conversational feel）</h2><a class="sl-anchor-link" href="#探讨式的交互气质conversational-feel"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “探讨式的交互气质（Conversational feel）”</span></a></div>
-<p>这本质上是一场<strong>反向的追问访谈（grilling session inverted）</strong>。在早期的发散构想阶段，提问的焦点是“你实际观察到了哪些零散事实？”；而在此处的成文阶段，提问的焦点彻底翻转为：“<strong>这篇文章究竟在论证什么核心观点？读者需要按照什么严密顺序依次听到这些论据？</strong>”。勇于提出反对意见，坚决不让软弱无力的过渡滑水蒙混过关。如果某个段落无法证明自身存在的独特价值，果断将其砍掉。</p>
+<p>这本质上是一场<strong>反向的深度访谈（grilling session inverted）</strong>。在早期的发散构想阶段，提问的焦点是“你实际观察到了哪些零散事实？”；而在此处的成文阶段，提问的焦点彻底翻转为：“<strong>这篇文章究竟在论证什么核心观点？读者需要按照什么严密顺序依次听到这些论据？</strong>”勇于提出反对意见，坚决不让软弱无力的过渡蒙混过关。如果某个段落无法证明自身存在的独特价值，果断将其砍掉。</p>
 <p>在协作中保持使用以下具体推敲句式：</p>
 <ul>
 <li>“相比上一段，这个新段落为读者带来了什么不可替代的新增价值？”</li>
@@ -201,17 +201,17 @@ observer.observe(document.documentElement, { attributes: true, attributeFilter: 
 </ul>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="从素材库中汲取养分pulling-from-the-pile">从素材库中汲取养分（Pulling from the pile）</h2><a class="sl-anchor-link" href="#从素材库中汲取养分pulling-from-the-pile"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “从素材库中汲取养分（Pulling from the pile）”</span></a></div>
-<p>将原始素材堆视为采石场，而不是死板宣读的剧本。从中提取一个素材碎片，精心重写打磨以完美契合上下文段落的语气，然后安插就位。一个原始碎片可以被拆散分流到多个段落中，也可以与另一个碎片合并，或是重新意译表述。素材堆的使命是被深度开采；而文章的使命则是<strong>通篇读起来浑然一体、出自同一个坚定声音</strong>。</p>
+<p>将原始素材堆视为采石场，而不是照本宣科的剧本。从中提取一个素材碎片，精心重写打磨以完美契合上下文段落的语气，然后安插就位。一个原始碎片可以被拆散分流到多个段落中，也可以与另一个碎片合并，或是重新意译表述。素材堆的使命是被深度开采；而文章的使命则是<strong>通篇读起来浑然一体、出自同一个坚定声音</strong>。</p>
 <p>如果素材堆中恰好缺失了成文所必需的关键论据，<strong>明确向用户点名该缺口</strong>：“此处急需一个具体案例来支撑，但素材堆中并无相关内容 —— 现在当场补充一个，否则我们必须将本节果断砍掉。”</p>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="显式权衡排版格式format-arguments-to-actually-have">显式权衡排版格式（Format arguments to actually have）</h2><a class="sl-anchor-link" href="#显式权衡排版格式format-arguments-to-actually-have"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “显式权衡排版格式（Format arguments to actually have）”</span></a></div>
 <p>在决定某个内容块采用何种排版展现时，与用户在对话中<strong>公开权衡利弊</strong>，切勿默默替用户做主：</p>
 <ul>
-<li><strong>普通散文 vs. 要点列表</strong>：散文承载连贯的逻辑论证；列表承载并列的并排要素。如果各项内容之间并非严格并列，散文表达更佳；如果确实是规整的并列条目，列表能让扫读更高效；</li>
-<li><strong>行内叙述 vs. 引用提示块（Callout）</strong>：小窍门、警告提醒以及旁白插话适合放入引用提示块（如 <code dir="auto">&gt; [!TIP]</code>、<code dir="auto">&gt; [!NOTE]</code>） —— 但前提是如果将其直接混在行文内会严重带偏主线论证。否则保持在行内自然叙述；</li>
+<li><strong>普通散文 vs. 要点列表</strong>：散文承载连贯的逻辑论证；列表承载并列要素。如果各项内容之间并非严格并列，散文表达更佳；如果确实是规整的并列条目，列表能让扫读更高效；</li>
+<li><strong>行内叙述 vs. 引用提示块（Callout）</strong>：小窍门、警告提醒以及旁白插话适合放入引用提示块（如 <code dir="auto">&gt; [!TIP]</code>、<code dir="auto">&gt; [!NOTE]</code>） —— 但前提是将其直接混在行文内确实会带偏主线论证。否则保持在行内自然叙述；</li>
 <li><strong>结构表格 vs. 重复段落</strong>：如果完全相同的字段与格式结构重复出现了 3 次以上，果断使用表格；否则采用带加粗前缀的散文段落；</li>
 <li><strong>原文直接引用 vs. 意译概括</strong>：只有当原话的字面措辞本身就是核心论点时才直接引用；如果仅仅是核心思想有用，一律采用意译概括；</li>
-<li><strong>独立代码块 vs. 行内代码</strong>：多行、可运行、或结构演示性的代码使用独立代码块；单个 Token、标识符或命令使用行内代码。</li>
+<li><strong>独立代码块 vs. 行内代码</strong>：多行、可运行、或结构演示性的代码使用独立代码块；单个 Token 或标识符使用行内代码。</li>
 </ul>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="写作节奏与纪律writing-rhythm">写作节奏与纪律（Writing rhythm）</h2><a class="sl-anchor-link" href="#写作节奏与纪律writing-rhythm"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “写作节奏与纪律（Writing rhythm）”</span></a></div>

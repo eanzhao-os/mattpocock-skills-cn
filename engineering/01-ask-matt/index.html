@@ -220,7 +220,7 @@ flowchart TD
 </li>
 <li>
 <p><strong>分支判断 — 所有问题都能光靠对话解决吗？</strong><br>
-如果某个问题需要一个可运行的代码验证才能得出结论（比如复杂状态流转、核心业务逻辑、或者必须亲眼看到效果的 UI 界面），那就需要绕道做一个原型（prototype），并通过 <strong><code dir="auto">/handoff</code></strong> 在两个方向之间架起桥梁（原型拥有自己独立的目录，而这正是 <code dir="auto">/handoff</code> 的用武之地 —— 详见 Phase boundaries 章节）：</p>
+如果某个问题需要靠可运行的代码才能得出答案（比如复杂状态流转、核心业务逻辑，或者必须亲眼看到效果的 UI 界面），那就需要绕道做一个原型（prototype），并通过 <strong><code dir="auto">/handoff</code></strong> 在两个方向之间架起桥梁（原型拥有自己独立的目录，而这正是 <code dir="auto">/handoff</code> 的用武之地 —— 详见 Phase boundaries 章节）：</p>
 <ul>
 <li>用 <strong><code dir="auto">/handoff</code></strong> 把当前上下文导出，针对该原型文件开启全新的会话；</li>
 <li>用 <strong><code dir="auto">/prototype</code></strong> 编写可随时丢弃的验证代码来回答悬而未决的问题；</li>
@@ -230,31 +230,31 @@ flowchart TD
 <li>
 <p><strong>分支判断 — 这是一次需要跨多次会话（multi-session）的大型构建吗？</strong></p>
 <ul>
-<li><strong>是</strong> → 使用 <strong><code dir="auto">/to-spec</code></strong>（将整个讨论串整理归纳为需求规范文档），然后用 <strong><code dir="auto">/to-tickets</code></strong> 将其拆解为一组纵深穿透的工单（tracer-bullet tickets，端到端垂直切片），每个工单明确声明自己的阻塞前置依赖（<strong>blocking edges</strong>）。如果使用本地简易跟踪器，就是在 <code dir="auto">.scratch/&lt;feature&gt;/issues/</code> 目录下每个工单生成一个独立 Markdown 文件，按前置依赖顺序手动推进；如果接入真实工单系统（如 GitHub Issues / Linear），这些依赖就会变成系统原生的 blocking 关联，这样只要某个工单的前置依赖全部完成，就能随时拉取该工单 —— 为每个工单启动一次 <strong><code dir="auto">/implement</code></strong>，并在工单切换之间清空上下文窗口（<strong><code dir="auto">/clear</code></strong>）。每个工单都是自包含的，因此前一个工单的会话上下文完全可以丢弃。</li>
+<li><strong>是</strong> → 使用 <strong><code dir="auto">/to-spec</code></strong>（将整个讨论串整理归纳为需求规范文档），然后用 <strong><code dir="auto">/to-tickets</code></strong> 将其拆解为一组纵深穿透的工单（tracer-bullet tickets，端到端垂直切片），每个工单明确声明自己的阻塞前置依赖（<strong>blocking edges</strong>）。如果使用本地简易跟踪器，就是在 <code dir="auto">.scratch/&lt;feature&gt;/issues/</code> 目录下每个工单生成一个独立 Markdown 文件，按前置依赖顺序手动推进；如果接入真实工单系统，这些依赖就会变成系统原生的 blocking 关联，这样只要某个工单的前置依赖全部完成，就可以随时认领该工单 —— 为每个工单启动一次 <strong><code dir="auto">/implement</code></strong>，并在工单切换之间清空上下文窗口（<strong><code dir="auto">/clear</code></strong>）。每个工单都是自包含的，因此前一个工单的会话上下文完全可以丢弃。</li>
 <li><strong>否</strong> → 直接在当前的同一个上下文窗口中执行 <strong><code dir="auto">/implement</code></strong>。</li>
 </ul>
-<p>无论选择哪条分支，<strong><code dir="auto">/implement</code></strong> 内部都是通过驱动 <strong><code dir="auto">/tdd</code></strong>（测试驱动开发）来逐步构建每个 issue —— 一次推进一个“红-绿”测试切片 —— 并在提交代码前，通过运行 <strong><code dir="auto">/code-review</code></strong> 对变更 diff 进行双轴代码审查（编码规范 Standards + 需求契合度 Spec）。<br>
-当你不需要完整需求规范、只想先写测试来开发某个具体行为时，可以直接单独使用 <strong><code dir="auto">/tdd</code></strong>；当你想针对某个固定的分支、PR 或基准点做代码审查时，可以直接单独使用 <strong><code dir="auto">/code-review</code></strong>。</p>
+<p>无论选择哪条分支，<strong><code dir="auto">/implement</code></strong> 内部都是通过驱动 <strong><code dir="auto">/tdd</code></strong>（测试驱动开发）来逐步构建每个工单 —— 一次推进一个“红-绿”测试切片 —— 并在提交代码前，通过运行 <strong><code dir="auto">/code-review</code></strong> 对变更 diff 进行双轴代码审查（编码规范 Standards + 需求契合度 Spec）。<br>
+当你不需要完整需求规范、只想先写测试来开发某个具体行为时，可以直接单独使用 <strong><code dir="auto">/tdd</code></strong>；当你想以某个固定基准点为参照，对某个分支或 PR 做代码审查时，可以直接单独使用 <strong><code dir="auto">/code-review</code></strong>。</p>
 </li>
 </ol>
 <div class="sl-heading-wrapper level-h3"><h3 id="上下文保洁context-hygiene">上下文保洁（Context hygiene）</h3><a class="sl-anchor-link" href="#上下文保洁context-hygiene"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “上下文保洁（Context hygiene）”</span></a></div>
-<p>在步骤 1 到 3 之间，请保持在 <strong>同一个连贯不间断的上下文窗口</strong> 中 —— 在执行完 <code dir="auto">/to-tickets</code> 之前不要使用 compact（压缩）或 clear（清空）—— 这样深度访谈（grilling）、需求规范（spec）和工单拆解（tickets）都能基于完全同一套思考脉络进行。随后的每一个 <code dir="auto">/implement</code> 任务则从对应工单出发，以全新的空白上下文独立开始。</p>
-<p>这套流程的上限取决于模型的 <strong><a href="https://www.aihero.dev/ai-coding-dictionary/smart-zone">Smart Zone（模型高效推理区间）</a></strong>：也就是先进大模型仍然能保持敏锐严密逻辑推理能力的上下文窗口范围（在顶尖模型上通常约为 150k tokens）。如果在进行到 <code dir="auto">/to-tickets</code> 之前上下文就已经逼近这个上限，切勿在模型认知能力已经降级的情况下硬撑 —— 在最近的阶段边界（phase boundary）处执行 <code dir="auto">/compact</code>，然后继续进行（详见 Phase boundaries）。</p>
+<p>在步骤 1 到 3 期间，请保持在 <strong>同一个连贯不间断的上下文窗口</strong> 中 —— 在执行完 <code dir="auto">/to-tickets</code> 之前不要使用 compact（压缩）或 clear（清空）—— 这样深度访谈（grilling）、需求规范（spec）和工单拆解（tickets）都能基于完全同一套思考脉络进行。随后的每一个 <code dir="auto">/implement</code> 任务则从对应工单出发，以全新的空白上下文独立开始。</p>
+<p>这套流程的上限取决于模型的 <strong><a href="https://www.aihero.dev/ai-coding-dictionary/smart-zone">Smart Zone（模型高效推理区间）</a></strong>：也就是模型推理依然敏锐的上下文窗口范围（在顶尖模型上通常约为 150k tokens）。如果在进行到 <code dir="auto">/to-tickets</code> 之前上下文就已经逼近这个上限，切勿在模型认知能力已经降级的情况下硬撑 —— 在最近的阶段边界（phase boundary）处执行 <code dir="auto">/compact</code>，然后继续进行（详见 Phase boundaries）。</p>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="汇入通道on-ramps">汇入通道（On-ramps）</h2><a class="sl-anchor-link" href="#汇入通道on-ramps"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “汇入通道（On-ramps）”</span></a></div>
-<p>代表那些会产生工作任务、并最终汇入主流程的起始场景：</p>
+<p>代表那些会产生工作任务，并最终汇入主流程的起始场景：</p>
 <ul>
 <li>
 <p><strong>Bugs 与需求堆积如山</strong> → <strong><code dir="auto">/triage</code></strong>（分类与分流）。它通过多角色流转梳理待办，产出适合 Agent 独立接手执行的工单（agent-ready issues），后续由 <strong><code dir="auto">/implement</code></strong> 接手。<br>
 <em>注意</em>：Triage <strong>仅用于处理那些你没有亲自创建的原始输入</strong>（如外部 Bug 报告、新收到的功能建议等未加工事项）。由 <code dir="auto">/to-tickets</code> 拆解产出的工单本身在结构上就已经达到了 agent-ready 标准，<strong>千万不要对其再次执行 triage</strong>。</p>
 </li>
 <li>
-<p><strong>东西坏了 / 故障排查</strong> → <strong><code dir="auto">/diagnosing-bugs</code></strong>。专治疑难杂症：那些第一眼看不出原因的 Bug、偶发性不稳定的 Flake、或者在两个已知正常版本之间悄然潜入的回归问题。在构建出 <strong>快速精准的反馈闭环（tight feedback loop）</strong>（即能稳定复现并在这特定 Bug 上必然报错的一行命令）之前，它严禁凭空猜想；一旦抓到复现闭环，就用回归测试锁定并修复。如果在事后复盘（post-mortem）中发现根本原因在于架构上缺乏良好的接缝（seam）来锁死 Bug，它会交接给 <strong><code dir="auto">/improve-codebase-architecture</code></strong>。</p>
+<p><strong>东西坏了 / 故障排查</strong> → <strong><code dir="auto">/diagnosing-bugs</code></strong>。专治疑难杂症：那些第一眼看不出原因的 Bug、偶发的 Flake（不稳定测试），或者在两个已知良好状态之间悄然潜入的回归问题。在构建出 <strong>快速精准的反馈闭环（tight feedback loop）</strong>（即能稳定复现并在这个特定 Bug 上必然报错的一行命令）之前，它拒绝凭空猜想；一旦抓到复现闭环，就用回归测试锁定并修复。如果在事后复盘（post-mortem）中发现根本原因在于架构上缺乏良好的接缝（seam）来锁死 Bug，它会交接给 <strong><code dir="auto">/improve-codebase-architecture</code></strong>。</p>
 </li>
 <li>
 <p><strong>巨大且前路迷茫的大型工程（全新从零项目或单次会话装不下的超大功能）</strong> → <strong><code dir="auto">/wayfinder</code></strong>（这是整套体系中认知负荷最大的工作流）。当从当前位置到最终目标的路径尚不可见时，它会在工单系统上绘制一张 <strong>决策工单共享地图（shared map）</strong>，逐一攻克这些决策工单 —— 产出的是 <strong>明确的决策，而不是具体交付物</strong> —— 直到迷雾散去、道路清晰。<br>
-对比来看：<code dir="auto">/grill-with-docs</code> 磨练的是单次会话就能消化的小中型想法，而 wayfinder 则是为了解决单次会话容纳不下的庞大工程 —— 它的推进速度更慢、信息密度更高，因此请务必仅在真正迷茫的大型场景中使用，绝不要用在边界清晰的小需求上。</p>
-<p>当迷雾地图清晰之后：<strong>它负责交接，而不直接做构建</strong>。在 <strong><code dir="auto">/to-spec</code></strong> 处汇入主流程，将地图中相互关联的决策收拢压缩为一份可执行计划，然后像往常一样走 <code dir="auto">/to-tickets</code> 和 <code dir="auto">/implement</code>。如果跳过这个压缩步骤、直接把整个大地图循环丢给 <code dir="auto">/implement</code>，会丢失关联的决策细节 —— 只有当最初以为很宏大的工程最终发现其实非常简单微小时，才可以跳过收拢直接进入 <code dir="auto">/implement</code>。</p>
+对比来看：<code dir="auto">/grill-with-docs</code> 打磨的是单次会话就能消化的中小型想法，而 wayfinder 则是为了解决单次会话容纳不下的庞大工程 —— 它的推进速度更慢、信息密度更高，因此请务必仅在真正迷茫的大型场景中使用，绝不要用在边界清晰的小需求上。</p>
+<p>当迷雾散去、地图清晰之后：<strong>它负责交接，而不直接做构建</strong>。在 <strong><code dir="auto">/to-spec</code></strong> 处汇入主流程，将地图中相互关联的决策收拢压缩为一份可执行计划，然后像往常一样走 <code dir="auto">/to-tickets</code> 和 <code dir="auto">/implement</code>。如果跳过这个压缩步骤、直接把整张大地图丢给 <code dir="auto">/implement</code>，会丢失关联的决策细节 —— 只有当最初以为很宏大的工程最终发现规模确实很小时，才可以跳过收拢直接进入 <code dir="auto">/implement</code>。</p>
 </li>
 </ul>
 <hr>
@@ -265,9 +265,9 @@ flowchart TD
 </ul>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="底层词汇与设计语言vocabulary-underneath">底层词汇与设计语言（Vocabulary underneath）</h2><a class="sl-anchor-link" href="#底层词汇与设计语言vocabulary-underneath"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “底层词汇与设计语言（Vocabulary underneath）”</span></a></div>
-<p>两个由模型调用的底层参考指南（model-invoked references），运行在其他所有 skills <em>之下</em> —— 它们各自是所属词汇领域的单一权威真相源。当你在 <strong>词汇概念</strong> 层面遇到困惑而非流程层面卡壳时，可以直接查阅它们；上层 skills 也会在需要时自动调用它们：</p>
+<p>两个由模型调用的底层参考指南（model-invoked references），运行在其他所有 skills <em>之下</em> —— 它们各自是所属词汇领域的单一事实源。当你在 <strong>词汇概念</strong> 层面遇到困惑而非流程层面卡壳时，可以直接查阅它们；上层 skills 也会在需要时自动调用它们：</p>
 <ul>
-<li><strong><code dir="auto">/domain-modeling</code>（领域建模）</strong> — 磨练并澄清项目的领域语言：质疑模糊不清的概念、厘清职责过载的术语（例如一个叫 “account” 的词同时承担三种不同角色的职责）、并将难以逆转的核心决策记录为 ADR。这是 <code dir="auto">/grill-with-docs</code> 背后驱动的积极纪律，目的是让 <code dir="auto">CONTEXT.md</code> 保持为一份清晰无歧义的词汇表。</li>
+<li><strong><code dir="auto">/domain-modeling</code>（领域建模）</strong> — 打磨并澄清项目的领域语言：质疑模糊不清的概念，厘清职责过载的术语（例如一个叫 “account” 的词同时承担三种不同角色的职责），并将难以逆转的核心决策记录为 ADR。这是 <code dir="auto">/grill-with-docs</code> 背后驱动的积极纪律，目的是让 <code dir="auto">CONTEXT.md</code> 保持为一份清晰无歧义的词汇表。</li>
 <li><strong><code dir="auto">/codebase-design</code>（代码库设计）</strong> — 专注于“深模块”（deep module）的设计词汇（包括 module 模块、interface 接口、depth 深度、seam 架构接缝、adapter 适配器、leverage 杠杆率、locality 局部性），用于设计模块的形态：在干净整洁的接缝处，用极简小巧的对外接口承载大量丰富的内部行为。<code dir="auto">/tdd</code> 和 <code dir="auto">/improve-codebase-architecture</code> 底层都在使用这套语言体系。</li>
 </ul>
 <hr>
@@ -280,21 +280,21 @@ flowchart TD
 <li><strong>Subagent（分发子代理）</strong> — 将一个边界明确、目标高度聚焦的任务派发到其独立的子窗口中执行，并在完成后将结果汇报回来。</li>
 <li><strong><code dir="auto">/compact</code>（上下文压缩）</strong> — 对当前上下文进行摘要压缩，并以此作为种子开启一个全新的会话。这是 <strong>默认的备选兜底方案</strong>，位于决策树的最底部，而不是第一优先级。</li>
 </ul>
-<p>阅读 <a href="/mattpocock-skills-cn/engineering/01-ask-matt_phase-boundaries/">PHASE-BOUNDARIES.md</a> 了解严格排序的决策树 —— 其中的五个核心问题、每个分支背后的权衡逻辑，以及为什么由于原始一手上下文（primary-source）的丢失代价，必须首先排除掉 <strong>Continue</strong> 的可能性才考虑其他选项。请务必在 <strong>阶段的边界处</strong> 做出决策；如果在阶段进行中途，要么继续（continue），要么把剩余工作拆分子代理。</p>
+<p>阅读 <a href="/mattpocock-skills-cn/engineering/01-ask-matt_phase-boundaries/">PHASE-BOUNDARIES.md</a> 了解严格排序的决策树 —— 其中的五个核心问题、每个分支背后的权衡逻辑，以及为什么由于一手事实源（primary-source）的丢失代价，必须首先排除掉 <strong>Continue</strong> 的可能性才考虑其他选项。请务必在 <strong>阶段的边界处</strong> 做出决策；如果在阶段进行中途，要么继续（continue），要么把剩余工作拆分子代理。</p>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="独立技能standalone">独立技能（Standalone）</h2><a class="sl-anchor-link" href="#独立技能standalone"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “独立技能（Standalone）”</span></a></div>
 <p>完全脱离主流程的独立工具：</p>
 <ul>
-<li><strong><code dir="auto">/grill-me</code></strong> — 与 <code dir="auto">/grill-with-docs</code> 采用同样严格透彻的深度访谈，但它是 <strong>无状态的（stateless）</strong>：不会在本地保存任何文件，也不会建立 <code dir="auto">CONTEXT.md</code>。当你 <strong>不在一个具体的项目代码仓库中工作时</strong> 使用（例如打磨构思、打磨设计方案、打磨一篇文章，或任何没有底层代码库支撑的事物）。如果你已经在代码仓库中，请改用 <code dir="auto">/grill-with-docs</code>：两者执行完全相同的深度访谈，但后者会留下文档记录，因此在有代码仓库时，它是绝对更优的选择。</li>
+<li><strong><code dir="auto">/grill-me</code></strong> — 与 <code dir="auto">/grill-with-docs</code> 采用同样严格透彻的深度访谈，但它是 <strong>无状态的（stateless）</strong>：不会在本地保存任何文件，也不会建立 <code dir="auto">CONTEXT.md</code>。当你 <strong>不在一个具体的项目代码仓库中工作时</strong> 使用（例如打磨一个构思、一份设计方案、一篇文章，或任何没有底层代码库支撑的事物）。如果你已经在代码仓库中，请改用 <code dir="auto">/grill-with-docs</code>：两者执行完全相同的深度访谈，但后者会留下文档记录，因此在有代码仓库时，它是绝对更优的选择。</li>
 <li><strong><code dir="auto">/grilling</code></strong> — 深度访谈算法原语本身：按轮次推进（rounds）、只询问当前依赖已解决的前沿问题（frontier）、明确分工（查询事实是 Agent 的职责，做出价值决策是用户的权利）。<code dir="auto">/grill-me</code> 与 <code dir="auto">/grill-with-docs</code> 是它的两个具名入口，而 <code dir="auto">/triage</code>、<code dir="auto">/wayfinder</code> 和 <code dir="auto">/improve-codebase-architecture</code> 内部也都在运行它。只有当你想要一个完全没有外层包装的纯粹访谈时，才直接使用它。</li>
 <li><strong><code dir="auto">/resolving-merge-conflicts</code></strong> — 逐个冲突块解决进行中的 merge 或 rebase 冲突，通过溯源双方的原始意图（primary source）而非机械挑拣代码行来化解分歧，并最终完成合并操作。它绝不会执行 <code dir="auto">--abort</code>。独立于所有主流程：仅在已经陷入代码冲突时使用。</li>
-<li><strong><code dir="auto">/prototype</code></strong> — 编写小型、可丢弃的探针程序来回答某个具体的设计疑问：例如“这种状态模型感觉对不对？”或者“这个 UI 界面应该长什么样？”。所谓“可丢弃（Throwaway）”是对代码编写方式的一种约束（不必写完备测试或过度抽象），而不是承诺必须将代码彻底销毁：探索出的答案会被提炼融入正式代码，而原型代码本身会作为一手参考材料保留在基于 main 分支拉出的 <code dir="auto">prototype/&lt;name&gt;</code> 分支上，并在对应的实现工单中予以链接。它是主流程第 2 步中的绕道分支，但在任何纸面上难以确定的设计问题面前，都可以随时调出它。</li>
+<li><strong><code dir="auto">/prototype</code></strong> — 编写小型、可丢弃的探针程序来回答某个具体的设计疑问：例如“这种状态模型感觉对不对？”或者“这个 UI 界面应该长什么样？”。所谓“可丢弃（Throwaway）”是对代码编写方式的一种约束（不必写完备测试或过度抽象），而不是承诺必须将代码彻底销毁：探索出的答案会被提炼融入正式代码，而原型代码本身会作为一手参考材料保留在基于 main 分支拉出的 <code dir="auto">prototype/&lt;name&gt;</code> 分支上，并在对应的实现工单中予以链接。它是主流程第 2 步中的绕道分支，但面对任何难以在纸面上敲定的设计问题，都可以随时调出它。</li>
 <li><strong><code dir="auto">/research</code></strong> — 将文献阅读和资料调研的繁重工作委派给 <strong>后台 Agent</strong>：它会对照一手权威资料（primary sources）深入调研一个问题，并在代码库中留下一份带有引用出处的 Markdown 笔记。在它查阅资料的同时，你可以继续进行其他工作。它产出的文件后续可以直接带入主流程的 <code dir="auto">/grill-with-docs</code> 中 —— 调研是为了辅助思考，而不是取代思考。</li>
 <li><strong><code dir="auto">/to-questionnaire</code></strong> — 当阻碍你前进的认知不在你自己脑子里、也不在代码库中，而在 <strong>他人脑海中</strong> 时，使用此 skill 为对方生成一份可以直接填写的问卷。它是 <code dir="auto">/grill-me</code> 的逆向操作：不是就主题本身盘问你，而是就 <strong>发出问卷这件事本身</strong> 盘问你 —— 问卷要发给谁、你期望拿回什么信息 —— 从而把问题精准对准认知缺口。回收的内容就是后续走 <code dir="auto">/grill-with-docs</code> 或 <code dir="auto">/to-spec</code> 的绝佳输入。</li>
 <li><strong><code dir="auto">/wizard</code></strong> — 专门处理那些只有 <strong>人类</strong> 才能完成的操作步骤：例如开通云基础设施、配置敏感凭证或 CI 密钥、在陌生的第三方控制面板中点击配置、运行一次性数据迁移或上线割接。它会生成一个交互式 bash 脚本，引导人类逐一打开对应 URL、捕获配置的值，并自动写入 <code dir="auto">.env</code> 和 GitHub Secrets —— 这样你就不必每次都要向 Agent 重新解释一遍这些人工流程。这是由模型自主调用的（Model-invoked），当 Agent 碰上只有人类才能越过的障碍时会自动调起它。如果 Agent 自己就能搞定，它就应该自己做；此工具专门用于必须有人类在环的场景。</li>
-<li><strong><code dir="auto">/wait-what</code></strong> — 当 Agent 的某条表达没能说清楚、导致沟通脱节时的即时纠偏工具。在任何其他 skill 的对话中途均可触发，Agent 会用大白话结合 <code dir="auto">CONTEXT.md</code> 中的既有词汇，把刚才所说内容结合你所缺失的背景重新阐述一遍。这是一种事后补救；而 <code dir="auto">/grill-with-docs</code> 则是事前预防，因为早期统一的领域语言从源头上就杜绝了黑话黑词的出现。</li>
+<li><strong><code dir="auto">/wait-what</code></strong> — 当 Agent 的某条表达没能说清楚、导致沟通脱节时的即时纠偏工具。在任何其他 skill 的对话中途均可触发，Agent 会用大白话和 <code dir="auto">CONTEXT.md</code> 中的既有词汇，结合你所缺失的背景，把刚才所说的内容重新阐述一遍。这是一种事后补救；而 <code dir="auto">/grill-with-docs</code> 则是事前预防，因为早期统一的领域语言从源头上就杜绝了黑话的出现。</li>
 <li><strong><code dir="auto">/teach</code></strong> — 跨多次会话学习某个概念，将当前目录作为有状态的工作空间。</li>
-<li><strong><code dir="auto">/writing-for-agents</code></strong> — 为编写供 Agent 消费阅读的文档提供核心参考指南（包括 skills 编写、AGENTS.md、以及各类指针引用的文档）。</li>
+<li><strong><code dir="auto">/writing-for-agents</code></strong> — 为编写供 Agent 消费的文档提供核心参考指南（包括 skills 编写、AGENTS.md，以及各类指针引用的文档）。</li>
 </ul>
 <hr>
 <div class="sl-heading-wrapper level-h2"><h2 id="前置条件precondition">前置条件（Precondition）</h2><a class="sl-anchor-link" href="#前置条件precondition"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 1 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 0 0-1.42-1.42m8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 1 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l3.88-3.89a4.49 4.49 0 0 0 0-6.33M8.83 15.17a1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.92-4.92a1 1 0 1 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42"></path></svg></span><span class="sr-only" data-pagefind-ignore>Section titled “前置条件（Precondition）”</span></a></div>
